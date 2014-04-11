@@ -1,0 +1,107 @@
+\documentclass[12pt, a4paper, oneside]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt} % Paper size, default font size and one-sided paper
+%\graphicspath{{./Figures/}} % Specifies the directory where pictures are stored
+%\usepackage[dcucite]{harvard}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage[flushleft]{threeparttable}
+\usepackage{multirow}
+\usepackage[comma, sort&compress]{natbib}% Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
+\usepackage{graphicx}
+%\bibliographystyle{plainnat}
+\bibliographystyle{agsm}
+\usepackage[colorlinks = true, citecolor = blue, linkcolor = blue]{hyperref}
+%\hypersetup{urlcolor=blue, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
+%\renewcommand[\harvardurl]{URL: \url}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\title{Stats and Probability Information}
+%\author{Rob Hayward\footnote{University of Brighton Business School, Lewes Road, Brighton, BN2 4AT; Telephone 01273 642586.  rh49@brighton.ac.uk}}
+\date{\today}
+\maketitle
+\section*{Continuous and marginal distributions}
+
+The marginal distribution of $x$ in a two-variable distribution is equal to the sum of the joint distribution over $y$. 
+\begin{equation}
+Pr(X = x) = \sum_y Pr(X = x, Y = y) = \sum_y Pr(X = x|Y = y)Pr(Y = y)
+\end{equation}
+
+From \href{http://en.wikipedia.org/wiki/Marginal_distribution}{Wikipedia}
+
+For the continuous case
+\begin{equation}
+p_X(x) = \int_y p_{X,Y}(x,y)dy = \int_y p_{X|Y}(x|y)p_Y(y)dy
+\end{equation}
+
+There are three related distributions:  the marginal, the joint and the conditional. 
+
+\section{Mixture Model}
+This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
+
+A \emph{mixture distribution} is the probability distribution of a random variable  whose values are derived from an underlying set of random variables. The \emph{mixture components} are individual distributions with \emph{mixture weights}.  Even in cases where the mixture comonents have a normal distribution, the mixture distribution is likely to be non-normal. Mixture models are used to understand the sub-population when there is only access to the information about the pooled population. 
+
+The mixture model will be comprised of N random varibles distributed according to K components, with each component belonging to the same distribution. The k mixture weights sum to one. Each component will have parameters (mean and variance in the case of normal distribution).  
+
+The method will try to estimate the all the parameters of the model from the data.  The underlying data is known $(x_i)$; the number of mixture components is set $(K)$; the parameters of the distribution of each mixture component $(\theta_{i=1\dots K})$; mixture weight $(\Phi_{i = 1\dots K})$; $\mathbf{\Phi}$ K-dimensional vector summing to 1; $F(x|\theta)$ probability distribution of observations parameterised on $\theta$; $\alpha$ shared hyperparameter for component weights; $\beta$ shared hyperparameter for mixture weights; $H(\theta|\alpha)$ prior probability distribution of component parameters; 
+
+\section{Adjusted R squared}
+\href{http://davegiles.blogspot.ca/2013/05/when-will-adjusted-r-squared-increase.html}{Adjusted R squared} applied a penalty to the basic R squard to account for additional variables.  The equartion is 
+
+\begin{equation}
+R_A^2 = 1 - \left [ \frac{(n-1)}{(n-k)} \right ] [1 - R^2]
+\end{equation}
+
+Adding a regressor to the equation will increase (reduce)) the $R_A^"$ when the absolute value of the t-statistic is greater (less) than one. Adding a group of regressors to the model will reduce (increase) the $R_A^"$ when the absolute value of the F-statistic is greater than one.  
+
+Proof \href{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}
+\end{document}
