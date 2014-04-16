@@ -54,4 +54,113 @@ R_A^2 = 1 - \left [ \frac{(n-1)}{(n-k)} \right ] [1 - R^2]
 Adding a regressor to the equation will increase (reduce)) the $R_A^"$ when the absolute value of the t-statistic is greater (less) than one. Adding a group of regressors to the model will reduce (increase) the $R_A^"$ when the absolute value of the F-statistic is greater than one.  
 
 Proof \href{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}
+
+
+\section{Monte Carlo Simulation}
+This comes from \href{http://blog.revolutionanalytics.com/2014/04/quantitative-finance-applications-in-r-5.html}{Revoluitionary Analytics}.  The analysis is in annual terms.  
+
+\begin{equation}
+\mu \Delta t + \sigma Z \sqrt{\Delta t}
+\end{equation}
+
+where $\mu$ is the drift or average annual return, Z is a standard Normal random variable, t is measured in years so for monthly returns $\Delta t$ equals $\frac{1}{12}$.
+
+<<MC, fig.height=6, cache=TRUE>>=
+n <- 10000
+# Fixing the seed gives us a consistent set of simulated returns
+set.seed(106)
+z <- rnorm(n)        # mean = 0 and sd = 1 are defaults
+mu <- 0.10
+sd <- 0.15
+delta_t <- 0.25
+# apply to expression (*) above
+qtr_returns <- mu*delta_t + sd*z*sqrt(delta_t)
+hist(qtr_returns, breaks = 100, col = "green")
+@
+
+Now the descriptive statistics can be uncovered from the simulated results. 
+<<stats>>=
+stats <- c(mean(qtr_returns) * 4, sd(qtr_returns) * 2)   # sqrt(4)
+names(stats) <- c("mean", "volatility")
+stats
+@
+This is the basic model.  It would also be possible to simulate two variables and to include some relationship between the two in the analysis.  It would also be possible to simulate an asset in two different regimes. A Monte-Carlo Markov Model (MCMM) would require another set of $\mu$ and $\sigma$ inputs as well as a transition matrix of the probabilities that there is a switch from one regime to another. 
+ 
+\section{Generalised Lambda Distribution}
+This is from \href{http://blog.revolutionanalytics.com/2014/02/quantitative-finance-applications-in-r-4-using-the-generalized-lambda-distribution-to-simulate-market-returns.html}{Revolutionary Analytics}.  The four parameters $\lambda_1$, $\lambda_2$, $\lambda_3$ and $\lambda_4$ indicate the location, scale, skew and kurtosis of the distribution. 
+
+<<Lambda, warning=FALSE, message=FALSE, cache=TRUE>>=
+require(GLDEX)
+require(quantmod)
+
+getSymbols("SPY", from = "1994-02-01")  
+SPY.Close <- SPY[,4] # Closing prices
+
+SPY.vector <- as.vector(SPY.Close)
+
+# Calculate log returns
+sp500 <- diff(log(SPY.vector), lag = 1)
+sp500 <- sp500[-1] # Remove the NA in the first position
+# Set normalise="Y" so that kurtosis is calculated with
+# reference to kurtosis = 0 under Normal distribution
+fun.moments.r(sp500, normalise = "Y")
+@
+Now fit the GLD with the function fun.data.fit.mm. There are warnings but these can be ignored. 
+
+<<GLD, warning=FALSE, message=FALSE, fig.height=6, cache=TRUE>>=
+spLambdaDist = fun.data.fit.mm(sp500)
+spLambdaDist
+fun.plot.fit(fit.obj = spLambdaDist, data = sp500, nclass = 100,
+             param = c("rs", "fmkl"), xlab = "Returns")
+@
+Now it is possible to generrate simualted results using the function rgl(). Lambdas need to be identified. 
+<<Lambda2>>=
+lambda_params_rs <- spLambdaDist[, 1]
+lambda1_rs <- lambda_params_rs[1]
+lambda2_rs <- lambda_params_rs[2]
+lambda3_rs <- lambda_params_rs[3]
+lambda4_rs <- lambda_params_rs[4]
+
+lambda_params_fmkl <- spLambdaDist[, 2]
+lambda1_fmkl <- lambda_params_fmkl[1]
+lambda2_fmkl <- lambda_params_fmkl[2]
+lambda3_fmkl <- lambda_params_fmkl[3]
+lambda4_fmkl <- lambda_params_fmkl[4]
+@
+Now generate simulations of each variety. 
+
+There are problems with the rgl function.  I am not sure what this does.  It is 10 million simulations.  I think that the rgl just uses extra hardware to make the change. It may be useful to re-do this last section using a different method. 
+<<simulat2e, warning=FALSE, error=FALSE>>=
+require(gld)
+require(GLDEX)
+# RS version:
+set.seed(100)    # Set seed to obtain a reproducible set
+rs_sample <- rgl(n = 10000000, lambda1=lambda1_rs, lambda2 = lambda2_rs,
+                  lambda3 = lambda3_rs,
+                  lambda4 = lambda4_rs,param = "rs")
+
+# Moments of simulated returns using RS method:
+fun.moments.r(rs_sample, normalise="Y")
+
+# Moments calculated from market data:
+fun.moments.r(sp500, normalise="Y")
+
+# FKML version:
+set.seed(100)    # Set seed to obtain a reproducible set
+fmkl_sample <- rgl(n = 10000000, lambda1=lambda1_fmkl, lambda2 =                                lambda2_fmkl,lambda3 = lambda3_fmkl,
+                   lambda4 = lambda4_fmkl,param = "fmkl")
+
+# Moments of simulated returns using FMKL method:
+fun.moments.r(fmkl_sample, normalise="Y")
+
+# Moments calculated from market data:
+fun.moments.r(sp500, normalise="Y") 
+@
+Compare the moments to the S\&P500 market data
+<<Simulate>>=
+fun.moments.r(rs_sample, normalise="Y")
+fun.moments.r(sp500, normalise="Y")
+fun.moments.r(fmkl_sample, normalise="Y")
+fun.moments.r(sp500, normalise="Y")
+@
 \end{document}

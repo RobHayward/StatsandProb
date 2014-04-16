@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.9.19)  11 APR 2014 09:11
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.9.19)  16 APR 2014 10:32
 entering extended mode
 **StatsandProb.tex
 
@@ -352,45 +352,130 @@ LaTeX Warning: No \author given.
 [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 107.
-
 Overfull \hbox (45.4941pt too wide) in paragraph at lines 106--107
 []\OT1/cmr/m/n/12 Proof [][]http://davegiles.blogspot.com/2014/04/proof-of-resu
 lt-about-adjusted.html[][] 
  []
 
-[2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 107.
+Package color Info: Redefining color shadecolor on input line 119.
+
+Overfull \hbox (15.27962pt too wide) in paragraph at lines 122--122
+[][]\OT1/cmtt/m/it/12 # Fixing the seed gives us a consistent set of simulated 
+returns[][] 
+ []
+
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 123.
+[2] <figure/MC.pdf, id=49, 505.89pt x 433.62pt>
+File: figure/MC.pdf Graphic file (type pdf)
+ <use figure/MC.pdf>
+Package pdftex.def Info: figure/MC.pdf used on input line 133.
+(pdftex.def)             Requested size: 390.0pt x 334.29204pt.
+
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 133--134
+[][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 140.
+
+Overfull \hbox (14.58298pt too wide) in paragraph at lines 142--142
+[][]\OT1/cmtt/m/n/12 stats[] []<-[] []c[][]([][]mean[][](qtr_returns)[] []*[] [
+]4[][],[] []sd[][](qtr_returns)[] []*[] []2[][])[]  []\OT1/cmtt/m/it/12 # sqrt(
+4)[][] 
+ []
+
+[3 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MC.pdf
+>]
+Package color Info: Redefining color shadecolor on input line 159.
+
+Overfull \hbox (40.47939pt too wide) in paragraph at lines 174--174
+[][]\OT1/cmtt/m/it/12 # Set normalise=Y so that kurtosis is calculated with r
+eference to[][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 188.
+
+Overfull \hbox (104.00024pt too wide) in paragraph at lines 201--201
+[][]\OT1/cmtt/m/n/12 fun.plot.fit[][]([][]fit.obj[] []= spLambdaDist,[] []data[
+] []= sp500,[] []nclass[] []=[] []100[][],[] []param[] []=[] []c[][]([][]"rs"[]
+[],[][] 
+ []
+
+[4] <figure/GLD.pdf, id=65, 505.89pt x 433.62pt>
+File: figure/GLD.pdf Graphic file (type pdf)
+ <use figure/GLD.pdf>
+Package pdftex.def Info: figure/GLD.pdf used on input line 205.
+(pdftex.def)             Requested size: 390.0pt x 334.29204pt.
+
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 205--206
+[][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 211.
+Package color Info: Redefining color shadecolor on input line 231.
+[5 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/GLD.pd
+f>]
+Overfull \hbox (13.19629pt too wide) in paragraph at lines 242--242
+\OT1/cmtt/m/it/12 ##    dgl, pgl, qdgl, qgl, rgl, starship, starship.adaptivegr
+id, 
+ []
+
+
+Overfull \hbox (184.27528pt too wide) in paragraph at lines 245--245
+[][]\OT1/cmtt/m/n/12 rs_sample[] []<-[] []rgl[][]([][]n[] []=[] []1e+07[][],[] 
+[]lambda1[] []= lambda1_rs,[] []lambda2[] []= lambda2_rs,[] []lambda3[] []= lam
+bda3_rs,[][] 
+ []
+
+
+Overfull \hbox (85.47523pt too wide) in paragraph at lines 265--265
+[][]\OT1/cmtt/m/n/12 fmkl_sample[] []<-[] []rgl[][]([][]n[] []=[] []1e+07[][],[
+] []lambda1[] []= lambda1_fmkl,[] []lambda2[] []= lambda2_fmkl,[][] 
+ []
+
+
+Overfull \hbox (23.7252pt too wide) in paragraph at lines 266--266
+[]    []\OT1/cmtt/m/n/12 lambda3[] []= lambda3_fmkl,[] []lambda4[] []= lambda4_
+fmkl,[] []param[] []=[] []"fmkl"[][])[][] 
+ []
+
+[6]
+Package color Info: Redefining color shadecolor on input line 287.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 319.
+ [7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 319.
 
 ("C:\Users\Toshiba\Google Drive\Research\GIT\StatsandProb\Knitr\StatsandProb.au
 x")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 107.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 107.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 319.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 319.
 Package rerunfilecheck Info: File `StatsandProb.out' has not changed.
-(rerunfilecheck)             Checksum: E4782E26417EA88EF30D08CB4528D0E4;103.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
+(rerunfilecheck)             Checksum: B84C0D241C05743F134FBF51521909AD;228.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 319.
  ) 
 Here is how much of TeX's memory you used:
- 6112 strings out of 494045
- 88586 string characters out of 3145963
- 173066 words of memory out of 3000000
- 9327 multiletter control sequences out of 15000+200000
- 10594 words of font info for 38 fonts, out of 3000000 for 9000
+ 6139 strings out of 494045
+ 88898 string characters out of 3145963
+ 178066 words of memory out of 3000000
+ 9340 multiletter control sequences out of 15000+200000
+ 10931 words of font info for 40 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 29i,6n,28p,642b,319s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,6n,28p,642b,366s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files
- (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on StatsandProb.pdf (2 pages, 115282 bytes).
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on StatsandProb.pdf (7 pages, 174075 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 128 PDF objects out of 1000 (max. 8388607)
+ 17 named destinations out of 1000 (max. 500000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 
