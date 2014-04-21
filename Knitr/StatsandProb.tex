@@ -262,14 +262,14 @@ There are problems with the rgl function.  I am not sure what this does.  It is 
 \begin{alltt}
 \hlcom{# FKML version:}
 \hlkwd{set.seed}\hlstd{(}\hlnum{100}\hlstd{)}  \hlcom{# Set seed to obtain a reproducible set}
-\hlstd{fmkl_sample} \hlkwb{<-} \hlkwd{rgl}\hlstd{(}\hlkwc{n} \hlstd{=} \hlnum{1e+07}\hlstd{,} \hlkwc{lambda1} \hlstd{= lambda1_fmkl,} \hlkwc{lambda2} \hlstd{= lambda2_fmkl,}
+\hlstd{fmkl_sample} \hlkwb{<-} \hlkwd{rgl}\hlstd{(}\hlkwc{n} \hlstd{=} \hlnum{1e+05}\hlstd{,} \hlkwc{lambda1} \hlstd{= lambda1_fmkl,} \hlkwc{lambda2} \hlstd{= lambda2_fmkl,}
     \hlkwc{lambda3} \hlstd{= lambda3_fmkl,} \hlkwc{lambda4} \hlstd{= lambda4_fmkl,} \hlkwc{param} \hlstd{=} \hlstr{"fmkl"}\hlstd{)}
 \hlcom{# Moments of simulated returns using FMKL method:}
 \hlkwd{fun.moments.r}\hlstd{(fmkl_sample,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002634  0.0001534 -0.1049874  9.9817876
+##  0.0002403  0.0001547 -0.0862244  8.5839659
 \end{verbatim}
 \begin{alltt}
 \hlcom{# Moments calculated from market data:}
@@ -304,7 +304,7 @@ Compare the moments to the S\&P500 market data
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002634  0.0001534 -0.1049874  9.9817876
+##  0.0002403  0.0001547 -0.0862244  8.5839659
 \end{verbatim}
 \begin{alltt}
 \hlkwd{fun.moments.r}\hlstd{(sp500,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
