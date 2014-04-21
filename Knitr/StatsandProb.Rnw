@@ -147,7 +147,7 @@ fun.moments.r(sp500, normalise="Y")
 
 # FKML version:
 set.seed(100)    # Set seed to obtain a reproducible set
-fmkl_sample <- rgl(n = 100000, lambda1=lambda1_fmkl, lambda2 =                                lambda2_fmkl,lambda3 = lambda3_fmkl,
+fmkl_sample <- rgl(n = 10000000, lambda1=lambda1_fmkl, lambda2 =                                lambda2_fmkl,lambda3 = lambda3_fmkl,
                    lambda4 = lambda4_fmkl,param = "fmkl")
 
 # Moments of simulated returns using FMKL method:
