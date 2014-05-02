@@ -167,7 +167,7 @@ fun.moments.r(sp500, normalise="Y")
 \href{http://www.mathtube.org/lecture/video/lasso-brief-review-and-new-significance-test#.U1aODV1sp94.twitter}{Rob Tibshirani}Cancer example that requires identification of appropriate cell. There are 20 cases that are being used as a training set.  Train a classifier to identify whether the cells are cencerous or not.  There are 11,000 features. It would be useful to use as few of the features as possible. Therefore, also want to know which features are important for the classification. 
 
 Sparcity means that the features are reduced by only using those that pass a particular level of significance.  \href{http://statweb.stanford.edu/~tibs/lasso.html}{More here.}
-<<<<<<< HEAD
+
 \section{Standard Error of the Regression}
 The standard error of the estimate of the mean is 
 \begin{equation}
@@ -181,6 +181,17 @@ This can be derived from the variance of the sum of independent random variables
 \item the standard deviation of $T/n$ must be $\frac{n}{\sigma n}$
 \item $T/n$ is the mean $\bar{x}$
 \end{itemize}
-=======
->>>>>>> 536a8b1896ac659dea7c7015467bb9d4e0b06a82
+
+\section{Logistic Regression}
+This comes from \href{http://www.win-vector.com/blog/2010/11/learn-a-powerful-machine-learning-tool-logistic-regression-and-beyond/}{Wim-Vector - logistic regression}.  
+
+<<Logdownload>>=
+CarData <- read.table(url('http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data'), sep=',',col.names=c('buying','maintenance','doors','persons','lug_boot','safety', 'rating'))
+logisticModel <- glm(rating!='unacc' ~ buying + maintenance + doors + persons + lug_boot +safety, family=binomial(link = "logit"),data=CarData)
+summary(logisticModel)
+@
+The variable levels and values are joined together. The model will provide an estimate of the effect of each category on the rating.  The values for each category are adde together to get the overall rating score. 
+
+To be completed. 
+
 \end{document}

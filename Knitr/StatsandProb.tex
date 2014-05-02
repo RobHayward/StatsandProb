@@ -320,7 +320,7 @@ Compare the moments to the S\&P500 market data
 \href{http://www.mathtube.org/lecture/video/lasso-brief-review-and-new-significance-test#.U1aODV1sp94.twitter}{Rob Tibshirani}Cancer example that requires identification of appropriate cell. There are 20 cases that are being used as a training set.  Train a classifier to identify whether the cells are cencerous or not.  There are 11,000 features. It would be useful to use as few of the features as possible. Therefore, also want to know which features are important for the classification. 
 
 Sparcity means that the features are reduced by only using those that pass a particular level of significance.  \href{http://statweb.stanford.edu/~tibs/lasso.html}{More here.}
-<<<<<<< HEAD
+
 \section{Standard Error of the Regression}
 The standard error of the estimate of the mean is 
 \begin{equation}
@@ -334,6 +334,67 @@ This can be derived from the variance of the sum of independent random variables
 \item the standard deviation of $T/n$ must be $\frac{n}{\sigma n}$
 \item $T/n$ is the mean $\bar{x}$
 \end{itemize}
-=======
->>>>>>> 536a8b1896ac659dea7c7015467bb9d4e0b06a82
+
+\section{Logistic Regression}
+This comes from \href{http://www.win-vector.com/blog/2010/11/learn-a-powerful-machine-learning-tool-logistic-regression-and-beyond/}{Wim-Vector - logistic regression}.  
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{CarData} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlkwd{url}\hlstd{(}\hlstr{"http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data"}\hlstd{),}
+    \hlkwc{sep} \hlstd{=} \hlstr{","}\hlstd{,} \hlkwc{col.names} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"buying"}\hlstd{,} \hlstr{"maintenance"}\hlstd{,} \hlstr{"doors"}\hlstd{,} \hlstr{"persons"}\hlstd{,} \hlstr{"lug_boot"}\hlstd{,}
+        \hlstr{"safety"}\hlstd{,} \hlstr{"rating"}\hlstd{))}
+\hlstd{logisticModel} \hlkwb{<-} \hlkwd{glm}\hlstd{(rating} \hlopt{!=} \hlstr{"unacc"} \hlopt{~} \hlstd{buying} \hlopt{+} \hlstd{maintenance} \hlopt{+} \hlstd{doors} \hlopt{+} \hlstd{persons} \hlopt{+}
+    \hlstd{lug_boot} \hlopt{+} \hlstd{safety,} \hlkwc{family} \hlstd{=} \hlkwd{binomial}\hlstd{(}\hlkwc{link} \hlstd{=} \hlstr{"logit"}\hlstd{),} \hlkwc{data} \hlstd{= CarData)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred}}\begin{alltt}
+\hlkwd{summary}\hlstd{(logisticModel)}
+\end{alltt}
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = rating != "unacc" ~ buying + maintenance + doors + 
+##     persons + lug_boot + safety, family = binomial(link = "logit"), 
+##     data = CarData)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -3.216   0.000   0.000   0.026   2.434  
+## 
+## Coefficients:
+##                  Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)       -28.426   1257.526   -0.02     0.98    
+## buyinglow           5.048      0.567    8.90  < 2e-16 ***
+## buyingmed           3.922      0.484    8.10  5.5e-16 ***
+## buyingvhigh        -2.066      0.375   -5.51  3.5e-08 ***
+## maintenancelow      3.406      0.469    7.26  3.9e-13 ***
+## maintenancemed      3.406      0.469    7.26  3.9e-13 ***
+## maintenancevhigh   -2.825      0.415   -6.82  9.4e-12 ***
+## doors3              1.856      0.404    4.59  4.4e-06 ***
+## doors4              2.482      0.428    5.80  6.6e-09 ***
+## doors5more          2.482      0.428    5.80  6.6e-09 ***
+## persons4           29.965   1257.526    0.02     0.98    
+## personsmore        29.584   1257.526    0.02     0.98    
+## lug_bootmed        -1.517      0.376   -4.04  5.4e-05 ***
+## lug_bootsmall      -4.448      0.475   -9.36  < 2e-16 ***
+## safetylow         -30.505   1300.343   -0.02     0.98    
+## safetymed          -3.004      0.358   -8.40  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2110.47  on 1727  degrees of freedom
+## Residual deviance:  339.36  on 1712  degrees of freedom
+## AIC: 371.4
+## 
+## Number of Fisher Scoring iterations: 21
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
 \end{document}
