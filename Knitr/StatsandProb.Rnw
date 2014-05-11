@@ -54,4 +54,7 @@ R_A^2 = 1 - \left [ \frac{(n-1)}{(n-k)} \right ] [1 - R^2]
 Adding a regressor to the equation will increase (reduce)) the $R_A^"$ when the absolute value of the t-statistic is greater (less) than one. Adding a group of regressors to the model will reduce (increase) the $R_A^"$ when the absolute value of the F-statistic is greater than one.  
 
 Proof \href{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}
+
+\section{Capital}
+This is  review and an amalgamation of the discussion of \emph{Capital} written by Piketty.  
 \end{document}
