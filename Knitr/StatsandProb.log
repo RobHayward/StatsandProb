@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.27)  11 MAY 2014 20:32
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.27)  11 MAY 2014 21:01
 entering extended mode
  %&-line parsing enabled.
 **StatsandProb.tex
@@ -411,62 +411,62 @@ Overfull \hbox (45.4941pt too wide) in paragraph at lines 106--107
 lt-about-adjusted.html[][] 
  []
 
-Package color Info: Redefining color shadecolor on input line 122.
-[2]
-Overfull \hbox (15.27962pt too wide) in paragraph at lines 125--125
+Package color Info: Redefining color shadecolor on input line 118.
+
+Overfull \hbox (15.27962pt too wide) in paragraph at lines 121--121
 [][]\OT1/cmtt/m/it/12 # Fixing the seed gives us a consistent set of simulated 
 returns[][] 
  []
 
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 126.
-<figure/MC.pdf, id=67, 505.89pt x 433.62pt>
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 122.
+[2] <figure/MC.pdf, id=65, 505.89pt x 433.62pt>
 File: figure/MC.pdf Graphic file (type pdf)
  <use figure/MC.pdf>
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 136--137
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 132--133
 [][] 
  []
 
-Package color Info: Redefining color shadecolor on input line 143.
+Package color Info: Redefining color shadecolor on input line 139.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/it' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/it' tried instead on input line 145.
+(Font)              Font shape `OT1/cmtt/m/it' tried instead on input line 141.
 
 
-Overfull \hbox (14.58298pt too wide) in paragraph at lines 145--145
+Overfull \hbox (14.58298pt too wide) in paragraph at lines 141--141
 []\OT1/cmtt/m/n/12 stats <- []c[]([]mean[](qtr_returns) * 4, []sd[](qtr_returns
 ) * 2)  []\OT1/cmtt/m/it/12 # []sqrt[](4)[][] 
  []
 
 [3 <./figure/MC.pdf>]
-Package color Info: Redefining color shadecolor on input line 162.
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 180
+Package color Info: Redefining color shadecolor on input line 158.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 176
 .
  (/usr/share/texmf-texlive/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (40.22649pt too wide) in paragraph at lines 180--180
+Overfull \hbox (40.22649pt too wide) in paragraph at lines 176--176
 [][]\OT1/cmtt/m/it/12 # Set normalise=\TS1/cmtt/m/it/12 '\OT1/cmtt/m/it/12 Y\TS
 1/cmtt/m/it/12 ' \OT1/cmtt/m/it/12 so that kurtosis is calculated with referenc
 e to[][] 
  []
 
-Package color Info: Redefining color shadecolor on input line 194.
+Package color Info: Redefining color shadecolor on input line 190.
 
-Overfull \hbox (104.00024pt too wide) in paragraph at lines 207--207
+Overfull \hbox (104.00024pt too wide) in paragraph at lines 203--203
 [][]\OT1/cmtt/m/n/12 fun.plot.fit[](fit.obj = spLambdaDist, data = sp500, nclas
 s = 100, param = []c[]([]"rs"[],[] 
  []
 
-[4] <figure/GLD.pdf, id=86, 505.89pt x 433.62pt>
+[4] <figure/GLD.pdf, id=82, 505.89pt x 433.62pt>
 File: figure/GLD.pdf Graphic file (type pdf)
  <use figure/GLD.pdf>
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 211--212
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 207--208
 [][] 
  []
 
-Package color Info: Redefining color shadecolor on input line 217.
+Package color Info: Redefining color shadecolor on input line 213.
 [5 <./figure/GLD.pdf>]
-Package color Info: Redefining color shadecolor on input line 238.
+Package color Info: Redefining color shadecolor on input line 234.
 
 Overfull \hbox (184.27528pt too wide) in paragraph at lines 248--248
 []\OT1/cmtt/m/n/12 rs_sample <- []rgl[](n = 1e+07, lambda1 = lambda1_rs, lambda
@@ -540,13 +540,14 @@ TS1/cmtt/m/n/12 ' \OT1/cmtt/m/n/12 0.01 \TS1/cmtt/m/n/12 '\OT1/cmtt/m/n/12 *\TS
 cmtt/m/n/12 ' \OT1/cmtt/m/n/12 0.1 \TS1/cmtt/m/n/12 ' ' \OT1/cmtt/m/n/12 1[] 
  []
 
-[8] [9]
+[8]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ˜ in font cmr12!
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
+ [9]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
@@ -555,13 +556,13 @@ Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
  [10] (./StatsandProb.aux) ) 
 Here is how much of TeX's memory you used:
- 5878 strings out of 495061
- 83588 string characters out of 1182620
+ 5874 strings out of 495061
+ 83533 string characters out of 1182620
  160807 words of memory out of 3000000
- 8917 multiletter control sequences out of 15000+50000
- 12170 words of font info for 44 fonts, out of 3000000 for 9000
+ 8914 multiletter control sequences out of 15000+50000
+ 11564 words of font info for 42 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,6n,36p,642b,346s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,6n,36p,642b,364s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/rob/.texmf-var/fonts/pk/ljfour/jknappen/ec/
 tctt1200.600pk> </home/rob/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600p
 k> </home/rob/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcit1200.600pk></usr/share
@@ -576,9 +577,9 @@ e/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmt
 i12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on StatsandProb.pdf (10 pages, 202689 bytes).
+Output written on StatsandProb.pdf (10 pages, 202934 bytes).
 PDF statistics:
- 187 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 183 PDF objects out of 1000 (max. 8388607)
+ 26 named destinations out of 1000 (max. 500000)
+ 75 words of extra memory for PDF output out of 10000 (max. 10000000)
 

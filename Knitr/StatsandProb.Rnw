@@ -191,6 +191,12 @@ summary(logisticModel)
 @
 The variable levels and values are joined together. The model will provide an estimate of the effect of each category on the rating.  The values for each category are adde together to get the overall rating score. 
 
+The error results of the model can be examined. 
+
+<<error>>-=
+table(CarData$rating,predict(logisticModel,type='response')>=0.5)
+@
+
 To be completed. 
 
 \subsection{F-Tests}

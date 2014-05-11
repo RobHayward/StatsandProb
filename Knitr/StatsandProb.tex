@@ -105,10 +105,6 @@ Adding a regressor to the equation will increase (reduce)) the $R_A^"$ when the 
 
 Proof \href{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}
 
-
-\section{Capital}
-This is  review and an amalgamation of the discussion of \emph{Capital} written by Piketty.  
-
 \subsection{Monte Carlo Simulation}
 This comes from \href{http://blog.revolutionanalytics.com/2014/04/quantitative-finance-applications-in-r-5.html}{Revoluitionary Analytics}.  The analysis is in annual terms.  
 
@@ -243,6 +239,10 @@ There are problems with the rgl function.  I am not sure what this does.  It is 
 
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: gld}}\begin{alltt}
 \hlkwd{require}(GLDEX)
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: GLDEX\\\#\# Loading required package: cluster}}\begin{alltt}
 \hlcom{# RS version:}
 \hlkwd{set.seed}(100)  \hlcom{# Set seed to obtain a reproducible set}
 rs_sample <- \hlkwd{rgl}(n = 1e+07, lambda1 = lambda1_rs, lambda2 = lambda2_rs, lambda3 = lambda3_rs, 
