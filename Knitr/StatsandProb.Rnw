@@ -19,7 +19,7 @@
 %\author{Rob Hayward\footnote{University of Brighton Business School, Lewes Road, Brighton, BN2 4AT; Telephone 01273 642586.  rh49@brighton.ac.uk}}
 \date{\today}
 \maketitle
-\section*{Continuous and marginal distributions}
+\subsection*{Continuous and marginal distributions}
 
 The marginal distribution of $x$ in a two-variable distribution is equal to the sum of the joint distribution over $y$. 
 \begin{equation}
@@ -35,7 +35,7 @@ p_X(x) = \int_y p_{X,Y}(x,y)dy = \int_y p_{X|Y}(x|y)p_Y(y)dy
 
 There are three related distributions:  the marginal, the joint and the conditional. 
 
-\section{Mixture Model}
+\subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
 
 A \emph{mixture distribution} is the probability distribution of a random variable  whose values are derived from an underlying set of random variables. The \emph{mixture components} are individual distributions with \emph{mixture weights}.  Even in cases where the mixture comonents have a normal distribution, the mixture distribution is likely to be non-normal. Mixture models are used to understand the sub-population when there is only access to the information about the pooled population. 
@@ -44,7 +44,7 @@ The mixture model will be comprised of N random varibles distributed according t
 
 The method will try to estimate the all the parameters of the model from the data.  The underlying data is known $(x_i)$; the number of mixture components is set $(K)$; the parameters of the distribution of each mixture component $(\theta_{i=1\dots K})$; mixture weight $(\Phi_{i = 1\dots K})$; $\mathbf{\Phi}$ K-dimensional vector summing to 1; $F(x|\theta)$ probability distribution of observations parameterised on $\theta$; $\alpha$ shared hyperparameter for component weights; $\beta$ shared hyperparameter for mixture weights; $H(\theta|\alpha)$ prior probability distribution of component parameters; 
 
-\section{Adjusted R squared}
+\subsection{Adjusted R squared}
 \href{http://davegiles.blogspot.ca/2013/05/when-will-adjusted-r-squared-increase.html}{Adjusted R squared} applied a penalty to the basic R squard to account for additional variables.  The equartion is 
 
 \begin{equation}
@@ -55,6 +55,171 @@ Adding a regressor to the equation will increase (reduce)) the $R_A^"$ when the 
 
 Proof \href{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}
 
+
 \section{Capital}
 This is  review and an amalgamation of the discussion of \emph{Capital} written by Piketty.  
+
+\subsection{Monte Carlo Simulation}
+This comes from \href{http://blog.revolutionanalytics.com/2014/04/quantitative-finance-applications-in-r-5.html}{Revoluitionary Analytics}.  The analysis is in annual terms.  
+
+\begin{equation}
+\mu \Delta t + \sigma Z \sqrt{\Delta t}
+\end{equation}
+
+where $\mu$ is the drift or average annual return, Z is a standard Normal random variable, t is measured in years so for monthly returns $\Delta t$ equals $\frac{1}{12}$.
+
+<<MC, fig.height=6, cache=TRUE>>=
+n <- 10000
+# Fixing the seed gives us a consistent set of simulated returns
+set.seed(106)
+z <- rnorm(n)        # mean = 0 and sd = 1 are defaults
+mu <- 0.10
+sd <- 0.15
+delta_t <- 0.25
+# apply to expression (*) above
+qtr_returns <- mu*delta_t + sd*z*sqrt(delta_t)
+hist(qtr_returns, breaks = 100, col = "green")
+@
+
+Now the descriptive statistics can be uncovered from the simulated results. 
+<<stats>>=
+stats <- c(mean(qtr_returns) * 4, sd(qtr_returns) * 2)   # sqrt(4)
+names(stats) <- c("mean", "volatility")
+stats
+@
+This is the basic model.  It would also be possible to simulate two variables and to include some relationship between the two in the analysis.  It would also be possible to simulate an asset in two different regimes. A Monte-Carlo Markov Model (MCMM) would require another set of $\mu$ and $\sigma$ inputs as well as a transition matrix of the probabilities that there is a switch from one regime to another. 
+ 
+\subsection{Generalised Lambda Distribution}
+This is from \href{http://blog.revolutionanalytics.com/2014/02/quantitative-finance-applications-in-r-4-using-the-generalized-lambda-distribution-to-simulate-market-returns.html}{Revolutionary Analytics}.  The four parameters $\lambda_1$, $\lambda_2$, $\lambda_3$ and $\lambda_4$ indicate the location, scale, skew and kurtosis of the distribution. 
+
+<<Lambda, warning=FALSE, message=FALSE, cache=TRUE>>=
+require(GLDEX)
+require(quantmod)
+
+getSymbols("SPY", from = "1994-02-01")  
+SPY.Close <- SPY[,4] # Closing prices
+
+SPY.vector <- as.vector(SPY.Close)
+
+# Calculate log returns
+sp500 <- diff(log(SPY.vector), lag = 1)
+sp500 <- sp500[-1] # Remove the NA in the first position
+# Set normalise="Y" so that kurtosis is calculated with
+# reference to kurtosis = 0 under Normal distribution
+fun.moments.r(sp500, normalise = "Y")
+@
+Now fit the GLD with the function fun.data.fit.mm. There are warnings but these can be ignored. 
+
+<<GLD, warning=FALSE, message=FALSE, fig.height=6, cache=TRUE>>=
+spLambdaDist = fun.data.fit.mm(sp500)
+spLambdaDist
+fun.plot.fit(fit.obj = spLambdaDist, data = sp500, nclass = 100,
+             param = c("rs", "fmkl"), xlab = "Returns")
+@
+Now it is possible to generrate simualted results using the function rgl(). Lambdas need to be identified. 
+<<Lambda2>>=
+lambda_params_rs <- spLambdaDist[, 1]
+lambda1_rs <- lambda_params_rs[1]
+lambda2_rs <- lambda_params_rs[2]
+lambda3_rs <- lambda_params_rs[3]
+lambda4_rs <- lambda_params_rs[4]
+
+lambda_params_fmkl <- spLambdaDist[, 2]
+lambda1_fmkl <- lambda_params_fmkl[1]
+lambda2_fmkl <- lambda_params_fmkl[2]
+lambda3_fmkl <- lambda_params_fmkl[3]
+lambda4_fmkl <- lambda_params_fmkl[4]
+@
+Now generate simulations of each variety. 
+
+There are problems with the rgl function.  I am not sure what this does.  It is 10 million simulations.  I think that the rgl just uses extra hardware to make the change. It may be useful to re-do this last section using a different method. 
+<<simulat2e, warning=FALSE, error=FALSE>>=
+require(gld)
+require(GLDEX)
+# RS version:
+set.seed(100)    # Set seed to obtain a reproducible set
+rs_sample <- rgl(n = 10000000, lambda1=lambda1_rs, lambda2 = lambda2_rs,
+                  lambda3 = lambda3_rs,
+                  lambda4 = lambda4_rs,param = "rs")
+
+# Moments of simulated returns using RS method:
+fun.moments.r(rs_sample, normalise="Y")
+
+# Moments calculated from market data:
+fun.moments.r(sp500, normalise="Y")
+
+# FKML version:
+set.seed(100)    # Set seed to obtain a reproducible set
+fmkl_sample <- rgl(n = 100000, lambda1=lambda1_fmkl, lambda2 =                                lambda2_fmkl,lambda3 = lambda3_fmkl,
+                   lambda4 = lambda4_fmkl,param = "fmkl")
+
+# Moments of simulated returns using FMKL method:
+fun.moments.r(fmkl_sample, normalise="Y")
+
+# Moments calculated from market data:
+fun.moments.r(sp500, normalise="Y") 
+@
+Compare the moments to the S\&P500 market data
+<<Simulate>>=
+fun.moments.r(rs_sample, normalise="Y")
+fun.moments.r(sp500, normalise="Y")
+fun.moments.r(fmkl_sample, normalise="Y")
+fun.moments.r(sp500, normalise="Y")
+@
+\subsection{Lasso method}
+\href{http://www.mathtube.org/lecture/video/lasso-brief-review-and-new-significance-test#.U1aODV1sp94.twitter}{Rob Tibshirani}Cancer example that requires identification of appropriate cell. There are 20 cases that are being used as a training set.  Train a classifier to identify whether the cells are cencerous or not.  There are 11,000 features. It would be useful to use as few of the features as possible. Therefore, also want to know which features are important for the classification. 
+
+Sparcity means that the features are reduced by only using those that pass a particular level of significance.  \href{http://statweb.stanford.edu/~tibs/lasso.html}{More here.}
+
+\subsection{Standard Error of the Regression}
+The standard error of the estimate of the mean is 
+\begin{equation}
+SD_x = \frac{\sigma}{\sqrt{n}}
+\end{equation}
+This can be derived from the variance of the sum of independent random variables
+\begin{itemize}
+\item If $X_1, X_2, \dots, X_n$ are independent observations from a population with a mean $\mu$ and a standard deviation $\sigma$, 
+\item Variance of the Total = $T = (X_1, X_2, \dots, X_n)$ is $n\sigma^2$
+\item the variance of $T/n$ is $\frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}$
+\item the standard deviation of $T/n$ must be $\frac{n}{\sigma n}$
+\item $T/n$ is the mean $\bar{x}$
+\end{itemize}
+
+\subsection{Logistic Regression}
+This comes from \href{http://www.win-vector.com/blog/2010/11/learn-a-powerful-machine-learning-tool-logistic-regression-and-beyond/}{Wim-Vector - logistic regression}.  
+
+<<Logdownload>>=
+CarData <- read.table(url('http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data'), sep=',',col.names=c('buying','maintenance','doors','persons','lug_boot','safety', 'rating'))
+logisticModel <- glm(rating!='unacc' ~ buying + maintenance + doors + persons + lug_boot +safety, family=binomial(link = "logit"),data=CarData)
+summary(logisticModel)
+@
+The variable levels and values are joined together. The model will provide an estimate of the effect of each category on the rating.  The values for each category are adde together to get the overall rating score. 
+
+To be completed. 
+
+\subsection{F-Tests}
+This is an example that is based on testing for fabricated evidence.  The full documentation is \href{http://errorstatistics.com/2014/05/10/who-ya-gonna-call-for-statistical-fraudbusting-r-a-fisher-p-values-and-error-statistics-again/}{Deborah Mayo}.  As the paper says
+\begin{quotation}
+``In each experiment, participants (undergraduate students) were randomly assigned to three groups, and each group was given a different ‘intervention’. All participants were then tested on some outcome measure.``
+\end{quotation}
+The accusation is that the results are \textbf{too} linear.  The relationships are too perfect compared to other studies.  The method used to asses this is called \emph{delta-F}.  The odds of seeing such linear trends are calculated based on the assumption that the trend is linear.  
+
+Unless there is a huge sample, the probability of obtaining a linear trend is very low becuase there is noise. THe amount of noise is evident in the \emph{within group variance}.  For a given sample size and a given level of within group variance, the odds of obtaining a linear trend are calculated as the sum of squares accounted for by a linear model and a none-linear model (one-way ANOVA) divided by the mean-square error (within group variance).
+
+\begin{equation}
+\Delta F = \frac{SS_{REG} - SS_B}{MS_W}
+\end{equation}
+
+There is one degree of freedom in the numerator and $3(n-1)$ degrees of freedom in the denominator. 
+
+If the difference between the two models (linear and non-linear) is small, it means that there is an underlying linear relationship. Assuming that the relationship is linear, this delta-F metric should follow an F distribution. 
+
+This is more or less the same method that is used to test whether a simple model fits the data as well as a complex model. In that case, the null hypothesis is that the simple model is the correct version and the objective is to determine if the difference between the two is unlikely given the null. 
+
+From the paper
+
+\begin{quotation}
+```But here the whole thing is turned on its head. Random noise means that a complex model will sometimes fit the data better than a simple one, even if the simple model describes reality. In a conventional use of F-tests, that would be regarded as a false positive. But in this case it’s the absence of those false positives that’s unusual.```
+\end{quotation}
+
 \end{document}
