@@ -55,10 +55,6 @@ Adding a regressor to the equation will increase (reduce)) the $R_A^"$ when the 
 
 Proof \href{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}{http://davegiles.blogspot.com/2014/04/proof-of-result-about-adjusted.html}
 
-
-\section{Capital}
-This is  review and an amalgamation of the discussion of \emph{Capital} written by Piketty.  
-
 \subsection{Monte Carlo Simulation}
 This comes from \href{http://blog.revolutionanalytics.com/2014/04/quantitative-finance-applications-in-r-5.html}{Revoluitionary Analytics}.  The analysis is in annual terms.  
 
