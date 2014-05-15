@@ -35,6 +35,23 @@ p_X(x) = \int_y p_{X,Y}(x,y)dy = \int_y p_{X|Y}(x|y)p_Y(y)dy
 
 There are three related distributions:  the marginal, the joint and the conditional. 
 
+\subsection{Markov Chain Monte Carlo Methods}
+This comes from Dave Miles.  There are four sections. 
+\begin{itemize}
+\item \href{http://davegiles.blogspot.ca/2014/03/mcmc-for-econometrics-students-i.html}{Introduction}
+\item \href{http://davegiles.blogspot.ca/2014/03/mcmc-for-econometrics-students-ii_18.html}{Showing the MCMC works}
+\item \href{http://davegiles.blogspot.ca/2014/03/mcmc-for-econometrics-students-iii.html}{Example to extract the marginal posterior distribution}
+\item \href{http://davegiles.blogspot.com/2014/03/mcmc-for-econometrics-students-part-iv.html#more}{Use R to implement MCMC}
+\end{itemize}
+
+This is an update of the code by \href{http://www.econometricsbysimulation.com/2014/04/dave-giles-on-mcmc-for-econometrics.html}{Economics by Simulation}
+
+The Gibbs sampler exploits the characteristics of the Markov chain.  With two parameters $\theta_1$ and $\theta_2$, $p(\theta_1, \theta_2)$ is the prior pdf and $L(\theta_1, \theta_2 | y) = p(y | \theta_1, \theta_2$ is the likelihood function.  Using Bayes theory, the posterior pdf for the parameters is 
+\begin{equation}
+p(\theta_1, \theta_2| y) = \propto p(\theta_1, \theta_2)L(\theta_1, \theta_2| y)
+\end{equation}
+
+
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
 
@@ -167,7 +184,7 @@ fun.moments.r(sp500, normalise="Y")
 
 Sparcity means that the features are reduced by only using those that pass a particular level of significance.  \href{http://statweb.stanford.edu/~tibs/lasso.html}{More here.}
 
-\subsection{Standard Error of the Regression}
+\subsection{Standard Error of the estimated mean}
 The standard error of the estimate of the mean is 
 \begin{equation}
 SD_x = \frac{\sigma}{\sqrt{n}}
@@ -176,9 +193,10 @@ This can be derived from the variance of the sum of independent random variables
 \begin{itemize}
 \item If $X_1, X_2, \dots, X_n$ are independent observations from a population with a mean $\mu$ and a standard deviation $\sigma$, 
 \item Variance of the Total = $T = (X_1, X_2, \dots, X_n)$ is $n\sigma^2$
-\item the variance of $T/n$ is $\frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}$
-\item the standard deviation of $T/n$ must be $\frac{n}{\sigma n}$
 \item $T/n$ is the mean $\bar{x}$
+\item the variance of $T/n$ is $\frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}$
+\item \href{https://onlinecourses.science.psu.edu/stat414/node/167}{Explained}
+\item the standard deviation of $T/n$ must be $\frac{n}{\sqrt{n}}$
 \end{itemize}
 
 \subsection{Logistic Regression}
@@ -193,7 +211,7 @@ The variable levels and values are joined together. The model will provide an es
 
 The error results of the model can be examined. 
 
-<<error>>-=
+<<error>>=
 table(CarData$rating,predict(logisticModel,type='response')>=0.5)
 @
 

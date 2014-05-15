@@ -85,6 +85,23 @@ p_X(x) = \int_y p_{X,Y}(x,y)dy = \int_y p_{X|Y}(x|y)p_Y(y)dy
 
 There are three related distributions:  the marginal, the joint and the conditional. 
 
+\subsection{Markov Chain Monte Carlo Methods}
+This comes from Dave Miles.  There are four sections. 
+\begin{itemize}
+\item \href{http://davegiles.blogspot.ca/2014/03/mcmc-for-econometrics-students-i.html}{Introduction}
+\item \href{http://davegiles.blogspot.ca/2014/03/mcmc-for-econometrics-students-ii_18.html}{Showing the MCMC works}
+\item \href{http://davegiles.blogspot.ca/2014/03/mcmc-for-econometrics-students-iii.html}{Example to extract the marginal posterior distribution}
+\item \href{http://davegiles.blogspot.com/2014/03/mcmc-for-econometrics-students-part-iv.html#more}{Use R to implement MCMC}
+\end{itemize}
+
+This is an update of the code by \href{http://www.econometricsbysimulation.com/2014/04/dave-giles-on-mcmc-for-econometrics.html}{Economics by Simulation}
+
+The Gibbs sampler exploits the characteristics of the Markov chain.  With two parameters $\theta_1$ and $\theta_2$, $p(\theta_1, \theta_2)$ is the prior pdf and $L(\theta_1, \theta_2 | y) = p(y | \theta_1, \theta_2$ is the likelihood function.  Using Bayes theory, the posterior pdf for the parameters is 
+\begin{equation}
+p(\theta_1, \theta_2| y) = \propto p(\theta_1, \theta_2)L(\theta_1, \theta_2| y)
+\end{equation}
+
+
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
 
@@ -117,16 +134,16 @@ where $\mu$ is the drift or average annual return, Z is a standard Normal random
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-n <- 10000
+\hlstd{n} \hlkwb{<-} \hlnum{10000}
 \hlcom{# Fixing the seed gives us a consistent set of simulated returns}
-\hlkwd{set.seed}(106)
-z <- \hlkwd{rnorm}(n)  \hlcom{# mean = 0 and sd = 1 are defaults}
-mu <- 0.1
-sd <- 0.15
-delta_t <- 0.25
+\hlkwd{set.seed}\hlstd{(}\hlnum{106}\hlstd{)}
+\hlstd{z} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(n)}  \hlcom{# mean = 0 and sd = 1 are defaults}
+\hlstd{mu} \hlkwb{<-} \hlnum{0.1}
+\hlstd{sd} \hlkwb{<-} \hlnum{0.15}
+\hlstd{delta_t} \hlkwb{<-} \hlnum{0.25}
 \hlcom{# apply to expression (*) above}
-qtr_returns <- mu * delta_t + sd * z * \hlkwd{sqrt}(delta_t)
-\hlkwd{hist}(qtr_returns, breaks = 100, col = \hlstr{"green"})
+\hlstd{qtr_returns} \hlkwb{<-} \hlstd{mu} \hlopt{*} \hlstd{delta_t} \hlopt{+} \hlstd{sd} \hlopt{*} \hlstd{z} \hlopt{*} \hlkwd{sqrt}\hlstd{(delta_t)}
+\hlkwd{hist}\hlstd{(qtr_returns,} \hlkwc{breaks} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"green"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/MC} 
@@ -138,9 +155,9 @@ Now the descriptive statistics can be uncovered from the simulated results.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-stats <- \hlkwd{c}(\hlkwd{mean}(qtr_returns) * 4, \hlkwd{sd}(qtr_returns) * 2)  \hlcom{# \hlkwd{sqrt}(4)}
-\hlkwd{names}(stats) <- \hlkwd{c}(\hlstr{"mean"}, \hlstr{"volatility"})
-stats
+\hlstd{stats} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlkwd{mean}\hlstd{(qtr_returns)} \hlopt{*} \hlnum{4}\hlstd{,} \hlkwd{sd}\hlstd{(qtr_returns)} \hlopt{*} \hlnum{2}\hlstd{)}  \hlcom{# sqrt(4)}
+\hlkwd{names}\hlstd{(stats)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"mean"}\hlstd{,} \hlstr{"volatility"}\hlstd{)}
+\hlstd{stats}
 \end{alltt}
 \begin{verbatim}
 ##       mean volatility 
@@ -157,29 +174,26 @@ This is from \href{http://blog.revolutionanalytics.com/2014/02/quantitative-fina
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{require}(GLDEX)
-\hlkwd{require}(quantmod)
-
-\hlkwd{getSymbols}(\hlstr{"SPY"}, from = \hlstr{"1994-02-01"})
+\hlkwd{require}\hlstd{(GLDEX)}
+\hlkwd{require}\hlstd{(quantmod)}
+\hlkwd{getSymbols}\hlstd{(}\hlstr{"SPY"}\hlstd{,} \hlkwc{from} \hlstd{=} \hlstr{"1994-02-01"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ## [1] "SPY"
 \end{verbatim}
 \begin{alltt}
-SPY.Close <- SPY[, 4]  \hlcom{# Closing prices}
-
-SPY.vector <- \hlkwd{as.vector}(SPY.Close)
-
+\hlstd{SPY.Close} \hlkwb{<-} \hlstd{SPY[,} \hlnum{4}\hlstd{]}  \hlcom{# Closing prices}
+\hlstd{SPY.vector} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(SPY.Close)}
 \hlcom{# Calculate log returns}
-sp500 <- \hlkwd{diff}(\hlkwd{log}(SPY.vector), lag = 1)
-sp500 <- sp500[-1]  \hlcom{# Remove the NA in the first position}
+\hlstd{sp500} \hlkwb{<-} \hlkwd{diff}\hlstd{(}\hlkwd{log}\hlstd{(SPY.vector),} \hlkwc{lag} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlstd{sp500} \hlkwb{<-} \hlstd{sp500[}\hlopt{-}\hlnum{1}\hlstd{]}  \hlcom{# Remove the NA in the first position}
 \hlcom{# Set normalise='Y' so that kurtosis is calculated with reference to}
 \hlcom{# kurtosis = 0 under Normal distribution}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(sp500,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002633  0.0001532 -0.0960976  9.5131553
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -189,19 +203,19 @@ Now fit the GLD with the function fun.data.fit.mm. There are warnings but these 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-spLambdaDist = \hlkwd{fun.data.fit.mm}(sp500)
-spLambdaDist
+\hlstd{spLambdaDist} \hlkwb{=} \hlkwd{fun.data.fit.mm}\hlstd{(sp500)}
+\hlstd{spLambdaDist}
 \end{alltt}
 \begin{verbatim}
 ##            RPRS     RMFMKL
-## [1,]  3.884e-04  3.244e-04
-## [2,] -4.238e+01  2.039e+02
-## [3,] -1.677e-01 -1.699e-01
-## [4,] -1.641e-01 -1.616e-01
+## [1,]  3.846e-04   0.000321
+## [2,] -4.228e+01 203.501581
+## [3,] -1.675e-01  -0.169657
+## [4,] -1.640e-01  -0.161483
 \end{verbatim}
 \begin{alltt}
-\hlkwd{fun.plot.fit}(fit.obj = spLambdaDist, data = sp500, nclass = 100, param = \hlkwd{c}(\hlstr{"rs"}, 
-    \hlstr{"fmkl"}), xlab = \hlstr{"Returns"})
+\hlkwd{fun.plot.fit}\hlstd{(}\hlkwc{fit.obj} \hlstd{= spLambdaDist,} \hlkwc{data} \hlstd{= sp500,} \hlkwc{nclass} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{param} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"rs"}\hlstd{,}
+    \hlstr{"fmkl"}\hlstd{),} \hlkwc{xlab} \hlstd{=} \hlstr{"Returns"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/GLD} 
@@ -212,17 +226,16 @@ Now it is possible to generrate simualted results using the function rgl(). Lamb
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-lambda_params_rs <- spLambdaDist[, 1]
-lambda1_rs <- lambda_params_rs[1]
-lambda2_rs <- lambda_params_rs[2]
-lambda3_rs <- lambda_params_rs[3]
-lambda4_rs <- lambda_params_rs[4]
-
-lambda_params_fmkl <- spLambdaDist[, 2]
-lambda1_fmkl <- lambda_params_fmkl[1]
-lambda2_fmkl <- lambda_params_fmkl[2]
-lambda3_fmkl <- lambda_params_fmkl[3]
-lambda4_fmkl <- lambda_params_fmkl[4]
+\hlstd{lambda_params_rs} \hlkwb{<-} \hlstd{spLambdaDist[,} \hlnum{1}\hlstd{]}
+\hlstd{lambda1_rs} \hlkwb{<-} \hlstd{lambda_params_rs[}\hlnum{1}\hlstd{]}
+\hlstd{lambda2_rs} \hlkwb{<-} \hlstd{lambda_params_rs[}\hlnum{2}\hlstd{]}
+\hlstd{lambda3_rs} \hlkwb{<-} \hlstd{lambda_params_rs[}\hlnum{3}\hlstd{]}
+\hlstd{lambda4_rs} \hlkwb{<-} \hlstd{lambda_params_rs[}\hlnum{4}\hlstd{]}
+\hlstd{lambda_params_fmkl} \hlkwb{<-} \hlstd{spLambdaDist[,} \hlnum{2}\hlstd{]}
+\hlstd{lambda1_fmkl} \hlkwb{<-} \hlstd{lambda_params_fmkl[}\hlnum{1}\hlstd{]}
+\hlstd{lambda2_fmkl} \hlkwb{<-} \hlstd{lambda_params_fmkl[}\hlnum{2}\hlstd{]}
+\hlstd{lambda3_fmkl} \hlkwb{<-} \hlstd{lambda_params_fmkl[}\hlnum{3}\hlstd{]}
+\hlstd{lambda4_fmkl} \hlkwb{<-} \hlstd{lambda_params_fmkl[}\hlnum{4}\hlstd{]}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -233,59 +246,54 @@ There are problems with the rgl function.  I am not sure what this does.  It is 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{require}(gld)
+\hlkwd{require}\hlstd{(gld)}
 \end{alltt}
 
 
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: gld}}\begin{alltt}
-\hlkwd{require}(GLDEX)
+\hlkwd{require}\hlstd{(GLDEX)}
 \end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: GLDEX\\\#\# Loading required package: cluster}}\begin{alltt}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: GLDEX\\\#\# Loading required package: cluster\\\#\# \\\#\# Attaching package: 'GLDEX'\\\#\# \\\#\# The following objects are masked from 'package:gld':\\\#\# \\\#\#\ \ \ \  dgl, pgl, qdgl, qgl, rgl, starship, starship.adaptivegrid,\\\#\#\ \ \ \  starship.obj}}\begin{alltt}
 \hlcom{# RS version:}
-\hlkwd{set.seed}(100)  \hlcom{# Set seed to obtain a reproducible set}
-rs_sample <- \hlkwd{rgl}(n = 1e+07, lambda1 = lambda1_rs, lambda2 = lambda2_rs, lambda3 = lambda3_rs, 
-    lambda4 = lambda4_rs, param = \hlstr{"rs"})
-
+\hlkwd{set.seed}\hlstd{(}\hlnum{100}\hlstd{)}  \hlcom{# Set seed to obtain a reproducible set}
+\hlstd{rs_sample} \hlkwb{<-} \hlkwd{rgl}\hlstd{(}\hlkwc{n} \hlstd{=} \hlnum{1e+07}\hlstd{,} \hlkwc{lambda1} \hlstd{= lambda1_rs,} \hlkwc{lambda2} \hlstd{= lambda2_rs,} \hlkwc{lambda3} \hlstd{= lambda3_rs,}
+    \hlkwc{lambda4} \hlstd{= lambda4_rs,} \hlkwc{param} \hlstd{=} \hlstr{"rs"}\hlstd{)}
 \hlcom{# Moments of simulated returns using RS method:}
-\hlkwd{fun.moments.r}(rs_sample, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(rs_sample,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  2.664e-04  9.759e-05 -1.052e-01  9.987e+00
+##  2.633e-04  9.774e-05 -1.043e-01  9.955e+00
 \end{verbatim}
 \begin{alltt}
-
 \hlcom{# Moments calculated from market data:}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(sp500,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002633  0.0001532 -0.0960976  9.5131553
 \end{verbatim}
 \begin{alltt}
-
 \hlcom{# FKML version:}
-\hlkwd{set.seed}(100)  \hlcom{# Set seed to obtain a reproducible set}
-fmkl_sample <- \hlkwd{rgl}(n = 1e+05, lambda1 = lambda1_fmkl, lambda2 = lambda2_fmkl, 
-    lambda3 = lambda3_fmkl, lambda4 = lambda4_fmkl, param = \hlstr{"fmkl"})
-
+\hlkwd{set.seed}\hlstd{(}\hlnum{100}\hlstd{)}  \hlcom{# Set seed to obtain a reproducible set}
+\hlstd{fmkl_sample} \hlkwb{<-} \hlkwd{rgl}\hlstd{(}\hlkwc{n} \hlstd{=} \hlnum{1e+05}\hlstd{,} \hlkwc{lambda1} \hlstd{= lambda1_fmkl,} \hlkwc{lambda2} \hlstd{= lambda2_fmkl,}
+    \hlkwc{lambda3} \hlstd{= lambda3_fmkl,} \hlkwc{lambda4} \hlstd{= lambda4_fmkl,} \hlkwc{param} \hlstd{=} \hlstr{"fmkl"}\hlstd{)}
 \hlcom{# Moments of simulated returns using FMKL method:}
-\hlkwd{fun.moments.r}(fmkl_sample, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(fmkl_sample,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002434  0.0001542 -0.0870419  8.6061100
+##  0.0002403  0.0001547 -0.0862244  8.5839659
 \end{verbatim}
 \begin{alltt}
-
 \hlcom{# Moments calculated from market data:}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(sp500,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002633  0.0001532 -0.0960976  9.5131553
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -294,32 +302,32 @@ Compare the moments to the S\&P500 market data
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{fun.moments.r}(rs_sample, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(rs_sample,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  2.664e-04  9.759e-05 -1.052e-01  9.987e+00
+##  2.633e-04  9.774e-05 -1.043e-01  9.955e+00
 \end{verbatim}
 \begin{alltt}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(sp500,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002633  0.0001532 -0.0960976  9.5131553
 \end{verbatim}
 \begin{alltt}
-\hlkwd{fun.moments.r}(fmkl_sample, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(fmkl_sample,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002434  0.0001542 -0.0870419  8.6061100
+##  0.0002403  0.0001547 -0.0862244  8.5839659
 \end{verbatim}
 \begin{alltt}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlkwd{fun.moments.r}\hlstd{(sp500,} \hlkwc{normalise} \hlstd{=} \hlstr{"Y"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002633  0.0001532 -0.0960976  9.5131553
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -329,7 +337,7 @@ Compare the moments to the S\&P500 market data
 
 Sparcity means that the features are reduced by only using those that pass a particular level of significance.  \href{http://statweb.stanford.edu/~tibs/lasso.html}{More here.}
 
-\subsection{Standard Error of the Regression}
+\subsection{Standard Error of the estimated mean}
 The standard error of the estimate of the mean is 
 \begin{equation}
 SD_x = \frac{\sigma}{\sqrt{n}}
@@ -338,9 +346,10 @@ This can be derived from the variance of the sum of independent random variables
 \begin{itemize}
 \item If $X_1, X_2, \dots, X_n$ are independent observations from a population with a mean $\mu$ and a standard deviation $\sigma$, 
 \item Variance of the Total = $T = (X_1, X_2, \dots, X_n)$ is $n\sigma^2$
-\item the variance of $T/n$ is $\frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}$
-\item the standard deviation of $T/n$ must be $\frac{n}{\sigma n}$
 \item $T/n$ is the mean $\bar{x}$
+\item the variance of $T/n$ is $\frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}$
+\item \href{https://onlinecourses.science.psu.edu/stat414/node/167}{Explained}
+\item the standard deviation of $T/n$ must be $\frac{n}{\sqrt{n}}$
 \end{itemize}
 
 \subsection{Logistic Regression}
@@ -349,16 +358,16 @@ This comes from \href{http://www.win-vector.com/blog/2010/11/learn-a-powerful-ma
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-CarData <- \hlkwd{read.table}(\hlkwd{url}(\hlstr{"http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data"}), 
-    sep = \hlstr{","}, col.names = \hlkwd{c}(\hlstr{"buying"}, \hlstr{"maintenance"}, \hlstr{"doors"}, \hlstr{"persons"}, \hlstr{"lug_boot"}, 
-        \hlstr{"safety"}, \hlstr{"rating"}))
-logisticModel <- \hlkwd{glm}(rating != \hlstr{"unacc"} ~ buying + maintenance + doors + persons + 
-    lug_boot + safety, family = \hlkwd{binomial}(link = \hlstr{"logit"}), data = CarData)
+\hlstd{CarData} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlkwd{url}\hlstd{(}\hlstr{"http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data"}\hlstd{),}
+    \hlkwc{sep} \hlstd{=} \hlstr{","}\hlstd{,} \hlkwc{col.names} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"buying"}\hlstd{,} \hlstr{"maintenance"}\hlstd{,} \hlstr{"doors"}\hlstd{,} \hlstr{"persons"}\hlstd{,} \hlstr{"lug_boot"}\hlstd{,}
+        \hlstr{"safety"}\hlstd{,} \hlstr{"rating"}\hlstd{))}
+\hlstd{logisticModel} \hlkwb{<-} \hlkwd{glm}\hlstd{(rating} \hlopt{!=} \hlstr{"unacc"} \hlopt{~} \hlstd{buying} \hlopt{+} \hlstd{maintenance} \hlopt{+} \hlstd{doors} \hlopt{+} \hlstd{persons} \hlopt{+}
+    \hlstd{lug_boot} \hlopt{+} \hlstd{safety,} \hlkwc{family} \hlstd{=} \hlkwd{binomial}\hlstd{(}\hlkwc{link} \hlstd{=} \hlstr{"logit"}\hlstd{),} \hlkwc{data} \hlstd{= CarData)}
 \end{alltt}
 
 
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred}}\begin{alltt}
-\hlkwd{summary}(logisticModel)
+\hlkwd{summary}\hlstd{(logisticModel)}
 \end{alltt}
 \begin{verbatim}
 ## 
@@ -390,7 +399,7 @@ logisticModel <- \hlkwd{glm}(rating != \hlstr{"unacc"} ~ buying + maintenance + 
 ## safetylow         -30.505   1300.343   -0.02     0.98    
 ## safetymed          -3.004      0.358   -8.40  < 2e-16 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -405,12 +414,31 @@ logisticModel <- \hlkwd{glm}(rating != \hlstr{"unacc"} ~ buying + maintenance + 
 
 The variable levels and values are joined together. The model will provide an estimate of the effect of each category on the rating.  The values for each category are adde together to get the overall rating score. 
 
+The error results of the model can be examined. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{table}\hlstd{(CarData}\hlopt{$}\hlstd{rating,} \hlkwd{predict}\hlstd{(logisticModel,} \hlkwc{type} \hlstd{=} \hlstr{"response"}\hlstd{)} \hlopt{>=} \hlnum{0.5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##        
+##         FALSE TRUE
+##   acc      32  352
+##   good      0   69
+##   unacc  1166   44
+##   vgood     0   65
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
 To be completed. 
 
 \subsection{F-Tests}
 This is an example that is based on testing for fabricated evidence.  The full documentation is \href{http://errorstatistics.com/2014/05/10/who-ya-gonna-call-for-statistical-fraudbusting-r-a-fisher-p-values-and-error-statistics-again/}{Deborah Mayo}.  As the paper says
 \begin{quotation}
-``In each experiment, participants (undergraduate students) were randomly assigned to three groups, and each group was given a different ‘intervention’. All participants were then tested on some outcome measure.``
+``In each experiment, participants (undergraduate students) were randomly assigned to three groups, and each group was given a different intervention. All participants were then tested on some outcome measure.``
 \end{quotation}
 The accusation is that the results are \textbf{too} linear.  The relationships are too perfect compared to other studies.  The method used to asses this is called \emph{delta-F}.  The odds of seeing such linear trends are calculated based on the assumption that the trend is linear.  
 
@@ -429,7 +457,7 @@ This is more or less the same method that is used to test whether a simple model
 From the paper
 
 \begin{quotation}
-```But here the whole thing is turned on its head. Random noise means that a complex model will sometimes fit the data better than a simple one, even if the simple model describes reality. In a conventional use of F-tests, that would be regarded as a false positive. But in this case it’s the absence of those false positives that’s unusual.```
+```But here the whole thing is turned on its head. Random noise means that a complex model will sometimes fit the data better than a simple one, even if the simple model describes reality. In a conventional use of F-tests, that would be regarded as a false positive. But in this case its the absence of those false positives thats unusual.```
 \end{quotation}
 
 \end{document}
