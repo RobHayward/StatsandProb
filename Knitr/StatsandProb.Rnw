@@ -51,6 +51,28 @@ The Gibbs sampler exploits the characteristics of the Markov chain.  With two pa
 p(\theta_1, \theta_2| y) = \propto p(\theta_1, \theta_2)L(\theta_1, \theta_2| y)
 \end{equation}
 
+Here is a very simple version of the sampler applied to linear regression.  A draw for the slope coefficient is made conditional upon the given intercept and then a new intercept is drawn conditional on the slope.  This is repeated.  I think that they should be random draws from the data.  
+
+<<MCMC>>=
+# Create a simple MCMC sampler
+
+x <- seq(1, 100, by = 1)
+e <- rnorm(length(x))
+y <- 0.5 + 5 * x + e
+# prior 
+a <- rep(NA, times = length(x))
+b <- rep(NA, times = length(x))
+a[1] = 1
+b[1] = 1
+for(i in 2:100){
+b[i] <- (y[i] - a[i-1] - rnorm(1))/x[i]
+a[i] <-  y[i] - b[i]*x[i] - rnorm(1)
+}
+plot(y ~ x, type = 'l', main = "Regression with OLS (red) and MCMC (blue)")
+abline(a = mean(a), b = mean(b), col = 'blue')
+lines(fitted(lm(y ~x)), col = 'red')
+@
+
 
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 

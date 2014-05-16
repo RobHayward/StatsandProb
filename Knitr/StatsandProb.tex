@@ -101,6 +101,39 @@ The Gibbs sampler exploits the characteristics of the Markov chain.  With two pa
 p(\theta_1, \theta_2| y) = \propto p(\theta_1, \theta_2)L(\theta_1, \theta_2| y)
 \end{equation}
 
+Here is a very simple version of the sampler applied to linear regression.  A draw for the slope coefficient is made conditional upon the given intercept and then a new intercept is drawn conditional on the slope.  This is repeated.  I think that they should be random draws from the data.  
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Create a simple MCMC sampler}
+\hlstd{x} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{100}\hlstd{,} \hlkwc{by} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlkwd{length}\hlstd{(x))}
+\hlstd{y} \hlkwb{<-} \hlnum{0.5} \hlopt{+} \hlnum{5} \hlopt{*} \hlstd{x} \hlopt{+} \hlstd{e}
+\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/MCMC1} 
+\begin{kframe}\begin{alltt}
+\hlcom{# prior}
+\hlstd{a} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{times} \hlstd{=} \hlkwd{length}\hlstd{(x))}
+\hlstd{b} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{times} \hlstd{=} \hlkwd{length}\hlstd{(x))}
+\hlstd{a[}\hlnum{1}\hlstd{]} \hlkwb{=} \hlnum{1}
+\hlstd{b[}\hlnum{1}\hlstd{]} \hlkwb{=} \hlnum{1}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{2}\hlopt{:}\hlnum{100}\hlstd{) \{}
+    \hlstd{b[i]} \hlkwb{<-} \hlstd{(y[i]} \hlopt{-} \hlstd{a[i} \hlopt{-} \hlnum{1}\hlstd{]} \hlopt{-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{))}\hlopt{/}\hlstd{x[i]}
+    \hlstd{a[i]} \hlkwb{<-} \hlstd{y[i]} \hlopt{-} \hlstd{b[i]} \hlopt{*} \hlstd{x[i]} \hlopt{-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{)}
+\hlstd{\}}
+\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x,} \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"Regression with OLS (red) and MCMC (blue)"}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{a} \hlstd{=} \hlkwd{mean}\hlstd{(a),} \hlkwc{b} \hlstd{=} \hlkwd{mean}\hlstd{(b),} \hlkwc{col} \hlstd{=} \hlstr{"blue"}\hlstd{)}
+\hlkwd{lines}\hlstd{(}\hlkwd{fitted}\hlstd{(}\hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x)),} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/MCMC2} 
+
+\end{knitrout}
+
+
 
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
