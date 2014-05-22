@@ -1,4 +1,5 @@
 # Create a simple MCMC sampler
+
 x <- seq(1, 100, by = 1)
 e <- rnorm(length(x))
 y <- 0.5 + 5 * x + e
