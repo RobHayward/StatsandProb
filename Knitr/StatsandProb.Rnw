@@ -72,7 +72,7 @@ plot(y ~ x, type = 'l', main = "Regression with OLS (red) and MCMC (blue)")
 abline(a = mean(a), b = mean(b), col = 'blue')
 lines(fitted(lm(y ~x)), col = 'red')
 @
-
+The R code from Dave Giles in the file DaveGilesMCMCcoes.R has better version than this. I am not sure how we got from $\rho = 0.5$ to $sd = 1-\rho^2$. 
 
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
