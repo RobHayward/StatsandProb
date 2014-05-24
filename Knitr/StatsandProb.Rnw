@@ -48,12 +48,23 @@ This is an update of the code by \href{http://www.econometricsbysimulation.com/2
 
 The Gibbs sampler exploits the characteristics of the Markov chain.  With two parameters $\theta_1$ and $\theta_2$, $p(\theta_1, \theta_2)$ is the prior pdf and $L(\theta_1, \theta_2 | y) = p(y | \theta_1, \theta_2$ is the likelihood function.  Using Bayes theory, the posterior pdf for the parameters is 
 \begin{equation}
-p(\theta_1, \theta_2| y) = \propto p(\theta_1, \theta_2)L(\theta_1, \theta_2| y)
+p(\theta_1, \theta_2| y) \propto p(\theta_1, \theta_2)L(\theta_1, \theta_2| y)
 \end{equation}
+
+There are a numbrer of steps. 
+\begin{enumerate}
+\item Assign initial values to $\theta_1^{(0)}$ and $\theta_2^{(0)}$
+\item Draw a random value $\theta_1^{(1)}$ from $p(\theta_1|\theta_2^{(0)}, y)$
+\item The draw a random value $\theta_2^{(1)}$ from $p(\theta_2|\theta_1^{(1)}, y)$
+\item Draw a random value $\theta_1^{(2)}$ from $p(\theta_1|\theta_2^{(1)}, y)$
+\item Repeat items 3 and 4
+\end{enumerate}
+
+We end up a with two series that are Markov chains so the initial values do not matter and after many replications the chains start to behave as if they were random draws from the \emph{marginal} posterior distibution $p(\theta_1 |y)$ and $p(\theta_2|y)$ rather than the \emph{conditional} posterior distribution $p(\theta_1| \theta_2, y)$ $p(\theta_1|\theta_2, y)$.  The early values are part of the \emph{burn in} period and should be discarded.   
 
 Here is a very simple version of the sampler applied to linear regression.  A draw for the slope coefficient is made conditional upon the given intercept and then a new intercept is drawn conditional on the slope.  This is repeated.  I think that they should be random draws from the data.  
 
-<<MCMC>>=
+<<MCMC, fig.height=6>>=
 # Create a simple MCMC sampler
 
 x <- seq(1, 100, by = 1)
@@ -68,11 +79,15 @@ for(i in 2:100){
 b[i] <- (y[i] - a[i-1] - rnorm(1))/x[i]
 a[i] <-  y[i] - b[i]*x[i] - rnorm(1)
 }
-plot(y ~ x, type = 'l', main = "Regression with OLS (red) and MCMC (blue)")
+plot(y ~ x, type = 'p', main = "Regression with OLS (red) and MCMC (blue)")
 abline(a = mean(a), b = mean(b), col = 'blue')
 lines(fitted(lm(y ~x)), col = 'red')
 @
 
+Once there is a large sample of $p(\theta_1|y)$ and the burn-in have been discarded, the mean, variance, median or mode of the marginal posterior can be calculated.  The process can be expanded to more parameters. 
+
+\subsubsection{Gibbs Sampler}
+The Gibbs sampler is a special case of the Metropolis-Hasting algorithm. 
 
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 

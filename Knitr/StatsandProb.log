@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.9.19)  16 MAY 2014 06:44
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.9.19)  22 MAY 2014 19:32
 entering extended mode
 **StatsandProb.tex
 
@@ -358,197 +358,192 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
  [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Package color Info: Redefining color shadecolor on input line 107.
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 110.
-
-<figure/MCMC1.pdf, id=62, 505.89pt x 505.89pt>
-File: figure/MCMC1.pdf Graphic file (type pdf)
- <use figure/MCMC1.pdf>
-Package pdftex.def Info: figure/MCMC1.pdf used on input line 116.
-(pdftex.def)             Requested size: 390.0pt x 390.00737pt.
-
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 116--117
-[][] 
+Overfull \hbox (3.44557pt too wide) in paragraph at lines 113--114
+$\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 []\OMS/cmsy/m/n/12 j\OML/
+cmm/m/it/12 y\OT1/cmr/m/n/12 )$ rather than the \OT1/cmr/m/it/12 con-di-tional 
+\OT1/cmr/m/n/12 pos-te-rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 
+(\OML/cmm/m/it/12 []\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 []; y\OT1/cmr/m/n/12 )
+$ $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 []\OMS/cmsy/m/n/12 j\OM
+L/cmm/m/it/12 []; y\OT1/cmr/m/n/12 )$.
  []
 
-[2 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MCMC1.
-pdf>]
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 123
+Package color Info: Redefining color shadecolor on input line 118.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 121.
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 129
 .
- (C:/PROGRA~1/R/R-30~1.2/share/texmf/tex/latex\omscmtt.fd
+(C:/PROGRA~1/R/R-30~1.2/share/texmf/tex/latex\omscmtt.fd
 File: omscmtt.fd 
 )
 LaTeX Font Info:    Font shape `OMS/cmtt/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 123.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 129.
 
-Overfull \hbox (73.12523pt too wide) in paragraph at lines 127--127
-[][]\OT1/cmtt/m/n/12 plot[][](y[] []~[] []x,[] []type[] []=[] []"l"[][],[] []ma
+Overfull \hbox (73.12523pt too wide) in paragraph at lines 133--133
+[][]\OT1/cmtt/m/n/12 plot[][](y[] []~[] []x,[] []type[] []=[] []"p"[][],[] []ma
 in[] []=[] []"Regression with OLS (red) and MCMC (blue)"[][])[][] 
  []
 
-<figure/MCMC2.pdf, id=75, 505.89pt x 505.89pt>
-File: figure/MCMC2.pdf Graphic file (type pdf)
- <use figure/MCMC2.pdf>
-Package pdftex.def Info: figure/MCMC2.pdf used on input line 132.
-(pdftex.def)             Requested size: 390.0pt x 390.00737pt.
+<figure/MCMC.pdf, id=62, 505.89pt x 433.62pt>
+File: figure/MCMC.pdf Graphic file (type pdf)
+ <use figure/MCMC.pdf>
+Package pdftex.def Info: figure/MCMC.pdf used on input line 138.
+(pdftex.def)             Requested size: 390.0pt x 334.29204pt.
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 132--133
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 138--139
 [][] 
  []
 
-[3 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MCMC2.
-pdf>]
-Overfull \hbox (45.4941pt too wide) in paragraph at lines 156--157
+[2] [3 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MC
+MC.pdf>]
+Overfull \hbox (45.4941pt too wide) in paragraph at lines 165--166
 []\OT1/cmr/m/n/12 Proof [][]http://davegiles.blogspot.com/2014/04/proof-of-resu
 lt-about-adjusted.html[][] 
  []
 
-[4]
-Package color Info: Redefining color shadecolor on input line 168.
+Package color Info: Redefining color shadecolor on input line 177.
 
-Overfull \hbox (15.27962pt too wide) in paragraph at lines 171--171
+Overfull \hbox (15.27962pt too wide) in paragraph at lines 180--180
 [][]\OT1/cmtt/m/it/12 # Fixing the seed gives us a consistent set of simulated 
 returns[][] 
  []
 
-<figure/MC.pdf, id=95, 505.89pt x 433.62pt>
+[4] <figure/MC.pdf, id=95, 505.89pt x 433.62pt>
 File: figure/MC.pdf Graphic file (type pdf)
  <use figure/MC.pdf>
-Package pdftex.def Info: figure/MC.pdf used on input line 182.
+Package pdftex.def Info: figure/MC.pdf used on input line 191.
 (pdftex.def)             Requested size: 390.0pt x 334.29204pt.
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 182--183
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 191--192
 [][] 
  []
 
-[5]
-Package color Info: Redefining color shadecolor on input line 189.
+Package color Info: Redefining color shadecolor on input line 198.
 
-Overfull \hbox (14.58298pt too wide) in paragraph at lines 191--191
+Overfull \hbox (14.58298pt too wide) in paragraph at lines 200--200
 [][]\OT1/cmtt/m/n/12 stats[] []<-[] []c[][]([][]mean[][](qtr_returns)[] []*[] [
 ]4[][],[] []sd[][](qtr_returns)[] []*[] []2[][])[]  []\OT1/cmtt/m/it/12 # sqrt(
 4)[][] 
  []
 
-Package color Info: Redefining color shadecolor on input line 208.
-[6 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MC.pdf
+[5 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MC.pdf
 >]
-Overfull \hbox (40.47939pt too wide) in paragraph at lines 223--223
+Package color Info: Redefining color shadecolor on input line 217.
+
+Overfull \hbox (40.47939pt too wide) in paragraph at lines 232--232
 [][]\OT1/cmtt/m/it/12 # Set normalise=Y so that kurtosis is calculated with r
 eference to[][] 
  []
 
-Package color Info: Redefining color shadecolor on input line 237.
+Package color Info: Redefining color shadecolor on input line 246.
 
-Overfull \hbox (104.00024pt too wide) in paragraph at lines 250--250
+Overfull \hbox (104.00024pt too wide) in paragraph at lines 259--259
 [][]\OT1/cmtt/m/n/12 fun.plot.fit[][]([][]fit.obj[] []= spLambdaDist,[] []data[
 ] []= sp500,[] []nclass[] []=[] []100[][],[] []param[] []=[] []c[][]([][]"rs"[]
 [],[][] 
  []
 
-<figure/GLD.pdf, id=112, 505.89pt x 433.62pt>
+<figure/GLD.pdf, id=107, 505.89pt x 433.62pt>
 File: figure/GLD.pdf Graphic file (type pdf)
  <use figure/GLD.pdf>
-Package pdftex.def Info: figure/GLD.pdf used on input line 254.
+Package pdftex.def Info: figure/GLD.pdf used on input line 263.
 (pdftex.def)             Requested size: 390.0pt x 334.29204pt.
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 254--255
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 263--264
 [][] 
  []
 
-[7]
-Package color Info: Redefining color shadecolor on input line 260.
-Package color Info: Redefining color shadecolor on input line 280.
- [8 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/GLD.p
+[6]
+Package color Info: Redefining color shadecolor on input line 269.
+Package color Info: Redefining color shadecolor on input line 289.
+ [7 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/GLD.p
 df>]
-Overfull \hbox (13.19629pt too wide) in paragraph at lines 291--291
+Overfull \hbox (13.19629pt too wide) in paragraph at lines 300--300
 \OT1/cmtt/m/it/12 ##    dgl, pgl, qdgl, qgl, rgl, starship, starship.adaptivegr
 id, 
  []
 
 
-Overfull \hbox (184.27528pt too wide) in paragraph at lines 294--294
+Overfull \hbox (184.27528pt too wide) in paragraph at lines 303--303
 [][]\OT1/cmtt/m/n/12 rs_sample[] []<-[] []rgl[][]([][]n[] []=[] []1e+07[][],[] 
 []lambda1[] []= lambda1_rs,[] []lambda2[] []= lambda2_rs,[] []lambda3[] []= lam
 bda3_rs,[][] 
  []
 
 
-Overfull \hbox (85.47523pt too wide) in paragraph at lines 314--314
+Overfull \hbox (85.47523pt too wide) in paragraph at lines 323--323
 [][]\OT1/cmtt/m/n/12 fmkl_sample[] []<-[] []rgl[][]([][]n[] []=[] []1e+05[][],[
 ] []lambda1[] []= lambda1_fmkl,[] []lambda2[] []= lambda2_fmkl,[][] 
  []
 
 
-Overfull \hbox (23.7252pt too wide) in paragraph at lines 315--315
+Overfull \hbox (23.7252pt too wide) in paragraph at lines 324--324
 []    []\OT1/cmtt/m/n/12 lambda3[] []= lambda3_fmkl,[] []lambda4[] []= lambda4_
 fmkl,[] []param[] []=[] []"fmkl"[][])[][] 
  []
 
-[9]
-Package color Info: Redefining color shadecolor on input line 336.
- [10]
-Package color Info: Redefining color shadecolor on input line 392.
+[8]
+Package color Info: Redefining color shadecolor on input line 345.
+ [9]
+Package color Info: Redefining color shadecolor on input line 401.
 
-Overfull \hbox (221.3253pt too wide) in paragraph at lines 394--394
+Overfull \hbox (221.3253pt too wide) in paragraph at lines 403--403
 [][]\OT1/cmtt/m/n/12 CarData[] []<-[] []read.table[][]([][]url[][]([][]"http://
 archive.ics.uci.edu/ml/machine-learning-databases/car/car.data"[][]),[][] 
  []
 
 
-Overfull \hbox (134.87526pt too wide) in paragraph at lines 395--395
+Overfull \hbox (134.87526pt too wide) in paragraph at lines 404--404
 []    []\OT1/cmtt/m/n/12 sep[] []=[] []","[][],[] []col.names[] []=[] []c[][]([
 ][]"buying"[][],[] []"maintenance"[][],[] []"doors"[][],[] []"persons"[][],[] [
 ]"lug_boot"[][],[][] 
  []
 
 
-Overfull \hbox (110.17525pt too wide) in paragraph at lines 397--397
+Overfull \hbox (110.17525pt too wide) in paragraph at lines 406--406
 [][]\OT1/cmtt/m/n/12 logisticModel[] []<-[] []glm[][](rating[] []!=[] []"unacc"
 [] []~[] []buying[] []+[] []maintenance[] []+[] []doors[] []+[] []persons[] []+
 [][] 
  []
 
 
-Overfull \hbox (60.77522pt too wide) in paragraph at lines 398--398
+Overfull \hbox (60.77522pt too wide) in paragraph at lines 407--407
 []    []\OT1/cmtt/m/n/12 lug_boot[] []+[] []safety,[] []family[] []=[] []binomi
 al[][]([][]link[] []=[] []"logit"[][]),[] []data[] []= CarData)[][] 
  []
 
 
-Overfull \hbox (48.42522pt too wide) in paragraph at lines 402--402
+Overfull \hbox (48.42522pt too wide) in paragraph at lines 411--411
 []\OT1/cmtt/m/n/12 ## Warning: glm.fit: fitted probabilities numerically 0 or 1
  occurred[] 
  []
 
 
-Overfull \hbox (23.7252pt too wide) in paragraph at lines 444--444
+Overfull \hbox (23.7252pt too wide) in paragraph at lines 453--453
 []\OT1/cmtt/m/n/12 ## glm(formula = rating != "unacc" ~ buying + maintenance + 
 doors +[] 
  []
 
 
-Overfull \hbox (42.25021pt too wide) in paragraph at lines 444--444
+Overfull \hbox (42.25021pt too wide) in paragraph at lines 453--453
 []\OT1/cmtt/m/n/12 ##     persons + lug_boot + safety, family = binomial(link =
  "logit"),[] 
  []
 
 
-Overfull \hbox (11.3752pt too wide) in paragraph at lines 444--444
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 453--453
 []\OT1/cmtt/m/n/12 ## Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1 
   1[] 
  []
 
-[11]
-Package color Info: Redefining color shadecolor on input line 453.
+[10]
+Package color Info: Redefining color shadecolor on input line 462.
 
-Overfull \hbox (48.42522pt too wide) in paragraph at lines 455--455
+Overfull \hbox (48.42522pt too wide) in paragraph at lines 464--464
 [][]\OT1/cmtt/m/n/12 table[][](CarData[][]$[][]rating,[] []predict[][](logistic
 Model,[] []type[] []=[] []"response"[][])[] []>=[] []0.5[][])[][] 
  []
 
-[12]
+[11]
 Missing character: There is no Â in font cmr12!
 Missing character: There is no ‘ in font cmr12!
 Missing character: There is no Â in font cmr12!
@@ -557,24 +552,24 @@ Missing character: There is no Â in font cmr12!
 Missing character: There is no ’ in font cmr12!
 Missing character: There is no Â in font cmr12!
 Missing character: There is no ’ in font cmr12!
+ [12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 505.
  [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 496.
- [14]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 496.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 505.
 
 ("C:\Users\Toshiba\Google Drive\Research\GIT\StatsandProb\Knitr\StatsandProb.au
 x")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 496.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 496.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 505.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 505.
 Package rerunfilecheck Info: File `StatsandProb.out' has not changed.
 (rerunfilecheck)             Checksum: 4B6B0D12545BD1701AC08FE2CD2BEFB2;559.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 496.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 505.
  ) 
 Here is how much of TeX's memory you used:
- 6202 strings out of 494045
- 89977 string characters out of 3145963
+ 6201 strings out of 494045
+ 89903 string characters out of 3145963
  184066 words of memory out of 3000000
- 9379 multiletter control sequences out of 15000+200000
+ 9375 multiletter control sequences out of 15000+200000
  10632 words of font info for 39 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  29i,6n,28p,642b,386s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -591,9 +586,9 @@ les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiK
 TeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on StatsandProb.pdf (14 pages, 228242 bytes).
+Output written on StatsandProb.pdf (13 pages, 224784 bytes).
 PDF statistics:
- 210 PDF objects out of 1000 (max. 8388607)
- 32 named destinations out of 1000 (max. 500000)
- 93 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 205 PDF objects out of 1000 (max. 8388607)
+ 36 named destinations out of 1000 (max. 500000)
+ 88 words of extra memory for PDF output out of 10000 (max. 10000000)
 

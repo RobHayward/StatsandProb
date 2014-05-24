@@ -98,8 +98,19 @@ This is an update of the code by \href{http://www.econometricsbysimulation.com/2
 
 The Gibbs sampler exploits the characteristics of the Markov chain.  With two parameters $\theta_1$ and $\theta_2$, $p(\theta_1, \theta_2)$ is the prior pdf and $L(\theta_1, \theta_2 | y) = p(y | \theta_1, \theta_2$ is the likelihood function.  Using Bayes theory, the posterior pdf for the parameters is 
 \begin{equation}
-p(\theta_1, \theta_2| y) = \propto p(\theta_1, \theta_2)L(\theta_1, \theta_2| y)
+p(\theta_1, \theta_2| y) \propto p(\theta_1, \theta_2)L(\theta_1, \theta_2| y)
 \end{equation}
+
+There are a numbrer of steps. 
+\begin{enumerate}
+\item Assign initial values to $\theta_1^{(0)}$ and $\theta_2^{(0)}$
+\item Draw a random value $\theta_1^{(1)}$ from $p(\theta_1|\theta_2^{(0)}, y)$
+\item The draw a random value $\theta_2^{(1)}$ from $p(\theta_2|\theta_1^{(1)}, y)$
+\item Draw a random value $\theta_1^{(2)}$ from $p(\theta_1|\theta_2^{(1)}, y)$
+\item Repeat items 3 and 4
+\end{enumerate}
+
+We end up a with two series that are Markov chains so the initial values do not matter and after many replications the chains start to behave as if they were random draws from the \emph{marginal} posterior distibution $p(\theta_1 |y)$ and $p(\theta_2|y)$ rather than the \emph{conditional} posterior distribution $p(\theta_1| \theta_2, y)$ $p(\theta_1|\theta_2, y)$.  The early values are part of the \emph{burn in} period and should be discarded.   
 
 Here is a very simple version of the sampler applied to linear regression.  A draw for the slope coefficient is made conditional upon the given intercept and then a new intercept is drawn conditional on the slope.  This is repeated.  I think that they should be random draws from the data.  
 
@@ -110,11 +121,6 @@ Here is a very simple version of the sampler applied to linear regression.  A dr
 \hlstd{x} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{100}\hlstd{,} \hlkwc{by} \hlstd{=} \hlnum{1}\hlstd{)}
 \hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlkwd{length}\hlstd{(x))}
 \hlstd{y} \hlkwb{<-} \hlnum{0.5} \hlopt{+} \hlnum{5} \hlopt{*} \hlstd{x} \hlopt{+} \hlstd{e}
-\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x)}
-\end{alltt}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/MCMC1} 
-\begin{kframe}\begin{alltt}
 \hlcom{# prior}
 \hlstd{a} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{times} \hlstd{=} \hlkwd{length}\hlstd{(x))}
 \hlstd{b} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{times} \hlstd{=} \hlkwd{length}\hlstd{(x))}
@@ -124,14 +130,17 @@ Here is a very simple version of the sampler applied to linear regression.  A dr
     \hlstd{b[i]} \hlkwb{<-} \hlstd{(y[i]} \hlopt{-} \hlstd{a[i} \hlopt{-} \hlnum{1}\hlstd{]} \hlopt{-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{))}\hlopt{/}\hlstd{x[i]}
     \hlstd{a[i]} \hlkwb{<-} \hlstd{y[i]} \hlopt{-} \hlstd{b[i]} \hlopt{*} \hlstd{x[i]} \hlopt{-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{)}
 \hlstd{\}}
-\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x,} \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"Regression with OLS (red) and MCMC (blue)"}\hlstd{)}
+\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x,} \hlkwc{type} \hlstd{=} \hlstr{"p"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"Regression with OLS (red) and MCMC (blue)"}\hlstd{)}
 \hlkwd{abline}\hlstd{(}\hlkwc{a} \hlstd{=} \hlkwd{mean}\hlstd{(a),} \hlkwc{b} \hlstd{=} \hlkwd{mean}\hlstd{(b),} \hlkwc{col} \hlstd{=} \hlstr{"blue"}\hlstd{)}
 \hlkwd{lines}\hlstd{(}\hlkwd{fitted}\hlstd{(}\hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x)),} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/MCMC2} 
+\includegraphics[width=\maxwidth]{figure/MCMC} 
 
 \end{knitrout}
+
+
+Once there is a large sample of $p(\theta_1|y)$ and the burn-in have been discarded, the mean, variance, median or mode of the marginal posterior can be calculated.  The process can be expanded to more parameters. 
 
 
 
