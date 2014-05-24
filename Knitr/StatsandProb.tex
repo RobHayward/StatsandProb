@@ -185,6 +185,115 @@ The mixture model will be comprised of N random varibles distributed according t
 
 The method will try to estimate the all the parameters of the model from the data.  The underlying data is known $(x_i)$; the number of mixture components is set $(K)$; the parameters of the distribution of each mixture component $(\theta_{i=1\dots K})$; mixture weight $(\Phi_{i = 1\dots K})$; $\mathbf{\Phi}$ K-dimensional vector summing to 1; $F(x|\theta)$ probability distribution of observations parameterised on $\theta$; $\alpha$ shared hyperparameter for component weights; $\beta$ shared hyperparameter for mixture weights; $H(\theta|\alpha)$ prior probability distribution of component parameters; 
 
+
+\subsection{Regression}
+This is a series of sessions that introduce regression with R.  The first page is \href{http://pingax.com/2013/11/}{here}.  \href{http://pingax.com/linear-regression-with-r-step-by-step-implementation-part-1/}{Linear Regression: Step-by-step}. This is essentially a version of the Andrew Ng Machine Learning Course.  
+
+If $Y$ is the dependent variable, $X_1, X_2, \dots X_n$ are the explanatory variables and $\Theta$ are unknown parameters, regression takes can be carried out in a number of ways. 
+
+\subsubsection{OLS}
+\begin{equation}
+h_{\Theta}(x) = \Theta_0 + \Theta_1 x
+\end{equation}
+
+The aim is to find values of $\Theta$ so that the model will fit the data.  The \emph{cost function} will assess the difference between the predicted and the actual values. One version of the cost function is 
+\begin{equation}
+J(\Theta_0, \Theta_1) = \frac{1}{2m} \sum_{i=1}^m (h_{\Theta}(X^{(i)} - y^{(i)}))^2
+\end{equation}
+Change the values of $\Theta$ to minimise the cost. The method used is gradient decent. 
+
+The partital derivative of the cost function with respect to the $\Theta$ are
+\begin{subequations}
+\begin{equation}
+\Theta_0 = \Theta_0 - \alpha \frac{1}{m}\sum_{i=1}^m (h_{\Theta}(x^{(i)}) - y^{(i)})
+\end{equation}
+\begin{equation}
+\Theta_1 = \Theta_1 - \alpha \frac{1}{m}\sum_{i=1}^m (h_{\Theta}(x^{(i)}) - y^{(i)})x^{(i)}
+\end{equation}
+\end{subequations}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{"../Data/Reg.csv"}\hlstd{)}
+\hlstd{y} \hlkwb{<-} \hlstd{data}\hlopt{$}\hlstd{profit}
+\hlstd{x} \hlkwb{<-} \hlstd{data}\hlopt{$}\hlstd{population}
+\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x,} \hlkwc{main} \hlstd{=} \hlstr{"Profits vs Population"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Regression} 
+
+\end{knitrout}
+
+The objective of the regression is to minimise the cost function.
+\begin{equation}
+J(\Theta_0, \Theta_1) = \frac{1}{2m} \sum_{i=1}^m (h_{\Theta}(X^{(i)} - y^{(i)}))^2
+\end{equation}
+Where the hypothesis is given by 
+\begin{equation}
+h_{\Theta}(x) = \Theta^Tx = \Theta_0 + \Theta_1x_1
+\end{equation}
+To take account of the intercept $\Theta_0$ an additional column of constants is added to $x$. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Add ones to x}
+\hlstd{x} \hlkwb{<-} \hlkwd{cbind}\hlstd{(}\hlnum{1}\hlstd{, x)}
+\hlcom{# Initialise theta vector}
+\hlstd{theta} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{0}\hlstd{)}
+\hlcom{# Number of observations}
+\hlstd{m} \hlkwb{<-} \hlkwd{nrow}\hlstd{(x)}
+\hlcom{# Calculate the cost}
+\hlstd{cost} \hlkwb{<-} \hlkwd{sum}\hlstd{(((x} \hlopt{%*%} \hlstd{theta)} \hlopt{-} \hlstd{y)}\hlopt{^}\hlnum{2}\hlstd{)}\hlopt{/}\hlstd{(}\hlnum{2} \hlopt{*} \hlstd{m)}
+\hlstd{cost}
+\end{alltt}
+\begin{verbatim}
+## [1] 32.07
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The initial value is 32.07 (how do I take this from the chunk?).  Now 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Set learning parameter}
+\hlstd{alpha} \hlkwb{<-} \hlnum{0.001}
+\hlcom{# Number of iterations}
+\hlstd{iterations} \hlkwb{<-} \hlnum{1500}
+\hlcom{# updating thetas using gradient update}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{iterations) \{}
+    \hlstd{theta[}\hlnum{1}\hlstd{]} \hlkwb{<-} \hlstd{theta[}\hlnum{1}\hlstd{]} \hlopt{-} \hlstd{alpha} \hlopt{*} \hlstd{(}\hlnum{1}\hlopt{/}\hlstd{m)} \hlopt{*} \hlkwd{sum}\hlstd{(((x} \hlopt{%*%} \hlstd{theta)} \hlopt{-} \hlstd{y))}
+    \hlstd{theta[}\hlnum{2}\hlstd{]} \hlkwb{<-} \hlstd{theta[}\hlnum{2}\hlstd{]} \hlopt{-} \hlstd{alpha} \hlopt{*} \hlstd{(}\hlnum{1}\hlopt{/}\hlstd{m)} \hlopt{*} \hlkwd{sum}\hlstd{(((x} \hlopt{%*%} \hlstd{theta)} \hlopt{-} \hlstd{y)} \hlopt{*} \hlstd{x[,} \hlnum{2}\hlstd{])}
+\hlstd{\}}
+\hlcom{# Predict for areas of the 35,000 and 70,000 people}
+\hlstd{predict1} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{3.5}\hlstd{)} \hlopt{%*%} \hlstd{theta}
+\hlstd{predict2} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{7}\hlstd{)} \hlopt{%*%} \hlstd{theta}
+\hlstd{predict1}
+\end{alltt}
+\begin{verbatim}
+##       [,1]
+## [1,] 2.247
+\end{verbatim}
+\begin{alltt}
+\hlstd{predict2}
+\end{alltt}
+\begin{verbatim}
+##       [,1]
+## [1,] 5.356
+\end{verbatim}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(data}\hlopt{$}\hlstd{population} \hlopt{~} \hlstd{data}\hlopt{$}\hlstd{profit,} \hlkwc{main} \hlstd{=} \hlstr{"Profits vs Population"}\hlstd{)}
+\hlkwd{abline}\hlstd{(theta,} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Regression3} 
+
+\end{knitrout}
+
+I think it is right, but....
+
 \subsection{Adjusted R squared}
 \href{http://davegiles.blogspot.ca/2013/05/when-will-adjusted-r-squared-increase.html}{Adjusted R squared} applied a penalty to the basic R squard to account for additional variables.  The equartion is 
 
