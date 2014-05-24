@@ -142,7 +142,39 @@ Here is a very simple version of the sampler applied to linear regression.  A dr
 
 Once there is a large sample of $p(\theta_1|y)$ and the burn-in have been discarded, the mean, variance, median or mode of the marginal posterior can be calculated.  The process can be expanded to more parameters. 
 
+\subsubsection{Gibbs Sampler}
+The Gibbs sampler is a special case of the Metropolis-Hasting algorithm. 
+The R code from Dave Giles in the file DaveGilesMCMCcoes.R has better version than this. I am not sure how we got from $\rho = 0.5$ to $sd = 1-\rho^2$. 
 
+This example is based on two random variables $Y_1$ and $Y_2$, with a mean vector of $(\mu_1, \mu_2)$ a correlation of $\rho$, the variances of $Y_1$ and $Y_2$ are $\sigma_1^2$ and $\sigma_2^2$ respectively and the covariance between $Y_1$ and $Y_2$ is $\rho \sigma_1 \sigma_2$. \footnote{As $\rho = \frac{\sigma_{Y_1, Y_2}}{\sigma_1 \sigma_2}$.  Some additional reading on covariance \href{http://www.cogsci.ucsd.edu/~desa/109/trieschmarksslides.pdf}{http://www.cogsci.ucsd.edu/~desa/109/trieschmarksslides.pdf}}
+
+
+
+The conditional distribution of $Y_1$ given $Y_2$ is 
+
+\begin{equation}
+p(Y_1| Y_2) \sim N \left(\mu_1 + \frac{\rho\sigma_1(Y_2 - \mu_2)}{\sigma_2}, \sigma_1^2(1 - \rho^2)\right)
+\end{equation}
+
+and the conditional distribution of $Y_2$ given $Y_1$ is
+
+\begin{equation}
+p(Y_2| Y_1) \sim N \left(\mu_2 + \frac{\rho\sigma_2(Y_1 - \mu_1)}{\sigma_2}, \sigma_1^2(1 - \rho^2) \right)
+\end{equation}
+
+This can be used to find the marginal distribution. It is known that the marginal distribution for $Y_1$ is
+\begin{equation}
+p(Y_1) \sim N(\mu_1, \sigma_1^2)
+\end{equation}
+
+and for $Y_2$ is 
+\begin{equation}
+p(Y_2) \sim N(\mu_2, \sigma_2^2)
+\end{equation}
+
+However, to test the MCMC draw from the conditional to find the marginal (that we already know).  
+
+Set $\mu_1 = 0$ and $\mu_2 = 0$ and $\sigma_1 = 1$ and $\sigma_2 = 2$
 
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
