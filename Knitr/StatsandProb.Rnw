@@ -16,7 +16,7 @@
 %\renewcommand[\harvardurl]{URL: \url}
 \begin{document}
 \title{Stats and Probability Information}
-%\author{Rob Hayward\footnote{University of Brighton Business School, Lewes Road, Brighton, BN2 4AT; Telephone 01273 642586.  rh49@brighton.ac.uk}}
+\author{Rob Hayward}
 \date{\today}
 \maketitle
 \subsection*{Continuous and marginal distributions}
@@ -118,7 +118,71 @@ p(Y_2) \sim N(\mu_2, \sigma_2^2)
 
 However, to test the MCMC draw from the conditional to find the marginal (that we already know).  
 
-Set $\mu_1 = 0$ and $\mu_2 = 0$ and $\sigma_1 = 1$ and $\sigma_2 = 2$
+Set $\mu_1 = 0$ and $\mu_2 = 0$ and $\sigma_1 = 1$ and $\sigma_2 = 1$
+
+The steps for the Gibbs sampler are 
+\begin{enumerate}
+\item Chose an initial value for $Y_1$ called $Y_1^{(0)}$
+\item Next, generate a random $Y_2$ value ($Y_2^{(0)})$ from $p(Y_2| Y_1^{(0)})$
+\item Then, generte a new random $Y_1$ value (say $Y_1^{(1)})$ from $p(Y_1| Y_2^{(0)})$
+\item Repeat steps 2 and 3 many times saving the strings of $Y_1$ and $Y_2$ values.
+\item Throw away the first thousand or so values as they are draws from the \emph{conditional distribution}
+\item Now the values from the marginal distribution of interest
+\end{enumerate}
+
+<<MCM, fig.height=6>>=
+set.seed(123)   
+nreps <- 105000
+nb <- 5000
+yy1 <- array(, nreps)
+yy2 <- array(, nreps)
+rho <- 0.5
+sd <- sqrt(1 - rho^2)
+y1 <- rnorm(1, 0, sd)
+for(i in 1:nreps){
+  y2 <- rnorm(1, 0, sd) + rho*y1
+  y1 <- rnorm(1, 0, sd) + rho*y2
+  yy1[i] <- y1
+  yy2[i] <- y2
+}
+nb1 <- nb + 1
+yy1b <- yy1[nb1:nreps]
+yy2b <- yy2[nb1:nreps]
+plot(yy1b, col = 2, main = "MCMC for Bivarite Normal", xlab = "Repetitions",
+     ylab = "Y1")
+abline(h = 3, lty = 2)
+abline(h = -3, lty = 2)
+@
+The values are centered around zero as they should be. 
+<<MCMC2, fig.height=6>>=
+plot(yy2b, col = 4, main = "MCMC for Bivarite Normal", xlab = "Repetitions",
+     ylab = "Y2")
+abline(h = 3, lty = 2)
+abline(h = -3, lty = 2)
+@
+The summary statistics are below. 
+<<MCMC3>>=
+summary(yy1b)
+var(yy1b)
+summary(yy2b)
+var(yy2b)
+@
+The means are zero and the variances are close  to unity. 
+
+<<Hist, fig.height=6>>=
+hist(yy1b, prob = T, col = 2, main = "MCMC for Bivariate Normal", xlab = "Y1", 
+     ylab = "Marginal PDF for Y1")
+hist(yy2b, prob = T, col = 4, main = "MCMC for Bivariate Normal", xlab = "Y2", 
+     ylab = "Marginal PDF for Y2")
+@
+
+<<Tests, fig.height=6>>=
+qqnorm(yy1b)
+qqnorm(yy2b)
+library(tseries)
+jarque.bera.test(yy1b)
+jarque.bera.test(yy1b)
+@
 
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
