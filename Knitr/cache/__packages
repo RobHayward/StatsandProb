@@ -4,6 +4,7 @@ Defaults
 GLDEX
 knitr
 quantmod
+tseries
 TTR
 xts
 zoo
