@@ -64,7 +64,7 @@ We end up a with two series that are Markov chains so the initial values do not 
 
 Here is a very simple version of the sampler applied to linear regression.  A draw for the slope coefficient is made conditional upon the given intercept and then a new intercept is drawn conditional on the slope.  This is repeated.  I think that they should be random draws from the data.  
 
-<<MCMC, fig.height=6>>=
+<<MCMC, fig.height=5>>=
 # Create a simple MCMC sampler
 
 x <- seq(1, 100, by = 1)
@@ -130,7 +130,7 @@ The steps for the Gibbs sampler are
 \item Now the values from the marginal distribution of interest
 \end{enumerate}
 
-<<MCM, fig.height=6>>=
+<<MCM, fig.height=5>>=
 set.seed(123)   
 nreps <- 105000
 nb <- 5000
@@ -154,7 +154,7 @@ abline(h = 3, lty = 2)
 abline(h = -3, lty = 2)
 @
 The values are centered around zero as they should be. 
-<<MCMC2, fig.height=6>>=
+<<MCMC2, fig.height=5>>=
 plot(yy2b, col = 4, main = "MCMC for Bivarite Normal", xlab = "Repetitions",
      ylab = "Y2")
 abline(h = 3, lty = 2)
@@ -169,20 +169,62 @@ var(yy2b)
 @
 The means are zero and the variances are close  to unity. 
 
-<<Hist, fig.height=6>>=
+<<Hist, fig.height=5>>=
 hist(yy1b, prob = T, col = 2, main = "MCMC for Bivariate Normal", xlab = "Y1", 
      ylab = "Marginal PDF for Y1")
 hist(yy2b, prob = T, col = 4, main = "MCMC for Bivariate Normal", xlab = "Y2", 
      ylab = "Marginal PDF for Y2")
 @
 
-<<Tests, fig.height=6>>=
+<<Tests, fig.height=5>>=
 qqnorm(yy1b)
 qqnorm(yy2b)
 library(tseries)
 jarque.bera.test(yy1b)
 jarque.bera.test(yy1b)
 @
+
+\subsubsection{Gibbs Sampler for Marginal Posterior}
+Extract the \emph{marginal posterior distribution} from the \emph{joint posterior distribution}. Assume that there is a population with an unknown mean $\mu$ and an unknown precistion parameter $\tau$ where $\tau = 1/\sigma^2$. Before looking at the data we are \emph{a priori} ignorant about the possible values of the parameters, we assign the following joint pior density: 
+
+\begin{equation}
+p(\mu, \tau) = p(\mu) p(\tau) \propto 1/\tau ; \quad -\inf < \mu < \inf ; \quad 0 < \tau < \inf
+\end{equation}
+
+Now take a sample of n independent values from the population.  This will give a likelihood function of
+\begin{equation}
+L(\mu, \tau | y) = p(y | \mu, \tau) \propto \tau^{n/2} exp[-(\tau/2) \sum(y_i - \mu)^2]
+\end{equation}
+
+I do not understand the next step.  
+
+Dave says that by Bayes law the \emph{joint} posterior density for the two parameters is
+\begin{align}{\label{eqref:BL}}
+p(\mu, \tau | y) &= [p(\mu, \tau)L(\mu, \tau | y)/ p(y)] \propto p(\mu, \tau)L(\mu, \tau |y)\\
+                 &\propto \tau^{n/2 -1}exp[-(\tau/2)\sum(y_i - \mu)^2]
+\end{align}
+
+For the marginal densities it is necessary to input the conditional posterior densities into the Gibbs sampler.  
+From Equation \ref{eqref:BL}, treat $\tau$ as a constant (so condition on $\tau$), 
+\begin{align}
+p(\mu | \tau, y) &\propto exp[-(\tau/2)\sum(y_i - \mu)^2]\\
+&\propto exp[-(\tau/2) (vs^2 + \sum(\mu - y^*)^2)]\\
+&\propto exp[-\tau/2)(\mu - y^*)^2]
+\end{align}
+
+where $y^*$ is the sample mean of $y$; $v = (n - 1)$; and $s^2$ is the sample variance. Therefore, the conditional posterior for $\mu$ is a normal distribution with a mean of $y^*$ and a variance of $(n\tau)^{-1}$.
+
+Alternatively, if the conditioning is on $\mu$ 
+\begin{equation}
+p(\tau | \mu, y) \propto \tau^{n/2 -1}exp[-\tau(0.5\sum(y_i - \mu)^2)]
+\end{equation}
+
+So the conditional posterior for $\tau$ is a Gammer distribution with a shape parameter, $r = (n/2)$ and a scale parameter, $\lambda = [0.5\sum(y_i - \mu)^2]$. 
+
+I do not understand the move to the conditional posterior and the distribution. 
+
+Now implement the Gibbs Sampler
+
 
 \subsection{Mixture Model}
 This is a probabilistic model that relates some random variables to some other variables.  The model has sub-populations. The properties of the sub-population are different from those of the parent. The sub-populations may not be observable.  For example, the distribution of returns may be different in different sub-population or regime. 
@@ -220,7 +262,7 @@ The partital derivative of the cost function with respect to the $\Theta$ are
 \end{equation}
 \end{subequations}
 
-<<Regression, fig.height=6>>=
+<<Regression, fig.height=5>>=
 data <- read.csv("../Data/Reg.csv")
 y <- data$profit
 x <- data$population

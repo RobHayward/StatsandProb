@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper, oneside]{article}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[12pt, a4paper, oneside]{article}\usepackage{graphicx, color}
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -11,16 +11,21 @@
 }
 \makeatother
 
-\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
-\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
-\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
-\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
-\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
+\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
+\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
+\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
+\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
+\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
+\newcommand{\hlslot}[1]{\textit{#1}}%
+\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
 
 \usepackage{framed}
 \makeatletter
@@ -117,23 +122,23 @@ Here is a very simple version of the sampler applied to linear regression.  A dr
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# Create a simple MCMC sampler}
+\hlcomment{# Create a simple MCMC sampler}
 
-x <- \hlkwd{seq}(1, 100, by = 1)
-e <- \hlkwd{rnorm}(\hlkwd{length}(x))
+x <- \hlfunctioncall{seq}(1, 100, by = 1)
+e <- \hlfunctioncall{rnorm}(\hlfunctioncall{length}(x))
 y <- 0.5 + 5 * x + e
-\hlcom{# prior}
-a <- \hlkwd{rep}(NA, times = \hlkwd{length}(x))
-b <- \hlkwd{rep}(NA, times = \hlkwd{length}(x))
+\hlcomment{# prior}
+a <- \hlfunctioncall{rep}(NA, times = \hlfunctioncall{length}(x))
+b <- \hlfunctioncall{rep}(NA, times = \hlfunctioncall{length}(x))
 a[1] = 1
 b[1] = 1
-\hlkwd{for} (i in 2:100) \{
-    b[i] <- (y[i] - a[i - 1] - \hlkwd{rnorm}(1))/x[i]
-    a[i] <- y[i] - b[i] * x[i] - \hlkwd{rnorm}(1)
+\hlfunctioncall{for} (i in 2:100) \{
+    b[i] <- (y[i] - a[i - 1] - \hlfunctioncall{rnorm}(1))/x[i]
+    a[i] <- y[i] - b[i] * x[i] - \hlfunctioncall{rnorm}(1)
 \}
-\hlkwd{plot}(y ~ x, type = \hlstr{"p"}, main = \hlstr{"Regression with \hlkwd{OLS} (red) and \hlkwd{MCMC} (blue)"})
-\hlkwd{abline}(a = \hlkwd{mean}(a), b = \hlkwd{mean}(b), col = \hlstr{"blue"})
-\hlkwd{lines}(\hlkwd{fitted}(\hlkwd{lm}(y ~ x)), col = \hlstr{"red"})
+\hlfunctioncall{plot}(y ~ x, type = \hlstring{"p"}, main = \hlstring{"Regression with \hlfunctioncall{OLS} (red) and \hlfunctioncall{MCMC} (blue)"})
+\hlfunctioncall{abline}(a = \hlfunctioncall{mean}(a), b = \hlfunctioncall{mean}(b), col = \hlstring{"blue"})
+\hlfunctioncall{lines}(\hlfunctioncall{fitted}(\hlfunctioncall{lm}(y ~ x)), col = \hlstring{"red"})
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/MCMC} 
@@ -190,27 +195,27 @@ The steps for the Gibbs sampler are
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{set.seed}(123)
+\hlfunctioncall{set.seed}(123)
 nreps <- 105000
 nb <- 5000
-yy1 <- \hlkwd{array}(, nreps)
-yy2 <- \hlkwd{array}(, nreps)
+yy1 <- \hlfunctioncall{array}(, nreps)
+yy2 <- \hlfunctioncall{array}(, nreps)
 rho <- 0.5
-sd <- \hlkwd{sqrt}(1 - rho^2)
-y1 <- \hlkwd{rnorm}(1, 0, sd)
-\hlkwd{for} (i in 1:nreps) \{
-    y2 <- \hlkwd{rnorm}(1, 0, sd) + rho * y1
-    y1 <- \hlkwd{rnorm}(1, 0, sd) + rho * y2
+sd <- \hlfunctioncall{sqrt}(1 - rho^2)
+y1 <- \hlfunctioncall{rnorm}(1, 0, sd)
+\hlfunctioncall{for} (i in 1:nreps) \{
+    y2 <- \hlfunctioncall{rnorm}(1, 0, sd) + rho * y1
+    y1 <- \hlfunctioncall{rnorm}(1, 0, sd) + rho * y2
     yy1[i] <- y1
     yy2[i] <- y2
 \}
 nb1 <- nb + 1
 yy1b <- yy1[nb1:nreps]
 yy2b <- yy2[nb1:nreps]
-\hlkwd{plot}(yy1b, col = 2, main = \hlstr{"MCMC for Bivarite Normal"}, xlab = \hlstr{"Repetitions"}, 
-    ylab = \hlstr{"Y1"})
-\hlkwd{abline}(h = 3, lty = 2)
-\hlkwd{abline}(h = -3, lty = 2)
+\hlfunctioncall{plot}(yy1b, col = 2, main = \hlstring{"MCMC for Bivarite Normal"}, xlab = \hlstring{"Repetitions"}, 
+    ylab = \hlstring{"Y1"})
+\hlfunctioncall{abline}(h = 3, lty = 2)
+\hlfunctioncall{abline}(h = -3, lty = 2)
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/MCM} 
@@ -221,10 +226,10 @@ The values are centered around zero as they should be.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{plot}(yy2b, col = 4, main = \hlstr{"MCMC for Bivarite Normal"}, xlab = \hlstr{"Repetitions"}, 
-    ylab = \hlstr{"Y2"})
-\hlkwd{abline}(h = 3, lty = 2)
-\hlkwd{abline}(h = -3, lty = 2)
+\hlfunctioncall{plot}(yy2b, col = 4, main = \hlstring{"MCMC for Bivarite Normal"}, xlab = \hlstring{"Repetitions"}, 
+    ylab = \hlstring{"Y2"})
+\hlfunctioncall{abline}(h = 3, lty = 2)
+\hlfunctioncall{abline}(h = -3, lty = 2)
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/MCMC2} 
@@ -235,27 +240,27 @@ The summary statistics are below.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{summary}(yy1b)
+\hlfunctioncall{summary}(yy1b)
 \end{alltt}
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  -4.400  -0.671   0.008   0.005   0.678   4.450
 \end{verbatim}
 \begin{alltt}
-\hlkwd{var}(yy1b)
+\hlfunctioncall{var}(yy1b)
 \end{alltt}
 \begin{verbatim}
 ## [1] 0.9954
 \end{verbatim}
 \begin{alltt}
-\hlkwd{summary}(yy2b)
+\hlfunctioncall{summary}(yy2b)
 \end{alltt}
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  -4.280  -0.668   0.007   0.007   0.681   4.110
 \end{verbatim}
 \begin{alltt}
-\hlkwd{var}(yy2b)
+\hlfunctioncall{var}(yy2b)
 \end{alltt}
 \begin{verbatim}
 ## [1] 1.004
@@ -268,14 +273,14 @@ The means are zero and the variances are close  to unity.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{hist}(yy1b, prob = T, col = 2, main = \hlstr{"MCMC for Bivariate Normal"}, xlab = \hlstr{"Y1"}, 
-    ylab = \hlstr{"Marginal PDF for Y1"})
+\hlfunctioncall{hist}(yy1b, prob = T, col = 2, main = \hlstring{"MCMC for Bivariate Normal"}, xlab = \hlstring{"Y1"}, 
+    ylab = \hlstring{"Marginal PDF for Y1"})
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Hist1} 
 \begin{kframe}\begin{alltt}
-\hlkwd{hist}(yy2b, prob = T, col = 4, main = \hlstr{"MCMC for Bivariate Normal"}, xlab = \hlstr{"Y2"}, 
-    ylab = \hlstr{"Marginal PDF for Y2"})
+\hlfunctioncall{hist}(yy2b, prob = T, col = 4, main = \hlstring{"MCMC for Bivariate Normal"}, xlab = \hlstring{"Y2"}, 
+    ylab = \hlstring{"Marginal PDF for Y2"})
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Hist2} 
@@ -286,32 +291,84 @@ The means are zero and the variances are close  to unity.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{qqnorm}(yy1b)
+\hlfunctioncall{qqnorm}(yy1b)
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Tests1} 
 \begin{kframe}\begin{alltt}
-\hlkwd{qqnorm}(yy2b)
+\hlfunctioncall{qqnorm}(yy2b)
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Tests2} 
 \begin{kframe}\begin{alltt}
-\hlkwd{library}(tseries)
+\hlfunctioncall{library}(tseries)
 \end{alltt}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'tseries'}}\begin{alltt}
-\hlkwd{jarque.bera.test}(yy1b)
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'tseries' was built under R version 3.0.3}}\begin{alltt}
+\hlfunctioncall{jarque.bera.test}(yy1b)
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}jarque.bera.test"{}}}\begin{alltt}
-\hlkwd{jarque.bera.test}(yy1b)
+\begin{verbatim}
+## 
+## 	Jarque Bera Test
+## 
+## data:  yy1b
+## X-squared = 1.07, df = 2, p-value = 0.5857
+\end{verbatim}
+\begin{alltt}
+\hlfunctioncall{jarque.bera.test}(yy1b)
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}jarque.bera.test"{}}}\end{kframe}
+\begin{verbatim}
+## 
+## 	Jarque Bera Test
+## 
+## data:  yy1b
+## X-squared = 1.07, df = 2, p-value = 0.5857
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
+
+
+\subsubsection{Gibbs Sampler for Marginal Posterior}
+Extract the \emph{marginal posterior distribution} from the \emph{joint posterior distribution}. Assume that there is a population with an unknown mean $\mu$ and an unknown precistion parameter $\tau$ where $\tau = 1/\sigma^2$. Before looking at the data we are \emph{a priori} ignorant about the possible values of the parameters, we assign the following joint pior density: 
+
+\begin{equation}
+p(\mu, \tau) = p(\mu) p(\tau) \propto 1/\tau ; \quad -\inf < \mu < \inf ; \quad 0 < \tau < \inf
+\end{equation}
+
+Now take a sample of n independent values from the population.  This will give a likelihood function of
+\begin{equation}
+L(\mu, \tau | y) = p(y | \mu, \tau) \propto \tau^{n/2} exp[-(\tau/2) \sum(y_i - \mu)^2]
+\end{equation}
+
+I do not understand the next step.  
+
+Dave says that by Bayes law the \emph{joint} posterior density for the two parameters is
+\begin{align}{\label{eqref:BL}}
+p(\mu, \tau | y) &= [p(\mu, \tau)L(\mu, \tau | y)/ p(y)] \propto p(\mu, \tau)L(\mu, \tau |y)\\
+                 &\propto \tau^{n/2 -1}exp[-(\tau/2)\sum(y_i - \mu)^2]
+\end{align}
+
+For the marginal densities it is necessary to input the conditional posterior densities into the Gibbs sampler.  
+From Equation \ref{eqref:BL}, treat $\tau$ as a constant (so condition on $\tau$), 
+\begin{align}
+p(\mu | \tau, y) &\propto exp[-(\tau/2)\sum(y_i - \mu)^2]\\
+&\propto exp[-(\tau/2) (vs^2 + \sum(\mu - y^*)^2)]\\
+&\propto exp[-\tau/2)(\mu - y^*)^2]
+\end{align}
+
+where $y^*$ is the sample mean of $y$; $v = (n - 1)$; and $s^2$ is the sample variance. Therefore, the conditional posterior for $\mu$ is a normal distribution with a mean of $y^*$ and a variance of $(n\tau)^{-1}$.
+
+Alternatively, if the conditioning is on $\mu$ 
+\begin{equation}
+p(\tau | \mu, y) \propto \tau^{n/2 -1}exp[-\tau(0.5\sum(y_i - \mu)^2)]
+\end{equation}
+
+So the conditional posterior for $\tau$ is a Gammer distribution with a shape parameter, $r = (n/2)$ and a scale parameter, $\lambda = [0.5\sum(y_i - \mu)^2]$. 
+
+I do not understand the move to the conditional posterior and the distribution. 
+
+Now implement the Gibbs Sampler
 
 
 \subsection{Mixture Model}
@@ -353,10 +410,10 @@ The partital derivative of the cost function with respect to the $\Theta$ are
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-data <- \hlkwd{read.csv}(\hlstr{"../Data/Reg.csv"})
+data <- \hlfunctioncall{read.csv}(\hlstring{"../Data/Reg.csv"})
 y <- data$profit
 x <- data$population
-\hlkwd{plot}(y ~ x, main = \hlstr{"Profits vs Population"})
+\hlfunctioncall{plot}(y ~ x, main = \hlstring{"Profits vs Population"})
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Regression} 
@@ -376,14 +433,14 @@ To take account of the intercept $\Theta_0$ an additional column of constants is
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# Add ones to x}
-x <- \hlkwd{cbind}(1, x)
-\hlcom{# Initialise theta vector}
-theta <- \hlkwd{c}(0, 0)
-\hlcom{# Number of observations}
-m <- \hlkwd{nrow}(x)
-\hlcom{# Calculate the cost}
-cost <- \hlkwd{sum}(((x %*% theta) - y)^2)/(2 * m)
+\hlcomment{# Add ones to x}
+x <- \hlfunctioncall{cbind}(1, x)
+\hlcomment{# Initialise theta vector}
+theta <- \hlfunctioncall{c}(0, 0)
+\hlcomment{# Number of observations}
+m <- \hlfunctioncall{nrow}(x)
+\hlcomment{# Calculate the cost}
+cost <- \hlfunctioncall{sum}(((x %*% theta) - y)^2)/(2 * m)
 cost
 \end{alltt}
 \begin{verbatim}
@@ -396,18 +453,18 @@ The initial value is 32.07 (how do I take this from the chunk?).  Now
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# Set learning parameter}
+\hlcomment{# Set learning parameter}
 alpha <- 0.001
-\hlcom{# Number of iterations}
+\hlcomment{# Number of iterations}
 iterations <- 1500
-\hlcom{# updating thetas using gradient update}
-\hlkwd{for} (i in 1:iterations) \{
-    theta[1] <- theta[1] - alpha * (1/m) * \hlkwd{sum}(((x %*% theta) - y))
-    theta[2] <- theta[2] - alpha * (1/m) * \hlkwd{sum}(((x %*% theta) - y) * x[, 2])
+\hlcomment{# updating thetas using gradient update}
+\hlfunctioncall{for} (i in 1:iterations) \{
+    theta[1] <- theta[1] - alpha * (1/m) * \hlfunctioncall{sum}(((x %*% theta) - y))
+    theta[2] <- theta[2] - alpha * (1/m) * \hlfunctioncall{sum}(((x %*% theta) - y) * x[, 2])
 \}
-\hlcom{# Predict for areas of the 35,000 and 70,000 people}
-predict1 <- \hlkwd{c}(1, 3.5) %*% theta
-predict2 <- \hlkwd{c}(1, 7) %*% theta
+\hlcomment{# Predict for areas of the 35,000 and 70,000 people}
+predict1 <- \hlfunctioncall{c}(1, 3.5) %*% theta
+predict2 <- \hlfunctioncall{c}(1, 7) %*% theta
 predict1
 \end{alltt}
 \begin{verbatim}
@@ -422,8 +479,8 @@ predict2
 ## [1,] 5.356
 \end{verbatim}
 \begin{alltt}
-\hlkwd{plot}(data$population ~ data$profit, main = \hlstr{"Profits vs Population"})
-\hlkwd{abline}(theta, col = \hlstr{"red"})
+\hlfunctioncall{plot}(data$population ~ data$profit, main = \hlstring{"Profits vs Population"})
+\hlfunctioncall{abline}(theta, col = \hlstring{"red"})
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Regression3} 
@@ -456,15 +513,15 @@ where $\mu$ is the drift or average annual return, Z is a standard Normal random
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 n <- 10000
-\hlcom{# Fixing the seed gives us a consistent set of simulated returns}
-\hlkwd{set.seed}(106)
-z <- \hlkwd{rnorm}(n)  \hlcom{# mean = 0 and sd = 1 are defaults}
+\hlcomment{# Fixing the seed gives us a consistent set of simulated returns}
+\hlfunctioncall{set.seed}(106)
+z <- \hlfunctioncall{rnorm}(n)  \hlcomment{# mean = 0 and sd = 1 are defaults}
 mu <- 0.1
 sd <- 0.15
 delta_t <- 0.25
-\hlcom{# apply to expression (*) above}
-qtr_returns <- mu * delta_t + sd * z * \hlkwd{sqrt}(delta_t)
-\hlkwd{hist}(qtr_returns, breaks = 100, col = \hlstr{"green"})
+\hlcomment{# apply to expression (*) above}
+qtr_returns <- mu * delta_t + sd * z * \hlfunctioncall{sqrt}(delta_t)
+\hlfunctioncall{hist}(qtr_returns, breaks = 100, col = \hlstring{"green"})
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/MC} 
@@ -476,8 +533,8 @@ Now the descriptive statistics can be uncovered from the simulated results.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-stats <- \hlkwd{c}(\hlkwd{mean}(qtr_returns) * 4, \hlkwd{sd}(qtr_returns) * 2)  \hlcom{# \hlkwd{sqrt}(4)}
-\hlkwd{names}(stats) <- \hlkwd{c}(\hlstr{"mean"}, \hlstr{"volatility"})
+stats <- \hlfunctioncall{c}(\hlfunctioncall{mean}(qtr_returns) * 4, \hlfunctioncall{sd}(qtr_returns) * 2)  \hlcomment{# \hlfunctioncall{sqrt}(4)}
+\hlfunctioncall{names}(stats) <- \hlfunctioncall{c}(\hlstring{"mean"}, \hlstring{"volatility"})
 stats
 \end{alltt}
 \begin{verbatim}
@@ -495,29 +552,29 @@ This is from \href{http://blog.revolutionanalytics.com/2014/02/quantitative-fina
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{require}(GLDEX)
-\hlkwd{require}(quantmod)
+\hlfunctioncall{require}(GLDEX)
+\hlfunctioncall{require}(quantmod)
 
-\hlkwd{getSymbols}(\hlstr{"SPY"}, from = \hlstr{"1994-02-01"})
+\hlfunctioncall{getSymbols}(\hlstring{"SPY"}, from = \hlstring{"1994-02-01"})
 \end{alltt}
 \begin{verbatim}
 ## [1] "SPY"
 \end{verbatim}
 \begin{alltt}
-SPY.Close <- SPY[, 4]  \hlcom{# Closing prices}
+SPY.Close <- SPY[, 4]  \hlcomment{# Closing prices}
 
-SPY.vector <- \hlkwd{as.vector}(SPY.Close)
+SPY.vector <- \hlfunctioncall{as.vector}(SPY.Close)
 
-\hlcom{# Calculate log returns}
-sp500 <- \hlkwd{diff}(\hlkwd{log}(SPY.vector), lag = 1)
-sp500 <- sp500[-1]  \hlcom{# Remove the NA in the first position}
-\hlcom{# Set normalise='Y' so that kurtosis is calculated with reference to}
-\hlcom{# kurtosis = 0 under Normal distribution}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlcomment{# Calculate log returns}
+sp500 <- \hlfunctioncall{diff}(\hlfunctioncall{log}(SPY.vector), lag = 1)
+sp500 <- sp500[-1]  \hlcomment{# Remove the NA in the first position}
+\hlcomment{# Set normalise='Y' so that kurtosis is calculated with reference to}
+\hlcomment{# kurtosis = 0 under Normal distribution}
+\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002695  0.0001526 -0.0976550  9.5583858
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -527,19 +584,19 @@ Now fit the GLD with the function fun.data.fit.mm. There are warnings but these 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-spLambdaDist = \hlkwd{fun.data.fit.mm}(sp500)
+spLambdaDist = \hlfunctioncall{fun.data.fit.mm}(sp500)
 spLambdaDist
 \end{alltt}
 \begin{verbatim}
 ##            RPRS     RMFMKL
-## [1,]  3.884e-04  3.244e-04
-## [2,] -4.238e+01  2.039e+02
-## [3,] -1.677e-01 -1.699e-01
-## [4,] -1.641e-01 -1.616e-01
+## [1,]  3.806e-04  3.278e-04
+## [2,] -4.702e+01  2.041e+02
+## [3,] -1.678e-01 -1.700e-01
+## [4,] -1.642e-01 -1.617e-01
 \end{verbatim}
 \begin{alltt}
-\hlkwd{fun.plot.fit}(fit.obj = spLambdaDist, data = sp500, nclass = 100, param = \hlkwd{c}(\hlstr{"rs"}, 
-    \hlstr{"fmkl"}), xlab = \hlstr{"Returns"})
+\hlfunctioncall{fun.plot.fit}(fit.obj = spLambdaDist, data = sp500, nclass = 100, param = \hlfunctioncall{c}(\hlstring{"rs"}, 
+    \hlstring{"fmkl"}), xlab = \hlstring{"Returns"})
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/GLD} 
@@ -571,59 +628,61 @@ There are problems with the rgl function.  I am not sure what this does.  It is 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{require}(gld)
+\hlfunctioncall{require}(gld)
 \end{alltt}
 
 
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: gld}}\begin{alltt}
-\hlkwd{require}(GLDEX)
+\hlfunctioncall{require}(GLDEX)
 \end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: GLDEX\\\#\# Loading required package: cluster}}\begin{alltt}
-\hlcom{# RS version:}
-\hlkwd{set.seed}(100)  \hlcom{# Set seed to obtain a reproducible set}
-rs_sample <- \hlkwd{rgl}(n = 1e+07, lambda1 = lambda1_rs, lambda2 = lambda2_rs, lambda3 = lambda3_rs, 
-    lambda4 = lambda4_rs, param = \hlstr{"rs"})
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: GLDEX}}
 
-\hlcom{# Moments of simulated returns using RS method:}
-\hlkwd{fun.moments.r}(rs_sample, normalise = \hlstr{"Y"})
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: cluster}}\begin{alltt}
+\hlcomment{# RS version:}
+\hlfunctioncall{set.seed}(100)  \hlcomment{# Set seed to obtain a reproducible set}
+rs_sample <- \hlfunctioncall{rgl}(n = 1e+07, lambda1 = lambda1_rs, lambda2 = lambda2_rs, lambda3 = lambda3_rs, 
+    lambda4 = lambda4_rs, param = \hlstring{"rs"})
+
+\hlcomment{# Moments of simulated returns using RS method:}
+\hlfunctioncall{fun.moments.r}(rs_sample, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  2.664e-04  9.759e-05 -1.052e-01  9.987e+00
+##  2.697e-04  7.939e-05 -1.059e-01  1.000e+01
 \end{verbatim}
 \begin{alltt}
 
-\hlcom{# Moments calculated from market data:}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlcomment{# Moments calculated from market data:}
+\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002695  0.0001526 -0.0976550  9.5583858
 \end{verbatim}
 \begin{alltt}
 
-\hlcom{# FKML version:}
-\hlkwd{set.seed}(100)  \hlcom{# Set seed to obtain a reproducible set}
-fmkl_sample <- \hlkwd{rgl}(n = 1e+05, lambda1 = lambda1_fmkl, lambda2 = lambda2_fmkl, 
-    lambda3 = lambda3_fmkl, lambda4 = lambda4_fmkl, param = \hlstr{"fmkl"})
+\hlcomment{# FKML version:}
+\hlfunctioncall{set.seed}(100)  \hlcomment{# Set seed to obtain a reproducible set}
+fmkl_sample <- \hlfunctioncall{rgl}(n = 1e+05, lambda1 = lambda1_fmkl, lambda2 = lambda2_fmkl, 
+    lambda3 = lambda3_fmkl, lambda4 = lambda4_fmkl, param = \hlstring{"fmkl"})
 
-\hlcom{# Moments of simulated returns using FMKL method:}
-\hlkwd{fun.moments.r}(fmkl_sample, normalise = \hlstr{"Y"})
+\hlcomment{# Moments of simulated returns using FMKL method:}
+\hlfunctioncall{fun.moments.r}(fmkl_sample, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002434  0.0001542 -0.0870419  8.6061100
+##  0.0002465  0.0001540 -0.0877574  8.6172744
 \end{verbatim}
 \begin{alltt}
 
-\hlcom{# Moments calculated from market data:}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlcomment{# Moments calculated from market data:}
+\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002695  0.0001526 -0.0976550  9.5583858
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -632,32 +691,32 @@ Compare the moments to the S\&P500 market data
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{fun.moments.r}(rs_sample, normalise = \hlstr{"Y"})
+\hlfunctioncall{fun.moments.r}(rs_sample, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  2.664e-04  9.759e-05 -1.052e-01  9.987e+00
+##  2.697e-04  7.939e-05 -1.059e-01  1.000e+01
 \end{verbatim}
 \begin{alltt}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002695  0.0001526 -0.0976550  9.5583858
 \end{verbatim}
 \begin{alltt}
-\hlkwd{fun.moments.r}(fmkl_sample, normalise = \hlstr{"Y"})
+\hlfunctioncall{fun.moments.r}(fmkl_sample, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002434  0.0001542 -0.0870419  8.6061100
+##  0.0002465  0.0001540 -0.0877574  8.6172744
 \end{verbatim}
 \begin{alltt}
-\hlkwd{fun.moments.r}(sp500, normalise = \hlstr{"Y"})
+\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
 \end{alltt}
 \begin{verbatim}
 ##       mean   variance   skewness   kurtosis 
-##  0.0002664  0.0001528 -0.0969262  9.5433262
+##  0.0002695  0.0001526 -0.0976550  9.5583858
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -688,16 +747,16 @@ This comes from \href{http://www.win-vector.com/blog/2010/11/learn-a-powerful-ma
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-CarData <- \hlkwd{read.table}(\hlkwd{url}(\hlstr{"http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data"}), 
-    sep = \hlstr{","}, col.names = \hlkwd{c}(\hlstr{"buying"}, \hlstr{"maintenance"}, \hlstr{"doors"}, \hlstr{"persons"}, \hlstr{"lug_boot"}, 
-        \hlstr{"safety"}, \hlstr{"rating"}))
-logisticModel <- \hlkwd{glm}(rating != \hlstr{"unacc"} ~ buying + maintenance + doors + persons + 
-    lug_boot + safety, family = \hlkwd{binomial}(link = \hlstr{"logit"}), data = CarData)
+CarData <- \hlfunctioncall{read.table}(\hlfunctioncall{url}(\hlstring{"http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data"}), 
+    sep = \hlstring{","}, col.names = \hlfunctioncall{c}(\hlstring{"buying"}, \hlstring{"maintenance"}, \hlstring{"doors"}, \hlstring{"persons"}, \hlstring{"lug_boot"}, 
+        \hlstring{"safety"}, \hlstring{"rating"}))
+logisticModel <- \hlfunctioncall{glm}(rating != \hlstring{"unacc"} ~ buying + maintenance + doors + persons + 
+    lug_boot + safety, family = \hlfunctioncall{binomial}(link = \hlstring{"logit"}), data = CarData)
 \end{alltt}
 
 
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred}}\begin{alltt}
-\hlkwd{summary}(logisticModel)
+\hlfunctioncall{summary}(logisticModel)
 \end{alltt}
 \begin{verbatim}
 ## 
@@ -729,7 +788,7 @@ logisticModel <- \hlkwd{glm}(rating != \hlstr{"unacc"} ~ buying + maintenance + 
 ## safetylow         -30.505   1300.343   -0.02     0.98    
 ## safetymed          -3.004      0.358   -8.40  < 2e-16 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -749,7 +808,7 @@ The error results of the model can be examined.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{table}(CarData$rating, \hlkwd{predict}(logisticModel, type = \hlstr{"response"}) >= 0.5)
+\hlfunctioncall{table}(CarData$rating, \hlfunctioncall{predict}(logisticModel, type = \hlstring{"response"}) >= 0.5)
 \end{alltt}
 \begin{verbatim}
 ##        
@@ -768,7 +827,7 @@ To be completed.
 \subsection{F-Tests}
 This is an example that is based on testing for fabricated evidence.  The full documentation is \href{http://errorstatistics.com/2014/05/10/who-ya-gonna-call-for-statistical-fraudbusting-r-a-fisher-p-values-and-error-statistics-again/}{Deborah Mayo}.  As the paper says
 \begin{quotation}
-``In each experiment, participants (undergraduate students) were randomly assigned to three groups, and each group was given a different ‘intervention’. All participants were then tested on some outcome measure.``
+``In each experiment, participants (undergraduate students) were randomly assigned to three groups, and each group was given a different intervention. All participants were then tested on some outcome measure.``
 \end{quotation}
 The accusation is that the results are \textbf{too} linear.  The relationships are too perfect compared to other studies.  The method used to asses this is called \emph{delta-F}.  The odds of seeing such linear trends are calculated based on the assumption that the trend is linear.  
 
@@ -787,7 +846,7 @@ This is more or less the same method that is used to test whether a simple model
 From the paper
 
 \begin{quotation}
-```But here the whole thing is turned on its head. Random noise means that a complex model will sometimes fit the data better than a simple one, even if the simple model describes reality. In a conventional use of F-tests, that would be regarded as a false positive. But in this case it’s the absence of those false positives that’s unusual.```
+```But here the whole thing is turned on its head. Random noise means that a complex model will sometimes fit the data better than a simple one, even if the simple model describes reality. In a conventional use of F-tests, that would be regarded as a false positive. But in this case its the absence of those false positives thats unusual.```
 \end{quotation}
 
 \end{document}
