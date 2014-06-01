@@ -224,6 +224,53 @@ So the conditional posterior for $\tau$ is a Gammer distribution with a shape pa
 I do not understand the move to the conditional posterior and the distribution. 
 
 Now implement the Gibbs Sampler
+<<MCM3>>=
+set.seed(123)
+# MC replications
+nrep <- 105000
+# burn-in
+nb <- 5000
+# Sample size
+n <- 10
+# set up vectors
+tau <- array(, nrep)
+mu <- array(, nrep)
+# Create a sample of data.  true values are 1.
+y <- rnorm(n, mean = 1, sd = 1)
+ybar <- mean(y)
+yy <- sum(y^2)
+lambda <- 1/(0.5 * n * var(y))
+@ 
+Now create the loop for the Gibbs sampler
+<<MCM4>>=
+ttau <- rgamma(1, shape = n/2, rate = lambda)
+for(i in 1:nrep){
+  mmu <- rnorm(1, mean = ybar, sd = 1/sqrt(n*ttau))
+  scale <- (0.5 * (yy + n * mmu^2 - 2 * n * mmu * ybar))
+  ttau <- rgamma(1, shape = n/2, scale)
+  ttau[i] <- ttau
+  mu[i] <- mmu
+}
+@
+Now drop the first 5000 values of $\mu$ and $\tau$ for the burn in. 
+<<MCMC5>>= 
+nb1 <- nb +1
+taub <- tau[nb1:nreps]
+mub <- mu[nb1:nreps]
+@
+Take a look at the distributions for $\mu$ and $\tau$. They should be student-t (n-1) and Gamma respectively. 
+<<MCM6>>=
+require(moments)
+summary(mub); var(mub)
+ybar # THe mean of the posterior for my should be ybar (1.0746)
+skewness(mub) # The skewness of student-t is zero
+kurtosis(mub) # THe excess kurtosis for student-t is 6/(n-5) = 1.2
+summary(taub); var(taub)
+skewness(taub) # the skewness of gamma is 2/sqrt(shape) = 0.8944
+kurtosis(taub) # excess kkurtosis of gamma is 6/(n/2) = 1.2
+@
+
+Not sure it works.  take a look at taub. 
 
 
 \subsection{Mixture Model}
