@@ -248,15 +248,15 @@ for(i in 1:nrep){
   mmu <- rnorm(1, mean = ybar, sd = 1/sqrt(n*ttau))
   scale <- (0.5 * (yy + n * mmu^2 - 2 * n * mmu * ybar))
   ttau <- rgamma(1, shape = n/2, scale)
-  ttau[i] <- ttau
+  tau[i] <- ttau
   mu[i] <- mmu
 }
 @
 Now drop the first 5000 values of $\mu$ and $\tau$ for the burn in. 
 <<MCMC5>>= 
 nb1 <- nb +1
-taub <- tau[nb1:nreps]
-mub <- mu[nb1:nreps]
+taub <- tau[nb1:nrep]
+mub <- mu[nb1:nrep]
 @
 Take a look at the distributions for $\mu$ and $\tau$. They should be student-t (n-1) and Gamma respectively. 
 <<MCM6>>=
@@ -270,7 +270,20 @@ skewness(taub) # the skewness of gamma is 2/sqrt(shape) = 0.8944
 kurtosis(taub) # excess kkurtosis of gamma is 6/(n/2) = 1.2
 @
 
-Not sure it works.  take a look at taub. 
+The last couple of comments from Dave are:
+\begin{itemize}
+\item The sample were drawn from a population with $\mu = \tau = 1$.  
+\item With a quadratic loss function, the Bayes estimators of the parameters would be the marginal posterior means (see above). 
+\item With an absolute error loss function, the Bayes estimators would be the marginal posterior medians. 
+\end{itemize}
+The marginal posterior densities. 
+
+<<MCMCplot, fig.height=5, tidy=TRUE>>=
+hist(mub, main = "Marginal Posterior for mu:  Student-t", 
+     prob = TRUE, col = 'red')
+hist(taub, main = "Marginal Posterior for tau: Gamma", 
+     prob = TRUE, col = 'blue')
+@
 
 
 \subsection{Mixture Model}
