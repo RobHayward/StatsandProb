@@ -369,6 +369,146 @@ So the conditional posterior for $\tau$ is a Gammer distribution with a shape pa
 I do not understand the move to the conditional posterior and the distribution. 
 
 Now implement the Gibbs Sampler
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlfunctioncall{set.seed}(123)
+\hlcomment{# MC replications}
+nrep <- 105000
+\hlcomment{# burn-in}
+nb <- 5000
+\hlcomment{# Sample size}
+n <- 10
+\hlcomment{# set up vectors}
+tau <- \hlfunctioncall{array}(, nrep)
+mu <- \hlfunctioncall{array}(, nrep)
+\hlcomment{# Create a sample of data.  true values are 1.}
+y <- \hlfunctioncall{rnorm}(n, mean = 1, sd = 1)
+ybar <- \hlfunctioncall{mean}(y)
+yy <- \hlfunctioncall{sum}(y^2)
+lambda <- 1/(0.5 * n * \hlfunctioncall{var}(y))
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Now create the loop for the Gibbs sampler
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+ttau <- \hlfunctioncall{rgamma}(1, shape = n/2, rate = lambda)
+\hlfunctioncall{for} (i in 1:nrep) \{
+    mmu <- \hlfunctioncall{rnorm}(1, mean = ybar, sd = 1/\hlfunctioncall{sqrt}(n * ttau))
+    scale <- (0.5 * (yy + n * mmu^2 - 2 * n * mmu * ybar))
+    ttau <- \hlfunctioncall{rgamma}(1, shape = n/2, scale)
+    tau[i] <- ttau
+    mu[i] <- mmu
+\}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Now drop the first 5000 values of $\mu$ and $\tau$ for the burn in. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+nb1 <- nb + 1
+taub <- tau[nb1:nrep]
+mub <- mu[nb1:nrep]
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Take a look at the distributions for $\mu$ and $\tau$. They should be student-t (n-1) and Gamma respectively. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlfunctioncall{require}(moments)
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: moments}}\begin{alltt}
+\hlfunctioncall{summary}(mub)
+\end{alltt}
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -2.760   0.863   1.080   1.070   1.290   3.960
+\end{verbatim}
+\begin{alltt}
+\hlfunctioncall{var}(mub)
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1161
+\end{verbatim}
+\begin{alltt}
+ybar  \hlcomment{# THe mean of the posterior for my should be \hlfunctioncall{ybar} (1.0746)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.075
+\end{verbatim}
+\begin{alltt}
+\hlfunctioncall{skewness}(mub)  \hlcomment{# The skewness of student-t is zero}
+\end{alltt}
+\begin{verbatim}
+## [1] -0.00761
+\end{verbatim}
+\begin{alltt}
+\hlfunctioncall{kurtosis}(mub)  \hlcomment{# THe excess kurtosis for student-t is 6/(n-5) = 1.2}
+\end{alltt}
+\begin{verbatim}
+## [1] 4.289
+\end{verbatim}
+\begin{alltt}
+\hlfunctioncall{summary}(taub)
+\end{alltt}
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.023   0.719   1.020   1.100   1.400   5.380
+\end{verbatim}
+\begin{alltt}
+\hlfunctioncall{var}(taub)
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2717
+\end{verbatim}
+\begin{alltt}
+\hlfunctioncall{skewness}(taub)  \hlcomment{# the skewness of gamma is 2/\hlfunctioncall{sqrt}(shape) = 0.8944}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9472
+\end{verbatim}
+\begin{alltt}
+\hlfunctioncall{kurtosis}(taub)  \hlcomment{# excess kkurtosis of gamma is 6/(n/2) = 1.2}
+\end{alltt}
+\begin{verbatim}
+## [1] 4.347
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+The last couple of comments from Dave are:
+\begin{itemize}
+\item The sample were drawn from a population with $\mu = \tau = 1$.  
+\item With a quadratic loss function, the Bayes estimators of the parameters would be the marginal posterior means (see above). 
+\item With an absolute error loss function, the Bayes estimators would be the marginal posterior medians. 
+\end{itemize}
+The marginal posterior densities. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlfunctioncall{hist}(mub, main = \hlstring{"Marginal Posterior for mu:  Student-t"}, prob = TRUE, col = \hlstring{"red"})
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/MCMCplot1} 
+\begin{kframe}\begin{alltt}
+\hlfunctioncall{hist}(taub, main = \hlstring{"Marginal Posterior for tau: Gamma"}, prob = TRUE, col = \hlstring{"blue"})
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/MCMCplot2} 
+
+\end{knitrout}
+
 
 
 \subsection{Mixture Model}
@@ -639,7 +779,11 @@ There are problems with the rgl function.  I am not sure what this does.  It is 
 
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: GLDEX}}
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: cluster}}\begin{alltt}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: cluster}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# \\\#\# Attaching package: 'GLDEX'}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following object is masked from 'package:moments':\\\#\# \\\#\#\ \ \ \  kurtosis, skewness}}\begin{alltt}
 \hlcomment{# RS version:}
 \hlfunctioncall{set.seed}(100)  \hlcomment{# Set seed to obtain a reproducible set}
 rs_sample <- \hlfunctioncall{rgl}(n = 1e+07, lambda1 = lambda1_rs, lambda2 = lambda2_rs, lambda3 = lambda3_rs, 
@@ -848,5 +992,9 @@ From the paper
 \begin{quotation}
 ```But here the whole thing is turned on its head. Random noise means that a complex model will sometimes fit the data better than a simple one, even if the simple model describes reality. In a conventional use of F-tests, that would be regarded as a false positive. But in this case its the absence of those false positives thats unusual.```
 \end{quotation}
+
+\section{Wilcoxon Rank-sum test}
+From \href{http://www.r-bloggers.com/example-2014-6-comparing-medians-and-the-wilcoxon-rank-sum-test/}{here}
+The Wilcox on test is also known as the Mann-Whitney-Wilcoxon test. There is a false belief that the Wilcoxon test is a test of medians.  However, the null of the test is that there is a 50\% chance that a random value from one population will exceed a random value from the other population. The null can be expressed as the median, but only on the assumption that the distribution of the two series are the same. 
 
 \end{document}
