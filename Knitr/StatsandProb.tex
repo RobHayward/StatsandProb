@@ -1,58 +1,4 @@
-\documentclass[12pt, a4paper, oneside]{article}\usepackage{graphicx, color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
-  \else
-    \Gin@nat@width
-  \fi
-}
-\makeatother
-
-\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
-\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
-\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
-\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
-\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
-\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
-\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
-\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
-\newcommand{\hlslot}[1]{\textit{#1}}%
-\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
-
-\usepackage{framed}
-\makeatletter
-\newenvironment{kframe}{%
- \def\at@end@of@kframe{}%
- \ifinner\ifhmode%
-  \def\at@end@of@kframe{\end{minipage}}%
-  \begin{minipage}{\columnwidth}%
- \fi\fi%
- \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
- \colorbox{shadecolor}{##1}\hskip-\fboxsep
-     % There is no \\@totalrightmargin, so:
-     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
- \MakeFramed {\advance\hsize-\width
-   \@totalleftmargin\z@ \linewidth\hsize
-   \@setminipage}}%
- {\par\unskip\endMakeFramed%
- \at@end@of@kframe}
-\makeatother
-
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
-
-\usepackage{alltt} % Paper size, default font size and one-sided paper
+\documentclass[12pt, a4paper, oneside]{article} % Paper size, default font size and one-sided paper
 %\graphicspath{{./Figures/}} % Specifies the directory where pictures are stored
 %\usepackage[dcucite]{harvard}
 \usepackage{amsmath}
@@ -68,7 +14,6 @@
 \usepackage[colorlinks = true, citecolor = blue, linkcolor = blue]{hyperref}
 %\hypersetup{urlcolor=blue, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
 %\renewcommand[\harvardurl]{URL: \url}
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 \title{Stats and Probability Information}
 \author{Rob Hayward}
@@ -122,29 +67,28 @@ Here is a very simple version of the sampler applied to linear regression.  A dr
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcomment{# Create a simple MCMC sampler}
+\hlcom{# Create a simple MCMC sampler}
 
-x <- \hlfunctioncall{seq}(1, 100, by = 1)
-e <- \hlfunctioncall{rnorm}(\hlfunctioncall{length}(x))
-y <- 0.5 + 5 * x + e
-\hlcomment{# prior}
-a <- \hlfunctioncall{rep}(NA, times = \hlfunctioncall{length}(x))
-b <- \hlfunctioncall{rep}(NA, times = \hlfunctioncall{length}(x))
-a[1] = 1
-b[1] = 1
-\hlfunctioncall{for} (i in 2:100) \{
-    b[i] <- (y[i] - a[i - 1] - \hlfunctioncall{rnorm}(1))/x[i]
-    a[i] <- y[i] - b[i] * x[i] - \hlfunctioncall{rnorm}(1)
-\}
-\hlfunctioncall{plot}(y ~ x, type = \hlstring{"p"}, main = \hlstring{"Regression with \hlfunctioncall{OLS} (red) and \hlfunctioncall{MCMC} (blue)"})
-\hlfunctioncall{abline}(a = \hlfunctioncall{mean}(a), b = \hlfunctioncall{mean}(b), col = \hlstring{"blue"})
-\hlfunctioncall{lines}(\hlfunctioncall{fitted}(\hlfunctioncall{lm}(y ~ x)), col = \hlstring{"red"})
+\hlstd{x} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{100}\hlstd{,} \hlkwc{by} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlkwd{length}\hlstd{(x))}
+\hlstd{y} \hlkwb{<-} \hlnum{0.5} \hlopt{+} \hlnum{5} \hlopt{*} \hlstd{x} \hlopt{+} \hlstd{e}
+\hlcom{# prior }
+\hlstd{a} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{times} \hlstd{=} \hlkwd{length}\hlstd{(x))}
+\hlstd{b} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{times} \hlstd{=} \hlkwd{length}\hlstd{(x))}
+\hlstd{a[}\hlnum{1}\hlstd{]} \hlkwb{=} \hlnum{1}
+\hlstd{b[}\hlnum{1}\hlstd{]} \hlkwb{=} \hlnum{1}
+\hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{2}\hlopt{:}\hlnum{100}\hlstd{)\{}
+\hlstd{b[i]} \hlkwb{<-} \hlstd{(y[i]} \hlopt{-} \hlstd{a[i}\hlopt{-}\hlnum{1}\hlstd{]} \hlopt{-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{))}\hlopt{/}\hlstd{x[i]}
+\hlstd{a[i]} \hlkwb{<-}  \hlstd{y[i]} \hlopt{-} \hlstd{b[i]}\hlopt{*}\hlstd{x[i]} \hlopt{-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{)}
+\hlstd{\}}
+\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x,} \hlkwc{type} \hlstd{=} \hlstr{'p'}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"Regression with OLS (red) and MCMC (blue)"}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{a} \hlstd{=} \hlkwd{mean}\hlstd{(a),} \hlkwc{b} \hlstd{=} \hlkwd{mean}\hlstd{(b),} \hlkwc{col} \hlstd{=} \hlstr{'blue'}\hlstd{)}
+\hlkwd{lines}\hlstd{(}\hlkwd{fitted}\hlstd{(}\hlkwd{lm}\hlstd{(y} \hlopt{~}\hlstd{x)),} \hlkwc{col} \hlstd{=} \hlstr{'red'}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/MCMC} 
 
 \end{knitrout}
-
 
 Once there is a large sample of $p(\theta_1|y)$ and the burn-in have been discarded, the mean, variance, median or mode of the marginal posterior can be calculated.  The process can be expanded to more parameters. 
 
@@ -195,139 +139,124 @@ The steps for the Gibbs sampler are
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlfunctioncall{set.seed}(123)
-nreps <- 105000
-nb <- 5000
-yy1 <- \hlfunctioncall{array}(, nreps)
-yy2 <- \hlfunctioncall{array}(, nreps)
-rho <- 0.5
-sd <- \hlfunctioncall{sqrt}(1 - rho^2)
-y1 <- \hlfunctioncall{rnorm}(1, 0, sd)
-\hlfunctioncall{for} (i in 1:nreps) \{
-    y2 <- \hlfunctioncall{rnorm}(1, 0, sd) + rho * y1
-    y1 <- \hlfunctioncall{rnorm}(1, 0, sd) + rho * y2
-    yy1[i] <- y1
-    yy2[i] <- y2
-\}
-nb1 <- nb + 1
-yy1b <- yy1[nb1:nreps]
-yy2b <- yy2[nb1:nreps]
-\hlfunctioncall{plot}(yy1b, col = 2, main = \hlstring{"MCMC for Bivarite Normal"}, xlab = \hlstring{"Repetitions"}, 
-    ylab = \hlstring{"Y1"})
-\hlfunctioncall{abline}(h = 3, lty = 2)
-\hlfunctioncall{abline}(h = -3, lty = 2)
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlstd{nreps} \hlkwb{<-} \hlnum{105000}
+\hlstd{nb} \hlkwb{<-} \hlnum{5000}
+\hlstd{yy1} \hlkwb{<-} \hlkwd{array}\hlstd{(, nreps)}
+\hlstd{yy2} \hlkwb{<-} \hlkwd{array}\hlstd{(, nreps)}
+\hlstd{rho} \hlkwb{<-} \hlnum{0.5}
+\hlstd{sd} \hlkwb{<-} \hlkwd{sqrt}\hlstd{(}\hlnum{1} \hlopt{-} \hlstd{rho}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlstd{y1} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{0}\hlstd{, sd)}
+\hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{nreps)\{}
+  \hlstd{y2} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{0}\hlstd{, sd)} \hlopt{+} \hlstd{rho}\hlopt{*}\hlstd{y1}
+  \hlstd{y1} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{0}\hlstd{, sd)} \hlopt{+} \hlstd{rho}\hlopt{*}\hlstd{y2}
+  \hlstd{yy1[i]} \hlkwb{<-} \hlstd{y1}
+  \hlstd{yy2[i]} \hlkwb{<-} \hlstd{y2}
+\hlstd{\}}
+\hlstd{nb1} \hlkwb{<-} \hlstd{nb} \hlopt{+} \hlnum{1}
+\hlstd{yy1b} \hlkwb{<-} \hlstd{yy1[nb1}\hlopt{:}\hlstd{nreps]}
+\hlstd{yy2b} \hlkwb{<-} \hlstd{yy2[nb1}\hlopt{:}\hlstd{nreps]}
+\hlkwd{plot}\hlstd{(yy1b,} \hlkwc{col} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"MCMC for Bivarite Normal"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"Repetitions"}\hlstd{,}
+     \hlkwc{ylab} \hlstd{=} \hlstr{"Y1"}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{h} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{lty} \hlstd{=} \hlnum{2}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{h} \hlstd{=} \hlopt{-}\hlnum{3}\hlstd{,} \hlkwc{lty} \hlstd{=} \hlnum{2}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/MCM} 
 
 \end{knitrout}
-
 The values are centered around zero as they should be. 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlfunctioncall{plot}(yy2b, col = 4, main = \hlstring{"MCMC for Bivarite Normal"}, xlab = \hlstring{"Repetitions"}, 
-    ylab = \hlstring{"Y2"})
-\hlfunctioncall{abline}(h = 3, lty = 2)
-\hlfunctioncall{abline}(h = -3, lty = 2)
+\hlkwd{plot}\hlstd{(yy2b,} \hlkwc{col} \hlstd{=} \hlnum{4}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"MCMC for Bivarite Normal"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"Repetitions"}\hlstd{,}
+     \hlkwc{ylab} \hlstd{=} \hlstr{"Y2"}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{h} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{lty} \hlstd{=} \hlnum{2}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{h} \hlstd{=} \hlopt{-}\hlnum{3}\hlstd{,} \hlkwc{lty} \hlstd{=} \hlnum{2}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/MCMC2} 
 
 \end{knitrout}
-
 The summary statistics are below. 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlfunctioncall{summary}(yy1b)
+\hlkwd{summary}\hlstd{(yy1b)}
 \end{alltt}
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  -4.400  -0.671   0.008   0.005   0.678   4.450
 \end{verbatim}
 \begin{alltt}
-\hlfunctioncall{var}(yy1b)
+\hlkwd{var}\hlstd{(yy1b)}
 \end{alltt}
 \begin{verbatim}
 ## [1] 0.9954
 \end{verbatim}
 \begin{alltt}
-\hlfunctioncall{summary}(yy2b)
+\hlkwd{summary}\hlstd{(yy2b)}
 \end{alltt}
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  -4.280  -0.668   0.007   0.007   0.681   4.110
 \end{verbatim}
 \begin{alltt}
-\hlfunctioncall{var}(yy2b)
+\hlkwd{var}\hlstd{(yy2b)}
 \end{alltt}
 \begin{verbatim}
 ## [1] 1.004
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 The means are zero and the variances are close  to unity. 
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlfunctioncall{hist}(yy1b, prob = T, col = 2, main = \hlstring{"MCMC for Bivariate Normal"}, xlab = \hlstring{"Y1"}, 
-    ylab = \hlstring{"Marginal PDF for Y1"})
+\hlkwd{hist}\hlstd{(yy1b,} \hlkwc{prob} \hlstd{= T,} \hlkwc{col} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"MCMC for Bivariate Normal"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"Y1"}\hlstd{,}
+     \hlkwc{ylab} \hlstd{=} \hlstr{"Marginal PDF for Y1"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Hist1} 
 \begin{kframe}\begin{alltt}
-\hlfunctioncall{hist}(yy2b, prob = T, col = 4, main = \hlstring{"MCMC for Bivariate Normal"}, xlab = \hlstring{"Y2"}, 
-    ylab = \hlstring{"Marginal PDF for Y2"})
+\hlkwd{hist}\hlstd{(yy2b,} \hlkwc{prob} \hlstd{= T,} \hlkwc{col} \hlstd{=} \hlnum{4}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"MCMC for Bivariate Normal"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"Y2"}\hlstd{,}
+     \hlkwc{ylab} \hlstd{=} \hlstr{"Marginal PDF for Y2"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Hist2} 
 
 \end{knitrout}
 
-
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlfunctioncall{qqnorm}(yy1b)
+\hlkwd{qqnorm}\hlstd{(yy1b)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Tests1} 
 \begin{kframe}\begin{alltt}
-\hlfunctioncall{qqnorm}(yy2b)
+\hlkwd{qqnorm}\hlstd{(yy2b)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Tests2} 
 \begin{kframe}\begin{alltt}
-\hlfunctioncall{library}(tseries)
+\hlkwd{library}\hlstd{(tseries)}
 \end{alltt}
 
 
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'tseries' was built under R version 3.0.3}}\begin{alltt}
-\hlfunctioncall{jarque.bera.test}(yy1b)
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'tseries'}}\begin{alltt}
+\hlkwd{jarque.bera.test}\hlstd{(yy1b)}
 \end{alltt}
-\begin{verbatim}
-## 
-## 	Jarque Bera Test
-## 
-## data:  yy1b
-## X-squared = 1.07, df = 2, p-value = 0.5857
-\end{verbatim}
-\begin{alltt}
-\hlfunctioncall{jarque.bera.test}(yy1b)
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}jarque.bera.test"{}}}\begin{alltt}
+\hlkwd{jarque.bera.test}\hlstd{(yy1b)}
 \end{alltt}
-\begin{verbatim}
-## 
-## 	Jarque Bera Test
-## 
-## data:  yy1b
-## X-squared = 1.07, df = 2, p-value = 0.5857
-\end{verbatim}
-\end{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}jarque.bera.test"{}}}\end{kframe}
 \end{knitrout}
-
 
 \subsubsection{Gibbs Sampler for Marginal Posterior}
 Extract the \emph{marginal posterior distribution} from the \emph{joint posterior distribution}. Assume that there is a population with an unknown mean $\mu$ and an unknown precistion parameter $\tau$ where $\tau = 1/\sigma^2$. Before looking at the data we are \emph{a priori} ignorant about the possible values of the parameters, we assign the following joint pior density: 
@@ -369,6 +298,129 @@ So the conditional posterior for $\tau$ is a Gammer distribution with a shape pa
 I do not understand the move to the conditional posterior and the distribution. 
 
 Now implement the Gibbs Sampler
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlcom{# MC replications}
+\hlstd{nrep} \hlkwb{<-} \hlnum{105000}
+\hlcom{# burn-in}
+\hlstd{nb} \hlkwb{<-} \hlnum{5000}
+\hlcom{# Sample size}
+\hlstd{n} \hlkwb{<-} \hlnum{10}
+\hlcom{# set up vectors}
+\hlstd{tau} \hlkwb{<-} \hlkwd{array}\hlstd{(, nrep)}
+\hlstd{mu} \hlkwb{<-} \hlkwd{array}\hlstd{(, nrep)}
+\hlcom{# Create a sample of data.  true values are 1.}
+\hlstd{y} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(n,} \hlkwc{mean} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{sd} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlstd{ybar} \hlkwb{<-} \hlkwd{mean}\hlstd{(y)}
+\hlstd{yy} \hlkwb{<-} \hlkwd{sum}\hlstd{(y}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlstd{lambda} \hlkwb{<-} \hlnum{1}\hlopt{/}\hlstd{(}\hlnum{0.5} \hlopt{*} \hlstd{n} \hlopt{*} \hlkwd{var}\hlstd{(y))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+Now create the loop for the Gibbs sampler
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{ttau} \hlkwb{<-} \hlkwd{rgamma}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{shape} \hlstd{= n}\hlopt{/}\hlnum{2}\hlstd{,} \hlkwc{rate} \hlstd{= lambda)}
+\hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{nrep)\{}
+  \hlstd{mmu} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{mean} \hlstd{= ybar,} \hlkwc{sd} \hlstd{=} \hlnum{1}\hlopt{/}\hlkwd{sqrt}\hlstd{(n}\hlopt{*}\hlstd{ttau))}
+  \hlstd{scale} \hlkwb{<-} \hlstd{(}\hlnum{0.5} \hlopt{*} \hlstd{(yy} \hlopt{+} \hlstd{n} \hlopt{*} \hlstd{mmu}\hlopt{^}\hlnum{2} \hlopt{-} \hlnum{2} \hlopt{*} \hlstd{n} \hlopt{*} \hlstd{mmu} \hlopt{*} \hlstd{ybar))}
+  \hlstd{ttau} \hlkwb{<-} \hlkwd{rgamma}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{shape} \hlstd{= n}\hlopt{/}\hlnum{2}\hlstd{, scale)}
+  \hlstd{tau[i]} \hlkwb{<-} \hlstd{ttau}
+  \hlstd{mu[i]} \hlkwb{<-} \hlstd{mmu}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+Now drop the first 5000 values of $\mu$ and $\tau$ for the burn in. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{nb1} \hlkwb{<-} \hlstd{nb} \hlopt{+}\hlnum{1}
+\hlstd{taub} \hlkwb{<-} \hlstd{tau[nb1}\hlopt{:}\hlstd{nrep]}
+\hlstd{mub} \hlkwb{<-} \hlstd{mu[nb1}\hlopt{:}\hlstd{nrep]}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+Take a look at the distributions for $\mu$ and $\tau$. They should be student-t (n-1) and Gamma respectively. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{require}\hlstd{(moments)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: moments}}
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: there is no package called 'moments'}}\begin{alltt}
+\hlkwd{summary}\hlstd{(mub);} \hlkwd{var}\hlstd{(mub)}
+\end{alltt}
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -2.760   0.863   1.080   1.070   1.290   3.960
+## [1] 0.1161
+\end{verbatim}
+\begin{alltt}
+\hlstd{ybar} \hlcom{# THe mean of the posterior for my should be ybar (1.0746)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.075
+\end{verbatim}
+\begin{alltt}
+\hlkwd{skewness}\hlstd{(mub)} \hlcom{# The skewness of student-t is zero}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}skewness"{}}}\begin{alltt}
+\hlkwd{kurtosis}\hlstd{(mub)} \hlcom{# THe excess kurtosis for student-t is 6/(n-5) = 1.2}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}kurtosis"{}}}\begin{alltt}
+\hlkwd{summary}\hlstd{(taub);} \hlkwd{var}\hlstd{(taub)}
+\end{alltt}
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.023   0.719   1.020   1.100   1.400   5.380
+## [1] 0.2717
+\end{verbatim}
+\begin{alltt}
+\hlkwd{skewness}\hlstd{(taub)} \hlcom{# the skewness of gamma is 2/sqrt(shape) = 0.8944}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}skewness"{}}}\begin{alltt}
+\hlkwd{kurtosis}\hlstd{(taub)} \hlcom{# excess kkurtosis of gamma is 6/(n/2) = 1.2}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}kurtosis"{}}}\end{kframe}
+\end{knitrout}
+
+The last couple of comments from Dave are:
+\begin{itemize}
+\item The sample were drawn from a population with $\mu = \tau = 1$.  
+\item With a quadratic loss function, the Bayes estimators of the parameters would be the marginal posterior means (see above). 
+\item With an absolute error loss function, the Bayes estimators would be the marginal posterior medians. 
+\end{itemize}
+The marginal posterior densities. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{hist}\hlstd{(mub,} \hlkwc{main} \hlstd{=} \hlstr{"Marginal Posterior for mu:  Student-t"}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/MCMCplot1} 
+\begin{kframe}\begin{alltt}
+\hlkwd{hist}\hlstd{(taub,} \hlkwc{main} \hlstd{=} \hlstr{"Marginal Posterior for tau: Gamma"}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"blue"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/MCMCplot2} 
+
+\end{knitrout}
 
 
 \subsection{Mixture Model}
@@ -410,16 +462,15 @@ The partital derivative of the cost function with respect to the $\Theta$ are
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-data <- \hlfunctioncall{read.csv}(\hlstring{"../Data/Reg.csv"})
-y <- data$profit
-x <- data$population
-\hlfunctioncall{plot}(y ~ x, main = \hlstring{"Profits vs Population"})
+\hlstd{data} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{"../Data/Reg.csv"}\hlstd{)}
+\hlstd{y} \hlkwb{<-} \hlstd{data}\hlopt{$}\hlstd{profit}
+\hlstd{x} \hlkwb{<-} \hlstd{data}\hlopt{$}\hlstd{population}
+\hlkwd{plot}\hlstd{(y} \hlopt{~} \hlstd{x,} \hlkwc{main} \hlstd{=} \hlstr{"Profits vs Population"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Regression} 
 
 \end{knitrout}
-
 The objective of the regression is to minimise the cost function.
 \begin{equation}
 J(\Theta_0, \Theta_1) = \frac{1}{2m} \sum_{i=1}^m (h_{\Theta}(X^{(i)} - y^{(i)}))^2
@@ -433,60 +484,59 @@ To take account of the intercept $\Theta_0$ an additional column of constants is
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcomment{# Add ones to x}
-x <- \hlfunctioncall{cbind}(1, x)
-\hlcomment{# Initialise theta vector}
-theta <- \hlfunctioncall{c}(0, 0)
-\hlcomment{# Number of observations}
-m <- \hlfunctioncall{nrow}(x)
-\hlcomment{# Calculate the cost}
-cost <- \hlfunctioncall{sum}(((x %*% theta) - y)^2)/(2 * m)
-cost
+\hlcom{# Add ones to x}
+\hlstd{x} \hlkwb{<-} \hlkwd{cbind}\hlstd{(}\hlnum{1}\hlstd{,x)}
+\hlcom{# Initialise theta vector}
+\hlstd{theta} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{)}
+\hlcom{# Number of observations}
+\hlstd{m} \hlkwb{<-} \hlkwd{nrow}\hlstd{(x)}
+\hlcom{# Calculate the cost}
+\hlstd{cost} \hlkwb{<-} \hlkwd{sum}\hlstd{(((x}\hlopt{%*%}\hlstd{theta)} \hlopt{-} \hlstd{y)}\hlopt{^}\hlnum{2}\hlstd{)}\hlopt{/}\hlstd{(}\hlnum{2}\hlopt{*}\hlstd{m)}
+\hlstd{cost}
 \end{alltt}
 \begin{verbatim}
 ## [1] 32.07
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-
 The initial value is 32.07 (how do I take this from the chunk?).  Now 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcomment{# Set learning parameter}
-alpha <- 0.001
-\hlcomment{# Number of iterations}
-iterations <- 1500
-\hlcomment{# updating thetas using gradient update}
-\hlfunctioncall{for} (i in 1:iterations) \{
-    theta[1] <- theta[1] - alpha * (1/m) * \hlfunctioncall{sum}(((x %*% theta) - y))
-    theta[2] <- theta[2] - alpha * (1/m) * \hlfunctioncall{sum}(((x %*% theta) - y) * x[, 2])
-\}
-\hlcomment{# Predict for areas of the 35,000 and 70,000 people}
-predict1 <- \hlfunctioncall{c}(1, 3.5) %*% theta
-predict2 <- \hlfunctioncall{c}(1, 7) %*% theta
-predict1
+\hlcom{# Set learning parameter }
+\hlstd{alpha} \hlkwb{<-} \hlnum{0.001}
+\hlcom{#Number of iterations }
+\hlstd{iterations} \hlkwb{<-} \hlnum{1500}
+\hlcom{# updating thetas using gradient update }
+\hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{iterations)}
+\hlstd{\{}
+\hlstd{theta[}\hlnum{1}\hlstd{]} \hlkwb{<-} \hlstd{theta[}\hlnum{1}\hlstd{]} \hlopt{-} \hlstd{alpha} \hlopt{*} \hlstd{(}\hlnum{1}\hlopt{/}\hlstd{m)} \hlopt{*} \hlkwd{sum}\hlstd{(((x}\hlopt{%*%}\hlstd{theta)}\hlopt{-} \hlstd{y))}
+\hlstd{theta[}\hlnum{2}\hlstd{]} \hlkwb{<-} \hlstd{theta[}\hlnum{2}\hlstd{]} \hlopt{-} \hlstd{alpha} \hlopt{*} \hlstd{(}\hlnum{1}\hlopt{/}\hlstd{m)} \hlopt{*} \hlkwd{sum}\hlstd{(((x}\hlopt{%*%}\hlstd{theta)}\hlopt{-} \hlstd{y)}\hlopt{*}\hlstd{x[,}\hlnum{2}\hlstd{])}
+\hlstd{\}}
+\hlcom{#Predict for areas of the 35,000 and 70,000 people }
+\hlstd{predict1} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{3.5}\hlstd{)} \hlopt{%*%} \hlstd{theta}
+\hlstd{predict2} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{7}\hlstd{)} \hlopt{%*%} \hlstd{theta}
+\hlstd{predict1}
 \end{alltt}
 \begin{verbatim}
 ##       [,1]
 ## [1,] 2.247
 \end{verbatim}
 \begin{alltt}
-predict2
+\hlstd{predict2}
 \end{alltt}
 \begin{verbatim}
 ##       [,1]
 ## [1,] 5.356
 \end{verbatim}
 \begin{alltt}
-\hlfunctioncall{plot}(data$population ~ data$profit, main = \hlstring{"Profits vs Population"})
-\hlfunctioncall{abline}(theta, col = \hlstring{"red"})
+\hlkwd{plot}\hlstd{(data}\hlopt{$}\hlstd{population} \hlopt{~} \hlstd{data}\hlopt{$}\hlstd{profit,} \hlkwc{main} \hlstd{=} \hlstr{"Profits vs Population"}\hlstd{)}
+\hlkwd{abline}\hlstd{(theta,} \hlkwc{col} \hlstd{=} \hlstr{'red'}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Regression3} 
 
 \end{knitrout}
-
 I think it is right, but....Needs to be looked at. 
 
 \subsection{Adjusted R squared}
@@ -509,344 +559,25 @@ This comes from \href{http://blog.revolutionanalytics.com/2014/04/quantitative-f
 
 where $\mu$ is the drift or average annual return, Z is a standard Normal random variable, t is measured in years so for monthly returns $\Delta t$ equals $\frac{1}{12}$.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-n <- 10000
-\hlcomment{# Fixing the seed gives us a consistent set of simulated returns}
-\hlfunctioncall{set.seed}(106)
-z <- \hlfunctioncall{rnorm}(n)  \hlcomment{# mean = 0 and sd = 1 are defaults}
-mu <- 0.1
-sd <- 0.15
-delta_t <- 0.25
-\hlcomment{# apply to expression (*) above}
-qtr_returns <- mu * delta_t + sd * z * \hlfunctioncall{sqrt}(delta_t)
-\hlfunctioncall{hist}(qtr_returns, breaks = 100, col = \hlstring{"green"})
-\end{alltt}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/MC} 
-
-\end{knitrout}
 
 
-Now the descriptive statistics can be uncovered from the simulated results. 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-stats <- \hlfunctioncall{c}(\hlfunctioncall{mean}(qtr_returns) * 4, \hlfunctioncall{sd}(qtr_returns) * 2)  \hlcomment{# \hlfunctioncall{sqrt}(4)}
-\hlfunctioncall{names}(stats) <- \hlfunctioncall{c}(\hlstring{"mean"}, \hlstring{"volatility"})
-stats
-\end{alltt}
-\begin{verbatim}
-##       mean volatility 
-##    0.09901    0.14976
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-This is the basic model.  It would also be possible to simulate two variables and to include some relationship between the two in the analysis.  It would also be possible to simulate an asset in two different regimes. A Monte-Carlo Markov Model (MCMM) would require another set of $\mu$ and $\sigma$ inputs as well as a transition matrix of the probabilities that there is a switch from one regime to another. 
- 
-\subsection{Generalised Lambda Distribution}
-This is from \href{http://blog.revolutionanalytics.com/2014/02/quantitative-finance-applications-in-r-4-using-the-generalized-lambda-distribution-to-simulate-market-returns.html}{Revolutionary Analytics}.  The four parameters $\lambda_1$, $\lambda_2$, $\lambda_3$ and $\lambda_4$ indicate the location, scale, skew and kurtosis of the distribution. 
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlfunctioncall{require}(GLDEX)
-\hlfunctioncall{require}(quantmod)
-
-\hlfunctioncall{getSymbols}(\hlstring{"SPY"}, from = \hlstring{"1994-02-01"})
-\end{alltt}
-\begin{verbatim}
-## [1] "SPY"
-\end{verbatim}
-\begin{alltt}
-SPY.Close <- SPY[, 4]  \hlcomment{# Closing prices}
-
-SPY.vector <- \hlfunctioncall{as.vector}(SPY.Close)
-
-\hlcomment{# Calculate log returns}
-sp500 <- \hlfunctioncall{diff}(\hlfunctioncall{log}(SPY.vector), lag = 1)
-sp500 <- sp500[-1]  \hlcomment{# Remove the NA in the first position}
-\hlcomment{# Set normalise='Y' so that kurtosis is calculated with reference to}
-\hlcomment{# kurtosis = 0 under Normal distribution}
-\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  0.0002695  0.0001526 -0.0976550  9.5583858
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-Now fit the GLD with the function fun.data.fit.mm. There are warnings but these can be ignored. 
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-spLambdaDist = \hlfunctioncall{fun.data.fit.mm}(sp500)
-spLambdaDist
-\end{alltt}
-\begin{verbatim}
-##            RPRS     RMFMKL
-## [1,]  3.806e-04  3.278e-04
-## [2,] -4.702e+01  2.041e+02
-## [3,] -1.678e-01 -1.700e-01
-## [4,] -1.642e-01 -1.617e-01
-\end{verbatim}
-\begin{alltt}
-\hlfunctioncall{fun.plot.fit}(fit.obj = spLambdaDist, data = sp500, nclass = 100, param = \hlfunctioncall{c}(\hlstring{"rs"}, 
-    \hlstring{"fmkl"}), xlab = \hlstring{"Returns"})
-\end{alltt}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/GLD} 
-
-\end{knitrout}
-
-Now it is possible to generrate simualted results using the function rgl(). Lambdas need to be identified. 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-lambda_params_rs <- spLambdaDist[, 1]
-lambda1_rs <- lambda_params_rs[1]
-lambda2_rs <- lambda_params_rs[2]
-lambda3_rs <- lambda_params_rs[3]
-lambda4_rs <- lambda_params_rs[4]
-
-lambda_params_fmkl <- spLambdaDist[, 2]
-lambda1_fmkl <- lambda_params_fmkl[1]
-lambda2_fmkl <- lambda_params_fmkl[2]
-lambda3_fmkl <- lambda_params_fmkl[3]
-lambda4_fmkl <- lambda_params_fmkl[4]
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
-Now generate simulations of each variety. 
-
-There are problems with the rgl function.  I am not sure what this does.  It is 10 million simulations.  I think that the rgl just uses extra hardware to make the change. It may be useful to re-do this last section using a different method. 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlfunctioncall{require}(gld)
-\end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: gld}}\begin{alltt}
-\hlfunctioncall{require}(GLDEX)
-\end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: GLDEX}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: cluster}}\begin{alltt}
-\hlcomment{# RS version:}
-\hlfunctioncall{set.seed}(100)  \hlcomment{# Set seed to obtain a reproducible set}
-rs_sample <- \hlfunctioncall{rgl}(n = 1e+07, lambda1 = lambda1_rs, lambda2 = lambda2_rs, lambda3 = lambda3_rs, 
-    lambda4 = lambda4_rs, param = \hlstring{"rs"})
-
-\hlcomment{# Moments of simulated returns using RS method:}
-\hlfunctioncall{fun.moments.r}(rs_sample, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  2.697e-04  7.939e-05 -1.059e-01  1.000e+01
-\end{verbatim}
-\begin{alltt}
-
-\hlcomment{# Moments calculated from market data:}
-\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  0.0002695  0.0001526 -0.0976550  9.5583858
-\end{verbatim}
-\begin{alltt}
-
-\hlcomment{# FKML version:}
-\hlfunctioncall{set.seed}(100)  \hlcomment{# Set seed to obtain a reproducible set}
-fmkl_sample <- \hlfunctioncall{rgl}(n = 1e+05, lambda1 = lambda1_fmkl, lambda2 = lambda2_fmkl, 
-    lambda3 = lambda3_fmkl, lambda4 = lambda4_fmkl, param = \hlstring{"fmkl"})
-
-\hlcomment{# Moments of simulated returns using FMKL method:}
-\hlfunctioncall{fun.moments.r}(fmkl_sample, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  0.0002465  0.0001540 -0.0877574  8.6172744
-\end{verbatim}
-\begin{alltt}
-
-\hlcomment{# Moments calculated from market data:}
-\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  0.0002695  0.0001526 -0.0976550  9.5583858
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-Compare the moments to the S\&P500 market data
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlfunctioncall{fun.moments.r}(rs_sample, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  2.697e-04  7.939e-05 -1.059e-01  1.000e+01
-\end{verbatim}
-\begin{alltt}
-\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  0.0002695  0.0001526 -0.0976550  9.5583858
-\end{verbatim}
-\begin{alltt}
-\hlfunctioncall{fun.moments.r}(fmkl_sample, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  0.0002465  0.0001540 -0.0877574  8.6172744
-\end{verbatim}
-\begin{alltt}
-\hlfunctioncall{fun.moments.r}(sp500, normalise = \hlstring{"Y"})
-\end{alltt}
-\begin{verbatim}
-##       mean   variance   skewness   kurtosis 
-##  0.0002695  0.0001526 -0.0976550  9.5583858
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-\subsection{Lasso method}
-\href{http://www.mathtube.org/lecture/video/lasso-brief-review-and-new-significance-test#.U1aODV1sp94.twitter}{Rob Tibshirani}Cancer example that requires identification of appropriate cell. There are 20 cases that are being used as a training set.  Train a classifier to identify whether the cells are cencerous or not.  There are 11,000 features. It would be useful to use as few of the features as possible. Therefore, also want to know which features are important for the classification. 
-
-Sparcity means that the features are reduced by only using those that pass a particular level of significance.  \href{http://statweb.stanford.edu/~tibs/lasso.html}{More here.}
-
-\subsection{Standard Error of the estimated mean}
-The standard error of the estimate of the mean is 
-\begin{equation}
-SD_x = \frac{\sigma}{\sqrt{n}}
-\end{equation}
-This can be derived from the variance of the sum of independent random variables
-\begin{itemize}
-\item If $X_1, X_2, \dots, X_n$ are independent observations from a population with a mean $\mu$ and a standard deviation $\sigma$, 
-\item Variance of the Total = $T = (X_1, X_2, \dots, X_n)$ is $n\sigma^2$
-\item $T/n$ is the mean $\bar{x}$
-\item the variance of $T/n$ is $\frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}$
-\item \href{https://onlinecourses.science.psu.edu/stat414/node/167}{Explained}
-\item the standard deviation of $T/n$ must be $\frac{n}{\sqrt{n}}$
-\end{itemize}
-
-\subsection{Logistic Regression}
-This comes from \href{http://www.win-vector.com/blog/2010/11/learn-a-powerful-machine-learning-tool-logistic-regression-and-beyond/}{Wim-Vector - logistic regression}.  
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-CarData <- \hlfunctioncall{read.table}(\hlfunctioncall{url}(\hlstring{"http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data"}), 
-    sep = \hlstring{","}, col.names = \hlfunctioncall{c}(\hlstring{"buying"}, \hlstring{"maintenance"}, \hlstring{"doors"}, \hlstring{"persons"}, \hlstring{"lug_boot"}, 
-        \hlstring{"safety"}, \hlstring{"rating"}))
-logisticModel <- \hlfunctioncall{glm}(rating != \hlstring{"unacc"} ~ buying + maintenance + doors + persons + 
-    lug_boot + safety, family = \hlfunctioncall{binomial}(link = \hlstring{"logit"}), data = CarData)
-\end{alltt}
 
 
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred}}\begin{alltt}
-\hlfunctioncall{summary}(logisticModel)
-\end{alltt}
-\begin{verbatim}
-## 
-## Call:
-## glm(formula = rating != "unacc" ~ buying + maintenance + doors + 
-##     persons + lug_boot + safety, family = binomial(link = "logit"), 
-##     data = CarData)
-## 
-## Deviance Residuals: 
-##    Min      1Q  Median      3Q     Max  
-## -3.216   0.000   0.000   0.026   2.434  
-## 
-## Coefficients:
-##                  Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)       -28.426   1257.526   -0.02     0.98    
-## buyinglow           5.048      0.567    8.90  < 2e-16 ***
-## buyingmed           3.922      0.484    8.10  5.5e-16 ***
-## buyingvhigh        -2.066      0.375   -5.51  3.5e-08 ***
-## maintenancelow      3.406      0.469    7.26  3.9e-13 ***
-## maintenancemed      3.406      0.469    7.26  3.9e-13 ***
-## maintenancevhigh   -2.825      0.415   -6.82  9.4e-12 ***
-## doors3              1.856      0.404    4.59  4.4e-06 ***
-## doors4              2.482      0.428    5.80  6.6e-09 ***
-## doors5more          2.482      0.428    5.80  6.6e-09 ***
-## persons4           29.965   1257.526    0.02     0.98    
-## personsmore        29.584   1257.526    0.02     0.98    
-## lug_bootmed        -1.517      0.376   -4.04  5.4e-05 ***
-## lug_bootsmall      -4.448      0.475   -9.36  < 2e-16 ***
-## safetylow         -30.505   1300.343   -0.02     0.98    
-## safetymed          -3.004      0.358   -8.40  < 2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 2110.47  on 1727  degrees of freedom
-## Residual deviance:  339.36  on 1712  degrees of freedom
-## AIC: 371.4
-## 
-## Number of Fisher Scoring iterations: 21
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-The variable levels and values are joined together. The model will provide an estimate of the effect of each category on the rating.  The values for each category are adde together to get the overall rating score. 
-
-The error results of the model can be examined. 
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlfunctioncall{table}(CarData$rating, \hlfunctioncall{predict}(logisticModel, type = \hlstring{"response"}) >= 0.5)
-\end{alltt}
-\begin{verbatim}
-##        
-##         FALSE TRUE
-##   acc      32  352
-##   good      0   69
-##   unacc  1166   44
-##   vgood     0   65
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
 
 
-To be completed. 
 
-\subsection{F-Tests}
-This is an example that is based on testing for fabricated evidence.  The full documentation is \href{http://errorstatistics.com/2014/05/10/who-ya-gonna-call-for-statistical-fraudbusting-r-a-fisher-p-values-and-error-statistics-again/}{Deborah Mayo}.  As the paper says
-\begin{quotation}
-``In each experiment, participants (undergraduate students) were randomly assigned to three groups, and each group was given a different intervention. All participants were then tested on some outcome measure.``
-\end{quotation}
-The accusation is that the results are \textbf{too} linear.  The relationships are too perfect compared to other studies.  The method used to asses this is called \emph{delta-F}.  The odds of seeing such linear trends are calculated based on the assumption that the trend is linear.  
 
-Unless there is a huge sample, the probability of obtaining a linear trend is very low becuase there is noise. THe amount of noise is evident in the \emph{within group variance}.  For a given sample size and a given level of within group variance, the odds of obtaining a linear trend are calculated as the sum of squares accounted for by a linear model and a none-linear model (one-way ANOVA) divided by the mean-square error (within group variance).
 
-\begin{equation}
-\Delta F = \frac{SS_{REG} - SS_B}{MS_W}
-\end{equation}
 
-There is one degree of freedom in the numerator and $3(n-1)$ degrees of freedom in the denominator. 
 
-If the difference between the two models (linear and non-linear) is small, it means that there is an underlying linear relationship. Assuming that the relationship is linear, this delta-F metric should follow an F distribution. 
 
-This is more or less the same method that is used to test whether a simple model fits the data as well as a complex model. In that case, the null hypothesis is that the simple model is the correct version and the objective is to determine if the difference between the two is unlikely given the null. 
 
-From the paper
 
-\begin{quotation}
-```But here the whole thing is turned on its head. Random noise means that a complex model will sometimes fit the data better than a simple one, even if the simple model describes reality. In a conventional use of F-tests, that would be regarded as a false positive. But in this case its the absence of those false positives thats unusual.```
-\end{quotation}
 
-\end{document}
+
+
+
