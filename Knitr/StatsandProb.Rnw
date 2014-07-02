@@ -552,4 +552,51 @@ From the paper
 ```But here the whole thing is turned on its head. Random noise means that a complex model will sometimes fit the data better than a simple one, even if the simple model describes reality. In a conventional use of F-tests, that would be regarded as a false positive. But in this case it’s the absence of those false positives that’s unusual.```
 \end{quotation}
 
+\subsection{Wilcoxon rank Sum}
+This comes from \href{http://sas-and-r.blogspot.co.uk/2014/06/example-20146-comparing-medians-and.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+SASandR+(SAS+and+R)}{SAS and R}. Using the Wilcoxon Rank-sum test is often used as a test of medias.  However, it should really be a test of whether a random number drawn from one distibution would be above a random number drawn from the other.  For this to be a test of medians, there is an additional assumption that the distrubtions are the same.  This is rarely true or acknowledged. 
+
+For example, 
+<<Wilcoxon>>=
+y1 <- rexp(1000)
+y2 <- rnorm(1000) + log(2)
+# two sets of random numbers with the same median
+wilcox.test(y1, y2)
+@
+The null is rejected.
+
+Can use a quantile regression 
+<<QuantileReg>>=
+library(quantreg)
+y = c(y1, y2)
+c = rep(1:2, each = 1000)
+summary(rq(y ~ as.factor(c)))
+@
+Fails to reject the null of equal medians.  See text. 
+
+\section{Probability Distributions}
+This comes from \href{http://www.petrkeil.com/?p=2084}{Are you cereal?}.  The range of fucntions are s follows. 
+\begin{itemize}
+\item probbility density function
+\item cumulative function
+\item quntile function
+\item random number genrator
+\end{itemize}
+
+It starts with the equation for the probability density function. The result can be deived (analytically or numerically) from there. 
+
+This is an example with an \emph{exponential function}. 
+
+\subsection{probability density function}
+\begin{itemize}
+\item probbility density is relative density
+\item at a given dat point, pdf is likelihood
+\item pdf can be greter than one. 
+\end{itemize}
+
+\begin{equation}
+p(x) = \lambda e^{-\lambda x},   \quad x \in [0, \inf]
+\end{equation}
+
+
+
 \end{document}
