@@ -564,7 +564,8 @@ wilcox.test(y1, y2)
 @
 The null is rejected.
 
-Can use a quantile regression 
+Can use a quantile regression where there are two series with the same median but different distributions. 
+
 <<QuantileReg>>=
 library(quantreg)
 y = c(y1, y2)
@@ -572,6 +573,12 @@ c = rep(1:2, each = 1000)
 summary(rq(y ~ as.factor(c)))
 @
 Fails to reject the null of equal medians.  See text. 
+
+<<plot2>>=
+par(mfrow = c(2,1))
+plot(density(y1), xlim = c(-3, 6), main = "Exponential Disbtribition")
+plot(density(y2), xlim = c(-3, 6), main = "Normal Distribution")
+@
 
 \section{Probability Distributions}
 This comes from \href{http://www.petrkeil.com/?p=2084}{Are you cereal?}.  The range of fucntions are s follows. 
