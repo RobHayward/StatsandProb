@@ -391,7 +391,7 @@ This comes from \href{http://blog.revolutionanalytics.com/2014/04/quantitative-f
 
 where $\mu$ is the drift or average annual return, Z is a standard Normal random variable, t is measured in years so for monthly returns $\Delta t$ equals $\frac{1}{12}$.
 
-<<MC, fig.height=6, cache=TRUE>>=
+<<MC, fig.height=6>>=
 n <- 10000
 # Fixing the seed gives us a consistent set of simulated returns
 set.seed(106)
@@ -415,7 +415,7 @@ This is the basic model.  It would also be possible to simulate two variables an
 \subsection{Generalised Lambda Distribution}
 This is from \href{http://blog.revolutionanalytics.com/2014/02/quantitative-finance-applications-in-r-4-using-the-generalized-lambda-distribution-to-simulate-market-returns.html}{Revolutionary Analytics}.  The four parameters $\lambda_1$, $\lambda_2$, $\lambda_3$ and $\lambda_4$ indicate the location, scale, skew and kurtosis of the distribution. 
 
-<<Lambda, warning=FALSE, message=FALSE, cache=TRUE>>=
+<<Lambda, warning=FALSE, message=FALSE>>=
 require(GLDEX)
 require(quantmod)
 
@@ -604,6 +604,14 @@ This is an example with an \emph{exponential function}.
 p(x) = \lambda e^{-\lambda x},   \quad x \in [0, \inf]
 \end{equation}
 
+\subsection{Chisquared test of independence}
+This comes from \href{# http://freakonometrics.hypotheses.org/17491}{Arthur Charpentier}. 
 
+Given the following table
+<<table, echo=FALSE>>=
+N = margin.table(HairEyeColor, c(1, 2))
+N
+@
+To be completed. 
 
 \end{document}
