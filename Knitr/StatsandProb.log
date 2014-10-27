@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.9.19)  24 OCT 2014 06:44
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.9.19)  27 OCT 2014 08:27
 entering extended mode
 **StatsandProb.tex
 
@@ -379,10 +379,10 @@ Overfull \hbox (73.12523pt too wide) in paragraph at lines 134--134
 in[] []=[] []"Regression with OLS (red) and MCMC (blue)"[][])[][] 
  []
 
-<figure/MCMC.pdf, id=94, 505.89pt x 361.35pt>
-File: figure/MCMC.pdf Graphic file (type pdf)
- <use figure/MCMC.pdf>
-Package pdftex.def Info: figure/MCMC.pdf used on input line 139.
+<figure/MCMC-1.pdf, id=98, 505.89pt x 361.35pt>
+File: figure/MCMC-1.pdf Graphic file (type pdf)
+ <use figure/MCMC-1.pdf>
+Package pdftex.def Info: figure/MCMC-1.pdf used on input line 139.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 139--140
@@ -399,8 +399,8 @@ tional read-ing on co-vari-ance
 Overfull \vbox (0.43835pt too high) has occurred while \output is active []
 
 
-[3 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MCMC.p
-df>]
+[3 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MCMC-1
+.pdf>]
 Overfull \hbox (3.60712pt too wide) in paragraph at lines 175--176
 []\OT1/cmr/m/n/12 However, to test the MCMC draw from the con-di-tional to find
  the marginal
@@ -413,10 +413,10 @@ Overfull \hbox (79.30023pt too wide) in paragraph at lines 209--209
 ]"MCMC for Bivarite Normal"[][],[] []xlab[] []=[] []"Repetitions"[][],[][] 
  []
 
-[4] <figure/MCM.pdf, id=141, 505.89pt x 361.35pt>
-File: figure/MCM.pdf Graphic file (type pdf)
- <use figure/MCM.pdf>
-Package pdftex.def Info: figure/MCM.pdf used on input line 215.
+[4] <figure/MCM-1.pdf, id=145, 505.89pt x 361.35pt>
+File: figure/MCM-1.pdf Graphic file (type pdf)
+ <use figure/MCM-1.pdf>
+Package pdftex.def Info: figure/MCM-1.pdf used on input line 215.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 215--216
@@ -430,32 +430,32 @@ Overfull \hbox (79.30023pt too wide) in paragraph at lines 222--222
 ]"MCMC for Bivarite Normal"[][],[] []xlab[] []=[] []"Repetitions"[][],[][] 
  []
 
-<figure/MCMC2.pdf, id=142, 505.89pt x 361.35pt>
-File: figure/MCMC2.pdf Graphic file (type pdf)
- <use figure/MCMC2.pdf>
-Package pdftex.def Info: figure/MCMC2.pdf used on input line 228.
+<figure/MCMC2-1.pdf, id=146, 505.89pt x 361.35pt>
+File: figure/MCMC2-1.pdf Graphic file (type pdf)
+ <use figure/MCMC2-1.pdf>
+Package pdftex.def Info: figure/MCMC2-1.pdf used on input line 228.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 228--229
 [][] 
  []
 
-[5 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MCM.pd
-f>]
+[5 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MCM-1.
+pdf>]
 Package color Info: Redefining color shadecolor on input line 233.
 Package color Info: Redefining color shadecolor on input line 265.
  [6 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MCMC2
-.pdf>]
+-1.pdf>]
 Overfull \hbox (91.65024pt too wide) in paragraph at lines 267--267
 [][]\OT1/cmtt/m/n/12 hist[][](yy1b,[] []prob[] []= T,[] []col[] []=[] []2[][],[
 ] []main[] []=[] []"MCMC for Bivariate Normal"[][],[] []xlab[] []=[] []"Y1"[][]
 ,[][] 
  []
 
-<figure/Hist1.pdf, id=163, 505.89pt x 361.35pt>
-File: figure/Hist1.pdf Graphic file (type pdf)
- <use figure/Hist1.pdf>
-Package pdftex.def Info: figure/Hist1.pdf used on input line 271.
+<figure/Hist-1.pdf, id=167, 505.89pt x 361.35pt>
+File: figure/Hist-1.pdf Graphic file (type pdf)
+ <use figure/Hist-1.pdf>
+Package pdftex.def Info: figure/Hist-1.pdf used on input line 271.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 271--272
@@ -469,10 +469,10 @@ Overfull \hbox (91.65024pt too wide) in paragraph at lines 273--273
 ,[][] 
  []
 
-<figure/Hist2.pdf, id=164, 505.89pt x 361.35pt>
-File: figure/Hist2.pdf Graphic file (type pdf)
- <use figure/Hist2.pdf>
-Package pdftex.def Info: figure/Hist2.pdf used on input line 277.
+<figure/Hist-2.pdf, id=168, 505.89pt x 361.35pt>
+File: figure/Hist-2.pdf Graphic file (type pdf)
+ <use figure/Hist-2.pdf>
+Package pdftex.def Info: figure/Hist-2.pdf used on input line 277.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 277--278
@@ -480,32 +480,33 @@ Overfull \hbox (17.62482pt too wide) in paragraph at lines 277--278
  []
 
 Package color Info: Redefining color shadecolor on input line 282.
-[7 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Hist1.
-pdf>] <figure/Tests1.pdf, id=176, 505.89pt x 361.35pt>
-File: figure/Tests1.pdf Graphic file (type pdf)
- <use figure/Tests1.pdf>
-Package pdftex.def Info: figure/Tests1.pdf used on input line 287.
+[7 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Hist-1
+.pdf>] <figure/Tests-1.pdf, id=180, 505.89pt x 361.35pt>
+File: figure/Tests-1.pdf Graphic file (type pdf)
+
+<use figure/Tests-1.pdf>
+Package pdftex.def Info: figure/Tests-1.pdf used on input line 287.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 287--288
 [][] 
  []
 
-[8 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Hist2.
-pdf> <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Test
-s1.pdf>] <figure/Tests2.pdf, id=193, 505.89pt x 361.35pt>
-File: figure/Tests2.pdf Graphic file (type pdf)
+[8 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Hist-2
+.pdf> <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Tes
+ts-1.pdf>] <figure/Tests-2.pdf, id=197, 505.89pt x 361.35pt>
+File: figure/Tests-2.pdf Graphic file (type pdf)
 
-<use figure/Tests2.pdf>
-Package pdftex.def Info: figure/Tests2.pdf used on input line 293.
+<use figure/Tests-2.pdf>
+Package pdftex.def Info: figure/Tests-2.pdf used on input line 292.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 293--294
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 292--293
 [][] 
  []
 
-[9 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Tests2
-.pdf>]
+[9 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Tests-
+2.pdf>]
 Package color Info: Redefining color shadecolor on input line 358.
  [10]
 Package color Info: Redefining color shadecolor on input line 380.
@@ -529,7 +530,7 @@ Overfull \hbox (13.40553pt too wide) in paragraph at lines 446--446
  gamma is 2/sqrt(shape) = 0.8944[][] 
  []
 
-[11]
+[11] [12]
 Package color Info: Redefining color shadecolor on input line 469.
 
 Overfull \hbox (122.52525pt too wide) in paragraph at lines 471--471
@@ -538,11 +539,11 @@ u:  Student-t"[][],[] []prob[] []=[] []TRUE[][],[] []col[] []=[] []"red"[][])[]
 [] 
  []
 
-[12] <figure/MCMCplot1.pdf, id=225, 505.89pt x 361.35pt>
-File: figure/MCMCplot1.pdf Graphic file (type pdf)
+<figure/MCMCplot-1.pdf, id=229, 505.89pt x 361.35pt>
+File: figure/MCMCplot-1.pdf Graphic file (type pdf)
 
-<use figure/MCMCplot1.pdf>
-Package pdftex.def Info: figure/MCMCplot1.pdf used on input line 474.
+<use figure/MCMCplot-1.pdf>
+Package pdftex.def Info: figure/MCMCplot-1.pdf used on input line 474.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 474--475
@@ -556,10 +557,11 @@ tau: Gamma"[][],[] []prob[] []=[] []TRUE[][],[] []col[] []=[] []"blue"[][])[][]
  
  []
 
-<figure/MCMCplot2.pdf, id=226, 505.89pt x 361.35pt>
-File: figure/MCMCplot2.pdf Graphic file (type pdf)
- <use figure/MCMCplot2.pdf>
-Package pdftex.def Info: figure/MCMCplot2.pdf used on input line 479.
+<figure/MCMCplot-2.pdf, id=230, 505.89pt x 361.35pt>
+File: figure/MCMCplot-2.pdf Graphic file (type pdf)
+
+<use figure/MCMCplot-2.pdf>
+Package pdftex.def Info: figure/MCMCplot-2.pdf used on input line 479.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 479--480
@@ -567,14 +569,14 @@ Overfull \hbox (17.62482pt too wide) in paragraph at lines 479--480
  []
 
 [13 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MCMCp
-lot1.pdf>] [14 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/f
-igure/MCMCplot2.pdf>]
+lot-1.pdf>] [14 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/
+figure/MCMCplot-2.pdf>]
 Package color Info: Redefining color shadecolor on input line 521.
- <figure/Regression.pdf, id=250, 505.89pt x 361.35pt>
-File: figure/Regression.pdf Graphic file (type pdf)
+ <figure/Regression-1.pdf, id=254, 505.89pt x 361.35pt>
+File: figure/Regression-1.pdf Graphic file (type pdf)
 
-<use figure/Regression.pdf>
-Package pdftex.def Info: figure/Regression.pdf used on input line 529.
+<use figure/Regression-1.pdf>
+Package pdftex.def Info: figure/Regression-1.pdf used on input line 529.
 (pdftex.def)             Requested size: 390.0pt x 278.57669pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 529--530
@@ -585,7 +587,7 @@ Overfull \hbox (17.62482pt too wide) in paragraph at lines 529--530
 Package color Info: Redefining color shadecolor on input line 543.
 Package color Info: Redefining color shadecolor on input line 562.
  [16 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Regr
-ession.pdf>]
+ession-1.pdf>]
 Overfull \hbox (17.5502pt too wide) in paragraph at lines 572--572
 [][]\OT1/cmtt/m/n/12 theta[[][]2[][]][] []<-[] []theta[[][]2[][]][] []-[] []alp
 ha[] []*[] []([][]1[][]/[][]m)[] []*[] []sum[][](((x[][]%*%[][]theta)[][]-[] []
@@ -598,11 +600,11 @@ Overfull \hbox (23.7252pt too wide) in paragraph at lines 591--591
 ofit,[] []main[] []=[] []"Profits vs Population"[][])[][] 
  []
 
-<figure/Regression3.pdf, id=272, 505.89pt x 505.89pt>
-File: figure/Regression3.pdf Graphic file (type pdf)
+<figure/Regression3-1.pdf, id=276, 505.89pt x 505.89pt>
+File: figure/Regression3-1.pdf Graphic file (type pdf)
 
-<use figure/Regression3.pdf>
-Package pdftex.def Info: figure/Regression3.pdf used on input line 595.
+<use figure/Regression3-1.pdf>
+Package pdftex.def Info: figure/Regression3-1.pdf used on input line 595.
 (pdftex.def)             Requested size: 390.0pt x 390.00737pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 595--596
@@ -616,7 +618,7 @@ lt-about-adjusted.html[][]
  []
 
 [18 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/Regre
-ssion3.pdf>]
+ssion3-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 621.
 
 Overfull \hbox (15.27962pt too wide) in paragraph at lines 624--624
@@ -624,10 +626,10 @@ Overfull \hbox (15.27962pt too wide) in paragraph at lines 624--624
 returns[][] 
  []
 
-<figure/MC.pdf, id=291, 505.89pt x 433.62pt>
-File: figure/MC.pdf Graphic file (type pdf)
- <use figure/MC.pdf>
-Package pdftex.def Info: figure/MC.pdf used on input line 635.
+<figure/MC-1.pdf, id=295, 505.89pt x 433.62pt>
+File: figure/MC-1.pdf Graphic file (type pdf)
+ <use figure/MC-1.pdf>
+Package pdftex.def Info: figure/MC-1.pdf used on input line 635.
 (pdftex.def)             Requested size: 390.0pt x 334.29204pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 635--636
@@ -644,8 +646,8 @@ Overfull \hbox (20.75798pt too wide) in paragraph at lines 643--643
  []
 
 Package color Info: Redefining color shadecolor on input line 659.
-[20 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MC.pd
-f>]
+[20 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/MC-1.
+pdf>]
 Package color Info: Redefining color shadecolor on input line 690.
 
 Overfull \hbox (5.2002pt too wide) in paragraph at lines 703--703
@@ -653,7 +655,7 @@ Overfull \hbox (5.2002pt too wide) in paragraph at lines 703--703
 ] []= sp500,[] []nclass[] []=[] []100[][],[][] 
  []
 
-<figure/GLD.pdf, id=309, 505.89pt x 433.62pt>
+<figure/GLD.pdf, id=313, 505.89pt x 433.62pt>
 File: figure/GLD.pdf Graphic file (type pdf)
  <use figure/GLD.pdf>
 Package pdftex.def Info: figure/GLD.pdf used on input line 707.
@@ -668,6 +670,12 @@ Package color Info: Redefining color shadecolor on input line 712.
 Package color Info: Redefining color shadecolor on input line 732.
  [22 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/GLD.
 pdf>]
+Overfull \hbox (13.19629pt too wide) in paragraph at lines 738--738
+\OT1/cmtt/m/it/12 ##    dgl, pgl, qdgl, qgl, rgl, starship, starship.adaptivegr
+id, 
+ []
+
+
 Overfull \hbox (54.60022pt too wide) in paragraph at lines 742--742
 [][]\OT1/cmtt/m/n/12 rs_sample[] []<-[] []rgl[][]([][]n[] []=[] []10000000[][],
 [] []lambda1[][]=lambda1_rs,[] []lambda2[] []= lambda2_rs,[][] 
@@ -680,8 +688,9 @@ Overfull \hbox (412.7504pt too wide) in paragraph at lines 764--764
  lambda2_fmkl,[][]lambda3[] []= lambda3_fmkl,[][] 
  []
 
+[23]
 Package color Info: Redefining color shadecolor on input line 786.
-[23] [24]
+ [24]
 Package color Info: Redefining color shadecolor on input line 841.
 
 Overfull \hbox (795.60059pt too wide) in paragraph at lines 843--843
@@ -732,15 +741,19 @@ Overfull \hbox (11.3752pt too wide) in paragraph at lines 900--900
 odel,[][]type[][]=[][]response[][])[][]>=[][]0.5[][])[][] 
  []
 
-Missing character: There is no Â in font cmr12!
-Missing character: There is no ‘ in font cmr12!
-Missing character: There is no Â in font cmr12!
-Missing character: There is no ’ in font cmr12!
 [26]
-Missing character: There is no Â in font cmr12!
-Missing character: There is no ’ in font cmr12!
-Missing character: There is no Â in font cmr12!
-Missing character: There is no ’ in font cmr12!
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ˜ in font cmr12!
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
  [27]
 Package color Info: Redefining color shadecolor on input line 945.
 
@@ -765,10 +778,10 @@ Overfull \hbox (5.2002pt too wide) in paragraph at lines 998--998
 ]-[][]3[][],[] []6[][]),[] []main[] []=[] []"Normal Distribution"[][])[][] 
  []
 
-<figure/plot2.pdf, id=357, 505.89pt x 505.89pt>
-File: figure/plot2.pdf Graphic file (type pdf)
- <use figure/plot2.pdf>
-Package pdftex.def Info: figure/plot2.pdf used on input line 1001.
+<figure/plot2-1.pdf, id=361, 505.89pt x 505.89pt>
+File: figure/plot2-1.pdf Graphic file (type pdf)
+ <use figure/plot2-1.pdf>
+Package pdftex.def Info: figure/plot2-1.pdf used on input line 1001.
 (pdftex.def)             Requested size: 390.0pt x 390.00737pt.
 
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 1001--1002
@@ -776,29 +789,205 @@ Overfull \hbox (17.62482pt too wide) in paragraph at lines 1001--1002
  []
 
 [29 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/plot2
-.pdf>]
+-1.pdf>]
 Package color Info: Redefining color shadecolor on input line 1034.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1047.
- [30]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1047.
+
+! Argument of \frac  has an extra }.
+<inserted text> 
+                \par 
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \frac  was complete.
+<to be read again> 
+                   \par 
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Argument of \frac  has an extra }.
+<inserted text> 
+                \par 
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+! Paragraph ended before \frac  was complete.
+<to be read again> 
+                   \par 
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Display math should end with $$.
+<to be read again> 
+                   \par 
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Extra }, or forgotten \endgroup.
+<recently read> }
+                 
+l.1051 ...P(X = i, Y = j) = \frac{N_i}{n}\dot\frac
+                                                  {N_j}{n}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1051 ... = i, Y = j) = \frac{N_i}{n}\dot\frac{N_
+                                                  j}{n}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.1051 ... i, Y = j) = \frac{N_i}{n}\dot\frac{N_j}
+                                                  {n}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! You can't use `\eqno' in math mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.1052 \end{equation}
+                     
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1052 \end{equation}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.1052 \end{equation}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+Package color Info: Redefining color shadecolor on input line 1055.
+[30]
+Package color Info: Redefining color shadecolor on input line 1074.
+Package color Info: Redefining color shadecolor on input line 1092.
+ [31]
+! Undefined control sequence.
+l.1116 ..._{i,j}^{\perp})^2}{N_{i,j}^{\perp}} \dis
+                                                   \chi^2((I-1)(J-1))
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Package color Info: Redefining color shadecolor on input line 1119.
+<figure/plotchi-1.pdf, id=388, 505.89pt x 361.35pt>
+File: figure/plotchi-1.pdf Graphic file (type pdf)
+ <use figure/plotchi-1.pdf>
+Package pdftex.def Info: figure/plotchi-1.pdf used on input line 1126.
+(pdftex.def)             Requested size: 390.0pt x 278.57669pt.
+
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 1126--1127
+[][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 1135.
+[32 <C:/Users/Toshiba/Google Drive/Research/GIT/StatsandProb/Knitr/figure/plotc
+hi-1.pdf>]
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 1137--1137
+[][]\OT1/cmtt/m/n/12 X[] []=[] []c[][]([][]0[][],[] []0[][],[] []1[][],[] []1[]
+[],[] []0[][],[] []1[][],[] []1[][],[] []1[][],[] []1[][],[] []0[][],[] []0[][]
+,[] []0[][],[] []1[][],[] []0[][],[] []1[][],[] []0[][],[] []1[][],[] []1[][],[
+] []0[][],[] []1[][])[][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 1153.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1180.
+[33]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1180.
 
 ("C:\Users\Toshiba\Google Drive\Research\GIT\StatsandProb\Knitr\StatsandProb.au
 x")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1047.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1047.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1180.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1180.
 
 Package rerunfilecheck Info: File `StatsandProb.out' has not changed.
-(rerunfilecheck)             Checksum: 38B98602EF6A7F75CF9F35079AA99DD6;1130.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1047.
+(rerunfilecheck)             Checksum: 34072CB41A7F6E868066193BB2289906;1200.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1180.
  ) 
 Here is how much of TeX's memory you used:
- 6321 strings out of 494045
- 91808 string characters out of 3145963
- 184132 words of memory out of 3000000
- 9431 multiletter control sequences out of 15000+200000
+ 6337 strings out of 494045
+ 92149 string characters out of 3145963
+ 183132 words of memory out of 3000000
+ 9436 multiletter control sequences out of 15000+200000
  11465 words of font info for 42 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 29i,8n,28p,642b,386s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,8n,28p,642b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{\040http://freakonometrics.hypotheses.org/17491} 
 has been referenced but does not exist, replaced by a fixed one
 
@@ -821,9 +1010,9 @@ pe1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
 lic/amsfonts/cm/cmtt12.pfb>
-Output written on StatsandProb.pdf (30 pages, 22255182 bytes).
+Output written on StatsandProb.pdf (33 pages, 22270918 bytes).
 PDF statistics:
- 456 PDF objects out of 1000 (max. 8388607)
- 89 named destinations out of 1000 (max. 500000)
- 207 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 489 PDF objects out of 1000 (max. 8388607)
+ 99 named destinations out of 1000 (max. 500000)
+ 220 words of extra memory for PDF output out of 10000 (max. 10000000)
 

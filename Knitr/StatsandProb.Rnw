@@ -130,7 +130,7 @@ The steps for the Gibbs sampler are
 \item Now the values from the marginal distribution of interest
 \end{enumerate}
 
-<<MCM, fig.height=5>>=
+<<MCM, fig.height=5, cache=TRUE>>=
 set.seed(123)   
 nreps <- 105000
 nb <- 5000
@@ -224,7 +224,7 @@ So the conditional posterior for $\tau$ is a Gammer distribution with a shape pa
 I do not understand the move to the conditional posterior and the distribution. 
 
 Now implement the Gibbs Sampler
-<<MCM3>>=
+<<MCM3, cache=TRUE>>=
 set.seed(123)
 # MC replications
 nrep <- 105000
@@ -242,7 +242,7 @@ yy <- sum(y^2)
 lambda <- 1/(0.5 * n * var(y))
 @ 
 Now create the loop for the Gibbs sampler
-<<MCM4>>=
+<<MCM4, cache=TRUE>>=
 ttau <- rgamma(1, shape = n/2, rate = lambda)
 for(i in 1:nrep){
   mmu <- rnorm(1, mean = ybar, sd = 1/sqrt(n*ttau))
@@ -253,7 +253,7 @@ for(i in 1:nrep){
 }
 @
 Now drop the first 5000 values of $\mu$ and $\tau$ for the burn in. 
-<<MCMC5>>= 
+<<MCMC5, cache=TRUE>>= 
 nb1 <- nb +1
 taub <- tau[nb1:nrep]
 mub <- mu[nb1:nrep]
@@ -415,7 +415,7 @@ This is the basic model.  It would also be possible to simulate two variables an
 \subsection{Generalised Lambda Distribution}
 This is from \href{http://blog.revolutionanalytics.com/2014/02/quantitative-finance-applications-in-r-4-using-the-generalized-lambda-distribution-to-simulate-market-returns.html}{Revolutionary Analytics}.  The four parameters $\lambda_1$, $\lambda_2$, $\lambda_3$ and $\lambda_4$ indicate the location, scale, skew and kurtosis of the distribution. 
 
-<<Lambda, warning=FALSE, message=FALSE>>=
+<<Lambda, warning=FALSE, message=FALSE, cache=TRUE>>=
 require(GLDEX)
 require(quantmod)
 
@@ -612,6 +612,68 @@ Given the following table
 N = margin.table(HairEyeColor, c(1, 2))
 N
 @
-To be completed. 
+To test for independence between eye colour and hair colour 
+\begin{equation}
+P_{i,j} = \P(X = i, Y = j) = \frac{N_{i,j}}{n}
+\end{equation}
+must be equal to 
+\begin{equation}
+P_{i,j,}^{\perp} = \P(X = i, Y = j) = \frac{N_i}{n}\dot\frac{N_j}{n}
+\end{equation}
+For each pair, under the assumption independence, there should be the following joint probabilities. 
+<<jprob>>=
+n=sum(N)
+NHair=apply(N,1,sum)
+NEye =apply(N,2,sum)
+Nind=NHair%*%t(NEye)/n
+Nind/n
+@
+This gives the following counts
+<<count>>=
+Nind
+@
+The distance is the Chi-squared distance in the two contingency tables. 
+\begin{equation}
+\sum_{i,j} \frac{(N_{i,j} - N_{i,j}^{\perp})^2}{N_{i,j}^{\perp}}
+\end{equation}
+<<test>>=
+X = (N-Nind) ^ 2 / Nind
+Qobs=sum(X)
+Qobs
+X
+@
+Under the assumption of idependence 
+\begin{equation}
+\sum_{i,j} \frac{(N_{i,j} - N_{i,j}^{\perp})^2}{N_{i,j}^{\perp}} \dis \chi^2((I-1)(J-1))
+\end{equation}
+<<plotchi, fig.height=5>>=
+x = seq(0,140)
+y = dchisq(x,df=(ncol(N)-1)*(nrow(N)-1))
+plot(x, y, type = 'l', main = "Chi-squ distribution")
+@
+
+\subsection{Statistical testing}
+This is from \href{http://freakonometrics.hypotheses.org/17500}{Arthur CHarpentier}.  The \emph{modus tollens} says that if A implies B, not A impies not B.  In words, if smoke implies fire, no smoke implies no fire. 
+
+Given the dataset
+<<data>>=
+X = c(0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1)
+@
+where $X_i$ follow a $B(p_*)$ law, test 
+\begin{equation}
+H_0: P_* = 0.5, \text{against} \quad H_1: P_* \neq 0.5
+\end{equation}
+
+If $H_0$ is true (and there is enough data for asymptotic distribution), 
+\begin{equation}
+T = \sqrt{n}[2\bar{X}-1]
+\end{equation}
+must follow a $N(0,1)$ .  Here A is the $H_0$ and B is the standard normal distribution of the test statistic $T$.  If the T is in the \emph{rejection region}, we reject $T \sim N(0, 1)$. There is a one in twenty chanvce of doing that if it is true. If we reject B, we reject A.  However, if we are not in the rejection region, we accept B and this means that we cannot reject A.  There is no way that B can imply A. 
+
+<<tests>>=
+sqrt(20)*(2*mean(X)-1)
+prop.test(sum(X), 20)
+@
+
 
 \end{document}

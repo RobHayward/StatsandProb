@@ -3,6 +3,7 @@ cluster
 Defaults
 GLDEX
 knitr
+moments
 quantmod
 tseries
 TTR
