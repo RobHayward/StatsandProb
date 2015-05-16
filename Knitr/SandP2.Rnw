@@ -1,0 +1,59 @@
+\documentclass[12pt, a4paper, oneside]{article} % Paper size, default font size and one-sided paper
+%\graphicspath{{./Figures/}} % Specifies the directory where pictures are stored
+%\usepackage[dcucite]{harvard}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage[flushleft]{threeparttable}
+\usepackage{multirow}
+\usepackage[comma, sort&compress]{natbib}% Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
+\usepackage{graphicx}
+%\bibliographystyle{plainnat}
+\bibliographystyle{agsm}
+\usepackage[colorlinks = true, citecolor = blue, linkcolor = blue]{hyperref}
+%\hypersetup{urlcolor=blue, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
+%\renewcommand[\harvardurl]{URL: \url}
+\begin{document}
+\title{Stats and Probability 2}
+\author{Rob Hayward}
+\date{\today}
+\maketitle
+\subsection*{Logistic Regression}
+This is used to model a binomial variable.  Multinominal can also be carried out.  The logistic regression takes the natural log of the odds of the dependent variable.  This is the log-odds or \emph{logit}.  This creates a continuous criterion as a transformation of the version of the dependent. The logit transformation is the \emph{link function}.  Linear regression is carried out and the predicted value  of the logit is converted back into predicted odds with the inverse of the natural log (exponential). 
+
+Logistic function is 
+\begin{equation*}
+F(t) = \frac{e^t}{e^t + 1} = \frac{1}{1 + e^{-t}}
+\end{equation*}
+
+Therefore, the logistic function is 
+\begin{equation*}
+F(x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x)}}
+\end{equation*}
+
+The \emph{inverse} of the logistic function is the logit or log odds
+
+\begin{equation*}
+g(x) = ln\frac{F(x)}{1 - F(x)} = \beta_0 + \beta_1 x
+\end{equation*}
+
+<<logit, echo=FALSE, fig.height=5.5>>=
+x <- seq(-10, 10, 0.5)
+b1 <- 0.5
+b2 <- 0.5
+y = 1/(1 + exp(-0.5 - 0.5*x))
+plot(x, y, type = 'l', ylab = "F(x)", main = "Logistic Regression")
+@
+The x variable can take any value while the y variable is between 0 and 1 and denotes the probability that the outcome is true. The odds increase by $e^\beta_1$ for every increase in x.  
+
+<<logit2>>=
+# https://chemicalstatistician.wordpress.com/2014/11/24/
+#performing-logistic-regression-in-r-and-sas/
+da <- read.csv("../Data/heart-attack.csv")
+logistic.ha <- glm(ha2 ~ treatment + anxiety, family = binomial, data = da)
+summary(logistic.ha)
+@
+Need to consider what this means. 
+
+\end{document}

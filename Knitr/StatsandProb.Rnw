@@ -19,6 +19,47 @@
 \author{Rob Hayward}
 \date{\today}
 \maketitle
+\section{http://www.r-bloggers.com/qq-plots-in-r-vs-spss-a-look-at-the-differences/}{Q-Q Plots}
+
+<<QQ>>=
+x <- rnorm(100)
+n <- length(x)          # number of observations
+r <- order(order(x))    # order of values, i.e. ranks without averaged ties
+p <- (r - 1/2) / n      # assign to ranks using Blom's method
+y <- qnorm(p)           # theoretical standard normal quantiles for p values
+plot(x, y)              # plot empirical against theoretical values
+@
+<<qq2>>=
+v <- c(1,1,2,3,3)
+order(order(v))     # ordinal ranking used by R
+rank(v)             # fractional ranking used by SPSS
+## [1] 1.5 1.5 3.0 4.5 4.5
+plot(x, y)                      # plot empirical against theoretical values
+ps <- c(.25, .75)               # reference probabilities
+a <- quantile(x, ps)            # empirical quantiles
+b <- qnorm(ps)                  # theoretical quantiles
+lines(a, b, lwd=4, col="red")   # our QQ line in red
+qqline(x, datax=T)              # R QQ line
+@
+<<qq3>>=
+n <- length(x)                # number of observations
+r <- rank(x)                  # a) ranks using fractional ranking (averaging ties)
+p <- (r - 1/2) / n            # assign to ranks using Blom's method
+y <- qnorm(p)                 # theoretical standard normal quantiles for p values
+y <- y * sd(x) + mean(x)      # b) transform SND quantiles to mean and sd from original data
+plot(x, y) 
+abline(0,1)                   # c) slope 0 through origin
+@
+<<qq>>=
+library(devtools) 
+install_github("markheckmann/ryouready")                # install from github repo
+library(ryouready)                                      # load package
+library(ggplot2)
+qq <- qqnorm_spss(x, method=1, ties.method="average")   # Blom's method with averaged ties
+plot(qq)                                                # generate QQ-plot
+ggplot(qq)                                              # use ggplot2 to generate QQ-plot
+@
+
 \subsection*{Continuous and marginal distributions}
 
 The marginal distribution of $x$ in a two-variable distribution is equal to the sum of the joint distribution over $y$. 
