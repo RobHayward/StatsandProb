@@ -1,0 +1,118 @@
+---
+title: "Bayesian ABC"
+author: "Rob Hayward"
+date: "8 November 2015"
+output: 
+  html_document: 
+    highlight: haddock
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+---
+#Approximate Bayesian Computation 
+This comes from [Karl Broman](http://www.sumsar.net/blog/2014/10/tiny-data-and-the-socks-of-karl-broman/)
+
+Process
+
+* Construct a generative model that produces the same type of data as you are trying to model.  Assume prior probability distributions for the parameters. These distributions represent the model's information about the data. 
+
+* Sample tentative parameters from the prior distributions, plug these into the model to generate a dataset. 
+
+* Check if the simulated dataset matches the actual dataset: if they do, add the tentative parameter values to the list of retained probable parameter values; if not, throw away. 
+
+* Repeat the previous steps many times.
+
+* Finally the distribution of the probable parameters represents the posterior information about the parameters. 
+
+##Sock model
+```{r}
+n_socks <- 18 # total socks
+n_picked <- 11 # stocks chosen
+
+```
+Some socks are lost and some are wholly paired
+```{r}
+n_pairs <- 7 # 14 socks
+n_odd <- 4
+```
+
+Now create a vector of socks where each pair or singleton has its own unique number. 
+
+```{r}
+socks <- rep(seq_len(n_pairs + n_odd), rep(c(2, 1), c(n_pairs, n_odd)) )
+socks
+```
+Now simulate picking socks and count the number of pairs and singletons. The number chosen cannot be more than the total socks. 
+
+```{r}
+picked_socks <- sample(socks, size = min(n_picked, n_socks))
+sock_counts <- table(picked_socks)
+sock_counts
+c(unique = sum(sock_counts == 1), pairs = sum(sock_counts == 2))
+```
+
+##Specify the prior distribution
+We need a prior estimate of `n_socks`, `n_pairs` and `n_odd`.  Non-informative priors can be used with *big data*.  
+
+Poisson distribution is problematic because mean and variance are set by the same parameter. Karl uses *negative binomial*.  This is parametrised with `mean` and `size` where $size = -mu^2/(mu - s^2)
+
+Assume that socks must be positive, that 15 pairs is about normal, therefore take a negative binomial prior for the `n_socks` with a `prior_mu = 30` and `prior_sd = 15`. 
+
+```{r}
+prior_mu = 30
+prior_sd = 15
+prior_size_param <- prior_mu^2/(prior_mu - prior_sd^2)
+n_socks <- rnbinom(1, mu = prior_mu, size = prior_size_param)
+```
+Rather than have separate priors for `n_pairs` and `n_odd` it will be over the proportion of socks that come in pairs.  `prop_pairs`.  This will have a beta prior of 0.75 to 1.00. This can then be translated back into pairs and odds. 
+
+```{r}
+prop_pairs <- rbeta(1, shape1 = 15, shape2 = 2)
+n_pairs <- round(floor(n_socks / 2) * prop_pairs)
+n_off <- n_socks - n_pairs * 2
+```
+Now use the ABC rejection algorithm to generate 100,000 samples 
+  ** last chunk does not work but same code works in R and as a stand alone chunk
+```{r}
+n_picked <- 11
+sock_sim <- replicate(100000, {
+  # generating a sample of parameters from the priors
+  prior_mu <- 30
+  prior_sd <- 15
+  prior_size <- prior_mu^2 / (prior_mu - prior_sd^2)
+  n_socks <- rnbinom(1, mu = prior_mu, size = prior_size)
+  prop_pairs <- rbeta(1, shape1 = 15, shape2 = 2)
+  n_pairs <- round(floor(n_socks / 2) * prop_pairs)
+  n_odd <- n_socks - n_pairs * 2
+  
+# simulate picking out n_picked socks
+  
+  socks <- rep(seq_len(n_pairs + n_odd), rep(c(2, 1), c(n_pairs, n_odd)))
+  picked_socks <- sample(socks, size = min(n_picked, n_socks))
+  sock_counts <- table(picked_socks)
+  
+  #Returning the parameters and counts of the number of matched and 
+  #unique socks among those that were picked out
+  c(unique = sum(sock_counts == 1), pairs = sum(sock_counts == 2), 
+    n_socks = n_socks, n_pairs = n_pairs, n_odd = n_odd, prop_pairs = 
+      prop_pairs)
+  
+})
+
+# just translatign socks_sim to get one variable per comumn
+sock_sim <- t(sock_sim)
+head(sock_sim)
+```
+Get risk of those samples not consistent with the data. 
+```{r}
+post_samples <- sock_sim[sock_sim[, "unique"] == 11 &
+                         sock_sim[, "pairs" ] == 0 , ]
+median_hist <- function(x, ...) {
+    hist(x, ...)
+    abline(v = median(x), col = "darkred", lty = 2, lwd = 2)
+}
+median_hist(post_samples[,"n_socks"], 40, xlim = c(0, 90), yaxt = "n", ylab = "",
+    xlab = "Number of socks", main = "Posterior on n_socks", col = "lightblue")
+```
+
+[Another post](http://www.r-bloggers.com/a-bayesian-model-to-calculate-whether-my-wife-is-pregnant-or-not/)

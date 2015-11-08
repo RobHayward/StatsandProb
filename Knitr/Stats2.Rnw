@@ -31,5 +31,15 @@ The success stories of modern causal inference is that scientists were encourage
 
 If there are multiple ways of estimating, the different methods should provide the same result. If they do not, the result is not likely to be right. Its often a case of finding the best estimator for an estimated.  The estimated will be a model of the problem that is to be solved. Having the mathematical model allows math to be used to assess what is the most powerful estimator for the problem. 
 
+There is a need to express mathematically the mechanism that explains questions. This allows statistics to answer questions about what effect interventions can have.  Causality is the search for explanation.  Statistics should be able to answer two sorts of questions: the effect of interventions and finding explanations. 
 
+What is the core set of statistical knowledge that all students should know?  There are two main principles: 
+
+However, there is a limit to what data and statistics can do.  Sometimes it is not possible to determine two different effects from the data. What is needed is a picture of reality to link the data with the question. Reality has a face and a language that can be described. This is the language of graphs (or equations). It is important to listen to the causal story and be able to formalise that mathematically. 
+
+For example, Simpson's paradox: treatment seems to be helpful to men, helpful to women but appears to have adverse effects on the population. It is important now to tell a story.  Why could this happen?  Are women more likely to seek help?  Are they more likely to recover? What is the selection process?  Can this be drawn on a graph.  All that is required is a couple of errors. 
+
+Once the graph (equation) is completed, it is added to the data to get an answer to the question of whether the drug is effective or not. The data are numbers in a context?  Data can speak many voices until they are managed.  The context of the data (way that it was collected) can be added to the story or equation.  If education is a confounder, this can be tested. 
+
+It is important to make the assumptions clear and transparent so that they can be discussed and, if necessary, replaced. 
 \end{document}
