@@ -19,6 +19,20 @@
 \author{Rob Hayward}
 \date{\today}
 \maketitle
+
+\section{Central Limit Theorum}
+This comes from \href{http://freakonometrics.hypotheses.org/48061}{Central Limit Theorum}.  The sum of a sufficiently large number of independent and identically distributed random variables approximately follows a normal distribution. If $X_1, X_2, \dots, X_n$ are a set of independnet random variables that are identically distributed with a mean $\mu$ and a finite variance $\sigma^2$, 
+
+\begin{equation*}
+\bar{X} = \frac{X_1,X_2,\dots,X_n}{n}
+\end{equation*}
+
+$[\bar{X_n} - \mu]$ will tend to zero as n moves towards infinity and $\sqrt{n}[\bar{X_n} - \mu]$ tends to a centered normal distribution when n goes to infinity. 
+\begin{equation*}
+\sqrt{n} \left(\frac{\bar{X_n}-\mu}{\sigma} \right) \overset{L}{\rightarrow} \N(0,1)
+\end{equation*}
+
+
 \section{http://www.r-bloggers.com/qq-plots-in-r-vs-spss-a-look-at-the-differences/}{Q-Q Plots}
 
 <<QQ>>=
@@ -195,12 +209,12 @@ abline(h = 3, lty = 2)
 abline(h = -3, lty = 2)
 @
 The values are centered around zero as they should be. 
-<<MCMC2, fig.height=5>>=
-plot(yy2b, col = 4, main = "MCMC for Bivarite Normal", xlab = "Repetitions",
-     ylab = "Y2")
-abline(h = 3, lty = 2)
-abline(h = -3, lty = 2)
-@
+%<<MCMC2, fig.height=5>>=
+%plot(yy2b, col = 4, main = "MCMC for Bivarite Normal", xlab = "Repetitions",
+%     ylab = "Y2")
+%abline(h = 3, lty = 2)
+%abline(h = -3, lty = 2)
+%@
 The summary statistics are below. 
 <<MCMC3>>=
 summary(yy1b)

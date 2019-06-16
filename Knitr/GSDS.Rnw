@@ -1,0 +1,10 @@
+\documentclass{article}
+\title{Getting started with data science}
+
+\begin{document}
+
+\section{Introduction}
+There are a large number of ways that conventional statistics classes fail to produce people who analyse data. One of the imporant features is the need for repetition.
+
+
+\end{document}
